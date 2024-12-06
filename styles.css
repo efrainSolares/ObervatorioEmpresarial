@@ -1,0 +1,539 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding-top: 85px; /* Ajusta según la altura de tu header */
+}
+
+.barra-azul {
+    width: 100%;
+    height: 10px; /* Ajusta la altura según lo que desees */
+    background-color: #007BFF; /* Azul institucional */
+    position: fixed; /* Fija la barra en la parte superior */
+    top: 0; /* Asegura que esté al inicio */
+    left: 0;
+    z-index: 1100; /* Coloca la barra por encima de otros elementos */
+}
+
+
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Ajusta según el tamaño deseado */
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor */
+}
+
+.overlay-left {
+    position: absolute;
+    top: 20%; /* Ajusta la posición vertical */
+    left: 0; /* Asegura que el rectángulo comience desde el borde izquierdo */
+    background-color: rgba(0, 0, 128, 0.8); /* Azul translúcido */
+    color: white;
+    padding: 20px 50px; /* Más largo horizontalmente */
+    border-radius: 0 10px 10px 0; /* Bordes redondeados solo a la derecha */
+    text-align: left; /* Alinea el texto a la izquierda */
+    max-width: 40%; /* Ajusta el ancho máximo */
+}
+
+.overlay-left h1 {
+    font-size: 1.5em; /* Ajusta el tamaño del texto */
+    margin-bottom: 10px;
+}
+
+.overlay-left p {
+    font-size: 0.8em;
+    margin-bottom: 15px;
+}
+
+.btn-descubre-mas {
+    position: absolute;
+    left: 10%; /* Alinea el botón con el rectángulo */
+    top: calc(20% + 110px); /* Ajusta la distancia desde el rectángulo */
+    padding: 10px 20px;
+    background-color: #0056b3; /* Azul más oscuro */
+    color: white;
+    text-decoration: none;
+    font-size: 0.9em;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+
+.btn-descubre-mas:hover {
+    background-color: #003f7f; /* Azul más intenso al pasar el cursor */
+}
+
+
+.text-center {
+    text-align: center; /* Centra el texto horizontalmente */
+    margin: 20px auto; /* Agrega un margen superior e inferior */
+    margin-bottom: 20px; /* Aumenta el valor según el espacio deseado */
+    width: 80%; /* Limita el ancho para una mejor legibilidad */
+    font-family: Arial, sans-serif; /* Define una fuente estándar */
+    line-height: 1.6; /* Mejora el espaciado entre líneas */
+    color: #0056b3; /* Azul para todo el texto */
+}
+
+.text-center a.highlight-link {
+    color: #003f7f; /* Azul más oscuro para los enlaces */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    font-weight: bold; /* Resalta los enlaces */
+}
+
+.text-center a.highlight-link:hover {
+    text-decoration: underline; /* Subraya los enlaces al pasar el cursor */
+}
+
+.text-center p {
+    margin-bottom: 30px; /* Incrementa el valor para mayor separación */
+}
+
+
+
+
+/* Barra de noticias */
+.news-bar {
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    width: 100%; /* Abarca todo el ancho */
+    height: 150px; /* Ajusta la altura según lo deseado */
+    background: linear-gradient(to right, rgba(0, 0, 128, 0.8), #007BFF); /* Fondo con gradiente */
+    border-top: 3px solid #0056b3; /* Línea superior elegante */
+    border-bottom: 3px solid #0056b3; /* Línea inferior */
+    align-items: center; /* Centra verticalmente las noticias */
+    position: relative; /* Para posicionar los botones */
+    overflow: hidden; /* Oculta el contenido que sale del área visible */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+}
+
+/* Contenedor de noticias */
+.news-content {
+    display: flex; /* Noticias en línea */
+    transition: transform 1s ease-in-out; /* Desplazamiento suave */
+    will-change: transform;
+}
+
+/* Noticias individuales */
+.news-item {
+    flex: 0 0 100%; /* Muestra solo una noticia a la vez */
+    text-align: center; /* Centra el texto horizontalmente */
+    font-size: 1.2em; /* Tamaño del texto */
+    color: #ffffff; /* Azul para el texto */
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    position: relative; /* Para posicionar el botón y la línea */
+    padding-bottom: 30px; /* Espacio para la línea decorativa */
+    display: flex; /* Flexbox para centrar */
+    flex-direction: column; /* Ordena contenido verticalmente */
+    justify-content: center; /* Centra verticalmente */
+    height: 100%; /* Asegura que ocupe toda la altura del contenedor */
+}
+
+
+.news-item::after {
+    content: ""; /* Línea decorativa */
+    position: absolute;
+    left: 25%; /* Alineación a la izquierda */
+    bottom: 10px; /* Deja espacio para el botón */
+    width: 50%; /* Longitud de la línea */
+    height: 1px; /* Grosor de la línea */
+    background-color: #ffffff; /* Azul para la línea */
+}
+
+/* Botón "Más información" */
+.more-info {
+    position: absolute;
+    bottom: -20px; /* Alinea el botón con la parte inferior de la línea */
+    left: 50%; /* Centra el botón horizontalmente */
+    transform: translateX(-50%); /* Ajusta el centro del botón */
+    margin-top: 0; /* Elimina cualquier margen superior */
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #ffffff; /* Botón azul */
+    color: rgb(1, 1, 179);
+    text-decoration: none;
+    font-size: 0.7em;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.more-info:hover {
+    background-color: #003f7f; /* Azul más intenso al pasar el cursor */
+}
+
+/* Botones para control manual */
+.news-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 128, 0.5); /* Botones translúcidos */
+    color: #fff;
+    border: none;
+    border-radius: 50%; /* Botones circulares */
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para botones */
+}
+
+.news-control.prev {
+    left: 10px; /* Botón izquierdo */
+}
+
+.news-control.next {
+    right: 10px; /* Botón derecho */
+}
+
+.news-control:hover {
+    background: rgba(0, 0, 128, 0.8); /* Cambio de color al pasar el cursor */
+}
+
+
+
+
+
+
+
+header {
+    position: fixed; /* Fija el header en la parte superior de la pantalla */
+    top: 0; /* Alinea el header en la parte superior de la ventana del navegador */
+    width: 100%; /* Asegura que el header se extienda a lo ancho de la pantalla */
+    z-index: 1000; /* Asegura que el header se muestre sobre otros elementos de la página */
+    background-color: #fff; /* Opcional: especifica un fondo para mejorar la legibilidad */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Opcional: añade sombra para un efecto visual */
+    color: white;
+    text-align: center;
+}
+
+.logo-container {
+    display: inline-block; /* Permite que el logo y el texto estén en línea */
+    vertical-align: middle; /* Alinea el logo verticalmente con el texto */
+    margin-right: 250px; /* Espacio entre el logo y el texto */
+}
+
+.logo-container img {
+    height: 70px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0; /* Eliminando el padding predeterminado */
+    margin: 0; /* Eliminando el margen predeterminado */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Asegurando que los elementos estén centrados verticalmente */
+}
+
+nav li {
+    margin: 0 5px; /* Reduciendo el espacio horizontal entre elementos si es necesario */
+}
+
+
+nav a {
+    padding: 0.5em 1em; /* Ajustando el padding para reducir el espacio vertical */
+    color: #000; /* Asegurando que el texto sea negro */
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    min-height: 80vh; /* Establece la altura mínima al 100% de la altura de la ventana */
+}
+
+.sidebar {
+    display: flex; /* Activa Flexbox */
+    flex-direction: column; /* Organiza los hijos verticalmente */
+    justify-content: space-between; /* Distribuye el espacio uniformemente */
+    height: 100vh; /* O usa 100% dependiendo del contenedor padre */
+    width: 20%;
+    padding: 10px;
+}
+
+.sidebar .sitio-interes {
+    flex: 1; /* Expande los div para llenar el espacio disponible */
+    /* Estilos adicionales para ajustar padding o márgenes según sea necesario */
+}
+
+.sidebar .sitio-interes a img {
+    width: 40px; /* Establece un tamaño pequeño para las imágenes */
+    height: 40px; /* Mantiene las imágenes cuadradas para facilitar el efecto redondeado */
+    border-radius: 50%; /* Crea bordes redondeados para hacer las imágenes circulares */
+    object-fit: cover; /* Asegura que el contenido de la imagen se cubra adecuadamente */
+    margin-right: 10px; /* Añade espacio a la derecha de la imagen */
+    float: left; /* Posiciona la imagen a la izquierda del texto */
+}
+
+.sitio-interes {
+    margin-bottom: 15px; /* Añade espacio entre cada sitio de interés */
+}
+
+.sitio-interes a {
+    display: block; /* Hace que cada enlace ocupe su propia línea */
+    color: #007bff; /* Color del enlace */
+    text-decoration: none; /* Elimina el subrayado */
+    padding: 5px 0; /* Añade algo de padding para hacer los enlaces más clickeables */
+}
+
+.sitio-interes a:hover {
+    text-decoration: underline; /* Añade un subrayado al pasar el mouse para mejorar la interactividad */
+}
+
+.sidebar.left {
+    border-right: 1px solid #ccc; /* Línea gris vertical delgada en el lado derecho */
+}
+
+.sidebar.right {
+    display: flex; /* Cambiado para manejar subsecciones */
+    flex-direction: column;
+    border-left: 1px solid #ccc; /* Línea gris vertical delgada en el lado izquierdo */
+}
+
+.sidebar.right .subsection {
+    flex: 1;
+    margin: 5px 0; /* Espacio entre subsecciones */
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Línea delgada gris en la parte inferior */
+}
+
+.sidebar.right .subsection:last-child {
+    border-bottom: none; /* No hay línea en la última subsección */
+}
+
+.sidebar.right .subsection h3 {
+    font-size: 0.9em; /* Tamaño de título pequeño */
+    margin-bottom: 0.5em; /* Espacio después del título */
+}
+
+.sidebar.right .subsection a {
+    font-size: 0.8em; /* Tamaño de enlace pequeño */
+    color: #007bff; /* Color azul para enlaces, por ejemplo */
+    text-decoration: none; /* Sin subrayado para que parezca más limpio */
+    margin-bottom: 0.5em; /* Espacio después del enlace */
+    display: block; /* Hace que el enlace ocupe su propia línea */
+}
+
+.sidebar.right .subsection img {
+    width: 100%; /* La imagen se ajusta al ancho de la subsección */
+    height: auto; /* Altura automática para mantener la proporción */
+    margin-top: 0.5em; /* Espacio antes de la imagen */
+}
+
+.mobile-nav-icon {
+    display: none; /* Oculto por defecto, se mostrará en vista móvil */
+    font-size: 30px; /* Tamaño del icono */
+    color: #000;
+    cursor: pointer;
+}
+
+.mobile-nav-icon span {
+    color: #000; /* Asegura que el icono del menú sea negro */
+}
+
+.mobile-nav {
+    display: inline-block; /* Permite que el texto esté en línea con el logo */
+    vertical-align: middle; /* Alinea el texto verticalmente con el logo */
+    color: blue; /* Cambia el color del texto a azul */
+}
+
+.mobile-nav a {
+    color: rgb(5, 5, 137); /* Cambia el color de los enlaces a azul */
+    text-decoration: none; /* Opcional: elimina el subrayado */
+}
+
+.mobile-nav a:hover {
+    text-decoration: underline; /* Opcional: subraya el texto al pasar el cursor */
+}
+
+.servicios {
+    width: 55%;
+    padding: 10px;
+}
+
+.servicios img {
+    max-width: 50%; /* Asegura que la imagen sea responsive */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin: 20px 0; /* Añade espacio alrededor de la imagen */
+}
+
+.proyecto-evaluacion {
+    text-align: center; /* Centra el contenido para mantenerlo agrupado */
+    margin: 20px 0; /* Añade margen para separarlo del resto del contenido */
+}
+
+.enlace-proyecto {
+    display: block; /* Hace que el enlace ocupe su propia línea */
+    font-size: 1.2em; /* Aumenta el tamaño del enlace para darle importancia */
+    margin-bottom: 10px; /* Espacio entre el enlace y la imagen */
+    color: #007bff; /* Color del enlace, ajusta según tu esquema de color */
+    text-decoration: none; /* Opcional: elimina el subrayado del enlace */
+}
+
+.imagen-proyecto {
+    max-width: 50%; /* Asegura que la imagen sea responsive */
+    height: auto; /* Mantiene la proporción de la imagen */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Opcional: añade sombra para destacar la imagen */
+    margin: 1px auto 0; /* Ajusta el margen para controlar el espacio alrededor de la imagen */
+}
+
+.dashboards-interes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Alinea el contenido hacia el inicio de la sección */
+    text-align: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.subtitulo-dashboards {
+    margin-bottom: 100px; /* Espacio entre el subtítulo y las imágenes */
+}
+
+.contenedor-imagenes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Crea tres columnas de igual tamaño */
+    grid-template-rows: auto auto; /* Dos filas que ajustan su tamaño al contenido */
+    gap: 5px; /* Espacio entre imágenes */
+    justify-content: center; /* Centra el grid horizontalmente si el contenedor es más ancho */
+    align-items: center; /* Centra el contenido de cada celda verticalmente */
+    width: 70%; /* Ajusta el ancho del contenedor de imágenes */
+    flex: 1; /* Permite que el contenedor de imágenes ocupe el espacio restante */
+    opacity: 1; /* Asegúrate de que las imágenes sean visibles */
+    margin-left: 20%;
+}
+
+.img-dashboard {
+    width: 250px; /* Ajusta según el tamaño deseado */
+    height: auto;
+    border-radius: 10px; /* Opcional: bordes redondeados */
+    opacity: 0.5; /* Inicialmente las imágenes están ocultas */
+    transition: opacity 2s ease-in-out; /* Transición suave para la aparición */
+} 
+
+.subtitulo {
+    font-size: 1em; /* Ajusta el tamaño del texto según necesites */
+    margin-bottom: 20px; /* Espacio entre el subtítulo y cualquier contenido que siga */
+    max-width: 80%; /* Controla el ancho del subtítulo para mejor legibilidad */
+    margin-left: auto; /* Centra el subtítulo horizontalmente */
+    margin-right: auto; /* Centra el subtítulo horizontalmente */
+}
+
+/* Estilos específicos para la sección Publicaciones */
+#publicaciones {
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 20px;
+    margin-bottom: 20px; /* Ajusta según sea necesario */
+    text-align: center; /* Centra todo el texto en la sección Publicaciones */
+    /* Añade aquí más estilos según sea necesario */
+}
+
+#publicaciones h2 {
+    font-size: 2em; /* Aumenta el tamaño del título */
+    margin-bottom: 0.5em; /* Espacio entre el título y el subtítulo */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .content, .sidebar, .servicios {
+        width: 100%;
+        padding: 5px;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo-container img {
+        height: 40px;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+}
+
+/* Estilos para mostrar el icono hamburguesa y ocultar la navegación tradicional en móviles */
+@media (max-width: 768px) {
+    .mobile-nav-icon {
+        display: block; /* Muestra el icono en dispositivos móviles */
+        position: absolute; /* Posición dentro del header */
+        right: 20px; /* A la derecha */
+        top: 10px; /* Alineado verticalmente */
+        z-index: 100;
+    }
+
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .mobile-nav {
+        display: none; /* Esta sección se mostrará dinámicamente con JavaScript */
+        position: absolute;
+        top: 50px; /* Justo debajo del header */
+        right: 0;
+        background-color: #ffffff; /* Fondo del menú desplegable */
+        width: auto; /* Asume el ancho completo */
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Sombra para el menú desplegable */
+    }
+
+    /* Muestra el menú móvil cuando tiene la clase .show */
+    .mobile-nav.show {
+        display: block;
+    }
+
+    .mobile-nav ul {
+        list-style-type: none; /* Sin viñetas */
+        padding: 0; /* Sin padding */
+    }
+
+    .mobile-nav ul li a {
+        display: block; /* Ocupa el ancho completo */
+        padding: 10px; /* Espacio interno */
+        text-decoration: none; /* Sin subrayado */
+        color: #000000; /* Texto negro */
+        border-bottom: 1px solid #eee; /* Línea divisoria */
+    }
+
+    .mobile-nav ul li:last-child a {
+        border-bottom: none;
+    }
+
+    
+}
+
+
+

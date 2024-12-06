@@ -1,0 +1,302 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 1.1em;
+}
+
+nav {
+    margin: 20px 0;
+    text-align: center;
+}
+
+
+.hidden {
+    display: none;
+}
+
+.iconos-navegacion {
+    position: fixed; /* Los íconos permanecen fijos en la pantalla */
+    top: 10px; /* Espaciado desde la parte superior */
+    left: 10px; /* Espaciado desde la izquierda */
+    display: flex; /* Los íconos estarán en línea */
+    gap: 10px; /* Espaciado entre los íconos */
+    z-index: 1000; /* Asegura que estén sobre otros elementos */
+}
+
+.iconos-navegacion a {
+    text-decoration: none;
+    color: #007bff; /* Azul para los íconos */
+    font-size: 1.5em; /* Tamaño de los íconos */
+    background: #fff; /* Fondo blanco */
+    padding: 5px;
+    border-radius: 50%; /* Íconos circulares */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para los íconos */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.iconos-navegacion a:hover {
+    background-color: #0056b3; /* Fondo azul más oscuro al pasar el cursor */
+    color: #fff; /* Cambia el color del ícono a blanco */
+}
+
+.mensaje {
+    opacity: 0; /* Invisible al inicio */
+    transform: translateY(20px); /* Comienza desplazado hacia abajo */
+    transition: opacity 1s ease, transform 1s ease; /* Transición suave */
+    text-align: center;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mensaje.visible {
+    opacity: 1; /* Se vuelve visible */
+    transform: translateY(0); /* Regresa a su posición original */
+    font-size: 0.85em;
+}
+
+
+
+#informacionBasica {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+#informacionBasica h2 {
+    font-size: 2em;
+    color: #007bff;
+}
+
+#informacionBasica label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+#informacionBasica input, #informacionBasica select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input.error, select.error {
+    border: 2px solid red; /* Resalta el borde en rojo */
+    background-color: #ffe6e6; /* Fondo claro para destacar */
+}
+
+
+
+
+.nav-sections {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-sections li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.nav-sections button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-sections button:hover {
+    background-color: #0056b3;
+}
+
+#mensajeAutodiagnostico {
+    text-align: center;
+    margin: 20px auto;
+    font-size: 1.5em;
+    color: #007bff; /* Azul destacable */
+    font-weight: bold;
+}
+.hidden {
+    display: none;
+}
+
+
+.section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.section.hidden {
+    display: none;
+}
+
+.section h2 {
+    margin-top: 0;
+    font-size: 2em;
+    color: #007bff;
+}
+
+.item {
+    background-color: #f8f9fa; /* Color original */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.item.answered {
+    background-color: #d4edda; /* Color verde claro para ítems contestados */
+}
+
+
+.short {
+    cursor: pointer;
+    font-weight: bold;
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+
+.short:hover {
+    color: #0056b3;
+}
+
+.item-detail {
+    margin-top: 10px;
+    padding: 10px;
+    border-left: 3px solid #007bff;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+#proveedoresStep1, #proveedoresItems {
+    margin: 20px 0;
+}
+
+#camposProveedores div {
+    margin-bottom: 10px;
+}
+
+/* Ítems contestados */
+.answered .short {
+    color: #28a745;
+    font-weight: bold;
+}
+
+input[type="number"], input[type="text"] {
+    width: 95%; /* Ajusta para evitar que sobresalgan del contenedor */
+    margin: 0 auto; /* Centra horizontalmente los campos */
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+
+.lista-alineada {
+    text-align: left; /* Alinea la lista a la izquierda */
+    margin: 20px auto; /* Centra la lista horizontalmente en el contenedor */
+    padding-left: 20px; /* Ajusta la indentación de la lista */
+}
+
+.lista-alineada li {
+    margin-bottom: 10px; /* Espaciado entre elementos de la lista */
+}
+
+
+
+#informacion-basica {
+    margin: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#informacion-basica h2 {
+    color: #0056b3;
+    text-align: center;
+}
+
+#informacion-basica label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+#informacion-basica input, #informacion-basica select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#informacion-basica button {
+    background-color: #0056b3;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#informacion-basica button:hover {
+    background-color: #003f87;
+}

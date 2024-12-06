@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autodiagnóstico Empresarial</title>
+    <link rel="stylesheet" href="Autodiagnostico.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+
+<body onload="mostrarMensajeBienvenida()">
+
+<header>
+    <h1>Autodiagnóstico Empresarial</h1>
+</header>
+
+<nav id="nav-sections" class="hidden">
+
+    <div id="mensajeAutodiagnostico" class="hidden">
+        <h2>¿En cuál(es) área(s) desea autodiagnosticarse?</h2>
+    </div>
+    <ul class="nav-sections">
+        <li><button onclick="mostrarSeccionProveedores()">Proveedores</button>
+        <li><button onclick="showSection('distribucion_items')">Distribución y clientes</button></li>
+        <li><button onclick="showSection('procesos_items')">Procesos</button></li>
+        <li><button onclick="showSection('finanzas_items')">Salud financiera</button></li>
+    </ul>
+</nav>
+
+<main>
+        <div id="iconosNavegacion" class="iconos-navegacion">
+            <a href="#inicio" onclick="irAlInicio()" title="Ir al inicio del autodiagnóstico">
+                <i class="fa fa-home"></i>
+            </a>
+            <a href="#" onclick="irASeccionAnterior()" title="Ir a la sección anterior">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+        </div>        
+        <section id = "mensajes" class="section">
+            <div id="mensajeBienvenida" class="hidden mensaje">
+                <h2>¡Bienvenido(a) al Autodiagnóstico Empresarial del Observatorio CIDESIE!</h2>                
+                <p>Esta es una plataforma en la que podrás evaluar distintas áreas clave de tu negocio, tales como:<br>
+                    <i>Proveedores</i>:  Mejora la gestión de tu cadena de suministro.<br>
+                    <i>Clientes</i>: Conoce qué tan bien estás satisfaciendo sus necesidades.<br>
+                    <i>Producción</i>: Evalúa la eficiencia en la creación de bienes y servicios.<br>
+                    <i>Finanzas</i>: Analiza la estabilidad y sostenibilidad económica de tu empresa.<br>                
+                </p>
+                
+                <p>La información que proporciones quedará bajo el resguardo de la Universidad Autónoma de Coahuila y será manejada de acuerdo con los más altos estándares éticos y académicos.</p>
+            </div>
+            
+            <div id="mensajeBienvenida2" class="hidden mensaje">
+                <h3>Instrucciones para Empezar</h3>
+                <ol class="lista-alineada">
+                    <li>Proporciona la información básica de tu empresa. Esto nos ayudará a personalizar el diagnóstico.</li>
+                    <li>Selecciona las áreas en las que deseas autoevaluarte. Puedes elegir una o más según tu interés.</li>
+                    <li>Completa las preguntas de cada sección. </li>
+                    <li>Al finalizar, obtendrás un reporte que podrás usar como guía estratégica para tu negocio.</li>
+                </ol>
+            </div>
+            
+            <div id="mensajeBienvenida3" class="hidden mensaje">
+                <p>No te preocupes, no hay respuestas correctas o incorrectas, ni tienes que proporcionar aquella información que desconozcas o que no te sientas cómodo(a) proporcionando; sin embargo, recuerda que esta información solamente será usada por ti y, de ser el caso, con fines estrictamente académicos por la UAdeC, además, tal información puede ser muy valiosa para determinar el diagnóstico de tu empresa y para que puedas apreciar la evolución de la misma a través del tiempo.</p>
+                <button onclick="ocultarMensaje()">Comenzar</button>
+            </div>
+        </section>
+
+        <!-- Nueva sección: Información Básica -->
+        <div id="informacionBasica" class="section hidden">
+            <h2>Información Básica</h2>
+            <p>Por favor, proporcione la siguiente información antes de comenzar el autodiagnóstico:</p>
+            <form id="formInformacionBasica">
+                <label for="nombreEmpresa">Nombre de la empresa:</label>
+                <input type="text" id="nombreEmpresa" placeholder="Ingrese el nombre de la empresa">
+            
+                <label for="sector">Sector de actividad:</label>
+                <select id="sector">
+                    <option value="" disabled selected>Seleccione el sector</option>
+                    <option value="manufactura">Manufactura</option>
+                    <option value="comercio">Comercio</option>
+                    <option value="servicios">Servicios</option>
+                    <option value="tecnologia">Tecnología</option>
+                    <option value="otros">Otros</option>
+                </select>
+            
+                <label for="tamanioEmpresa">Tamaño de la empresa:</label>
+                <select id="tamanioEmpresa">
+                    <option value="" disabled selected>Seleccione el tamaño</option>
+                    <option value="micro">Micro</option>
+                    <option value="pequena">Pequeña</option>
+                    <option value="mediana">Mediana</option>
+                    <option value="grande">Grande</option>
+                </select>
+            
+                <label>
+                    <input type="checkbox" id="guardarDatos"> Deseo registrar mis datos para recuperarlos en el futuro.
+                </label>
+            
+                <button type="button" onclick="validarInformacionBasica()">Continuar</button>
+            </form>                        
+        </div>
+    
+    <!-- Sección de Proveedores -->
+    <section id="proveedores" class="section hidden">
+        <h2>Proveedores</h2>
+        <div id="proveedoresStep1">
+            <h3>Información Inicial</h3>
+            <p>¿Cuántos proveedores tiene su empresa?</p>
+            <input type="number" id="cantidadProveedores" placeholder="Ingrese el número de proveedores" min="1">
+            <button onclick="procesarCantidadProveedores()">Continuar</button>
+        </div>
+    </section>
+    
+    <section id="proveedoresMasImportantes" class="section hidden">
+        <h2>Proveedores</h2>
+        <div>
+            <h3>Proveedores más importantes</h3>
+            <p>Por favor, proporcione información sobre los <span id="cantidadImportantes"></span> proveedores más importantes:</p>
+            <div id="camposProveedores"></div>
+                <button onclick="mostrarItemsProveedores()">Siguiente</button>
+            </div>
+    </section>
+
+
+    <section id="proveedores_items" class="section hidden">
+        <p>Seleccione los indicadores que desea proporcionar:</p>
+    
+        <!-- Ítems con preguntas -->
+        <div class="item" onclick="toggleItem(event, 'proveedores1')">
+            <p class="short">Compras hechas electrónicamente</p>
+            <div id="proveedores1" class="item-detail hidden">
+                <p>¿Qué porcentaje de las compras realizadas por su empresa se gestionan electrónicamente (EDI o Internet)?</p>
+                <input type="number" name="proveedores1" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores1')">
+            </div>
+        </div>
+    
+        <div class="item" onclick="toggleItem(event, 'proveedores3')">
+            <p class="short">Tiempo de espera</p>
+            <div id="proveedores3" class="item-detail hidden">
+                <p>¿Cuánto tiempo, en promedio, transcurre desde que realiza un pedido hasta que lo recibe?</p>
+                <input type="number" name="proveedores3" placeholder="Ingrese el tiempo en días" oninput="markAsAnswered('proveedores3')">
+            </div>
+        </div>
+    
+        <div class="item" onclick="toggleItem(event, 'proveedores4')">
+            <p class="short">Porcentaje de entregas puntuales</p>
+            <div id="proveedores4" class="item-detail hidden">
+                <p>¿Qué porcentaje de las entregas de sus proveedores se realiza puntualmente?</p>
+                <input type="number" name="proveedores4" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores4')">
+            </div>
+        </div>
+    
+        <div class="item" onclick="toggleItem(event, 'proveedores5')">
+            <p class="short">Porcentaje de pedidos fuera de plazo</p>
+            <div id="proveedores5" class="item-detail hidden">
+                <p>¿Cuál es el porcentaje de pedidos que llegan fuera del plazo acordado con sus proveedores?</p>
+                <input type="number" name="proveedores5" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores5')">
+            </div>
+        </div>
+    
+        <div class="item" onclick="toggleItem(event, 'proveedores6')">
+            <p class="short">Partes defectuosas por millón (PPM)</p>
+            <div id="proveedores6" class="item-detail hidden">
+                <p>¿Qué proporción de los pedidos entrantes contiene partes defectuosas (medido en partes por millón - PPM)?</p>
+                <input type="number" name="proveedores6" placeholder="Ingrese el valor" oninput="markAsAnswered('proveedores6')">
+            </div>
+        </div>
+    
+        <div class="item" onclick="toggleItem(event, 'proveedores7')">
+            <p class="short">Evaluación de la calidad de materias primas</p>
+            <div id="proveedores7" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>Responda las siguientes preguntas para evaluar la calidad de las materias primas entregadas por sus proveedores:</p>
+                <ol>
+                    <li>
+                        ¿Qué porcentaje de las materias primas entregadas cumple con las especificaciones técnicas acordadas?
+                        <input type="number" name="conformidadEspecificaciones" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores7')">
+                    </li>
+                    <li>
+                        ¿Con qué frecuencia detecta desviaciones en las especificaciones de las materias primas entregadas?
+                        <select name="frecuenciaDesviaciones" oninput="markAsAnswered('proveedores7')">
+                            <option value="" disabled selected>Seleccione</option>
+                            <option value="nunca">Nunca</option>
+                            <option value="raramente">Raramente</option>
+                            <option value="a veces">A veces</option>
+                            <option value="frecuentemente">Frecuentemente</option>
+                            <option value="siempre">Siempre</option>
+                        </select>
+                    </li>
+                    <li>
+                        ¿Ha notado variaciones en la calidad de las materias primas entregadas por el mismo proveedor a lo largo del tiempo?
+                        <select name="variacionesCalidad" oninput="markAsAnswered('proveedores7')">
+                            <option value="" disabled selected>Seleccione</option>
+                            <option value="nunca">Nunca</option>
+                            <option value="raramente">Raramente</option>
+                            <option value="frecuentemente">Frecuentemente</option>
+                            <option value="siempre">Siempre</option>
+                        </select>
+                    </li>
+                    <li>
+                        ¿En qué estado físico llegan las materias primas (daños, contaminación, deterioro, etc.)?
+                        <input type="text" name="estadoFisico" placeholder="Describa el estado" oninput="markAsAnswered('proveedores7')">
+                    </li>
+                    <li>
+                        ¿Qué porcentaje de las entregas de materias primas ha sido rechazado debido a problemas de calidad?
+                        <input type="number" name="porcentajeRechazo" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores7')">
+                    </li>
+                    <li>
+                        ¿Cuántos problemas de producción se han generado por defectos en las materias primas entregadas?
+                        <input type="number" name="problemasProduccion" placeholder="Ingrese el número" oninput="markAsAnswered('proveedores7')">
+                    </li>
+                    <li>
+                        ¿El proveedor entrega certificaciones de calidad junto con las materias primas?
+                        <select name="certificacionesCalidad" oninput="markAsAnswered('proveedores7')">
+                            <option value="" disabled selected>Seleccione</option>
+                            <option value="siempre">Siempre</option>
+                            <option value="frecuentemente">Frecuentemente</option>
+                            <option value="a veces">A veces</option>
+                            <option value="raramente">Raramente</option>
+                            <option value="nunca">Nunca</option>
+                        </select>
+                    </li>
+                    <li>
+                        ¿Qué tan confiables son las pruebas de calidad realizadas por el proveedor?
+                        <select name="confiabilidadPruebas" oninput="markAsAnswered('proveedores7')">
+                            <option value="" disabled selected>Seleccione</option>
+                            <option value="muy confiables">Muy confiables</option>
+                            <option value="confiables">Confiables</option>
+                            <option value="poco confiables">Poco confiables</option>
+                            <option value="nada confiables">Nada confiables</option>
+                        </select>
+                    </li>
+                    <li>
+                        ¿Qué tan rápido responde el proveedor cuando se le informa de problemas de calidad?
+                        <input type="text" name="respuestaProveedor" placeholder="Describa la rapidez de la respuesta" oninput="markAsAnswered('proveedores7')">
+                    </li>
+                    <li>
+                        ¿El proveedor acepta devoluciones o reemplazos en caso de problemas de calidad?
+                        <select name="aceptaDevoluciones" oninput="markAsAnswered('proveedores7')">
+                            <option value="" disabled selected>Seleccione</option>
+                            <option value="siempre">Siempre</option>
+                            <option value="frecuentemente">Frecuentemente</option>
+                            <option value="a veces">A veces</option>
+                            <option value="raramente">Raramente</option>
+                            <option value="nunca">Nunca</option>
+                        </select>
+                    </li>
+                </ol>
+            </div>
+        </div>    
+    
+        <div class="item" onclick="toggleItem(event, 'proveedores8')">
+            <p class="short">Proveedores calificados sin inspección previa</p>
+            <div id="proveedores8" class="item-detail hidden">
+                <p>¿Qué porcentaje de proveedores calificados pueden entregar sin inspección previa?</p>
+                <input type="number" name="proveedores8" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores8')">
+            </div>
+        </div>
+    
+        <div class="item" onclick="toggleItem(event, 'proveedores9')">
+            <p class="short">Porcentaje de pedidos perfectos recibidos</p>
+            <div id="proveedores9" class="item-detail hidden">
+                <p>¿Qué porcentaje de pedidos se reciben perfectos sin defectos o problemas?</p>
+                <input type="number" name="proveedores9" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores9')">
+            </div>
+        </div>
+    
+        <div class="item" onclick="toggleItem(event, 'proveedores10')">
+            <p class="short">Innovaciones propuestas por proveedores</p>
+            <div id="proveedores10" class="item-detail hidden">
+                <p>¿Cuántas innovaciones han sido propuestas por sus proveedores?</p>
+                <input type="number" name="proveedores10" placeholder="Ingrese el número de innovaciones" oninput="markAsAnswered('proveedores10')">
+            </div>
+        </div>
+    
+        <div class="item" onclick="toggleItem(event, 'proveedores11')">
+            <p class="short">Alianzas con proveedores</p>
+            <div id="proveedores11" class="item-detail hidden">
+                <p>¿Tiene alianzas estratégicas con sus proveedores?</p>
+                <input type="text" name="proveedores11" placeholder="Describa las alianzas" oninput="markAsAnswered('proveedores11')">
+            </div>
+        </div>
+    
+        <div class="item" onclick="toggleItem(event, 'proveedores12')">
+            <p class="short">Planificación de inventarios</p>
+            <div id="proveedores12" class="item-detail hidden">
+                <p>¿Cómo amplía la planificación de inventario en colaboración con proveedores?</p>
+                <input type="text" name="proveedores12" placeholder="Describa su proceso" oninput="markAsAnswered('proveedores12')">
+            </div>
+        </div>
+    
+        <div class="item" onclick="toggleItem(event, 'proveedores13')">
+            <p class="short">Evaluación con herramientas sólidas</p>
+            <div id="proveedores13" class="item-detail hidden">
+                <p>¿Cómo evalúa a sus proveedores utilizando herramientas específicas?</p>
+                <input type="text" name="proveedores13" placeholder="Describa la herramienta" oninput="markAsAnswered('proveedores13')">
+            </div>
+        </div>
+    </section>
+
+    <section id="distribucion_items" class="section hidden">
+        <p>Seleccione los indicadores que desea proporcionar:</p>
+    
+        <!-- 1. Costo ABC de Almacenamiento y entrega a clientes -->
+        <div class="item" onclick="toggleItem(event, 'costoABC')">
+            <p class="short">Costos de Almacenamiento</p>
+            <div id="costoABC" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>Responda las siguientes preguntas para analizar los costos de almacenamiento y entrega a clientes:</p>
+                <ol>
+                    <li>
+                        ¿Qué porcentaje de los costos operativos totales corresponde al almacenamiento de inventarios?
+                        <input type="number" name="almacenamientoPorcentaje" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('costoABC')">
+                    </li>
+                    <li>
+                        ¿Cuánto representan, en términos absolutos (moneda), los costos de almacenamiento en el último periodo contable?
+                        <input type="number" name="almacenamientoMonto" placeholder="Ingrese el monto ($)" oninput="markAsAnswered('costoABC')">
+                    </li>
+                    <li>
+                        ¿Qué porcentaje de los costos operativos totales corresponde a la entrega de productos a clientes?
+                        <input type="number" name="entregaPorcentaje" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('costoABC')">
+                    </li>
+                    <li>
+                        ¿Cuánto representan, en términos absolutos (moneda), los costos de entrega en el último periodo contable?
+                        <input type="number" name="entregaMonto" placeholder="Ingrese el monto ($)" oninput="markAsAnswered('costoABC')">
+                    </li>
+                    <li>
+                        ¿Qué porcentaje de los costos de entrega está asociado a transporte?
+                        <input type="number" name="transportePorcentaje" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('costoABC')">
+                    </li>
+                    <li>
+                        ¿Qué porcentaje de los costos de entrega está asociado a embalaje y etiquetado?
+                        <input type="number" name="embalajePorcentaje" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('costoABC')">
+                    </li>
+                    <li>
+                        ¿Qué porcentaje de los costos de entrega está asociado a la gestión administrativa de pedidos?
+                        <input type="number" name="gestionPorcentaje" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('costoABC')">
+                    </li>
+                    <li>
+                        ¿Considera que puede reducir los costos de almacenamiento o entrega mediante ajustes operativos?
+                        <select name="reduccionCostos" oninput="markAsAnswered('costoABC')">
+                            <option value="" disabled selected>Seleccione</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                            <option value="no_seguro">No estoy seguro</option>
+                        </select>
+                    </li>
+                </ol>
+            </div>
+        </div>
+                
+        <!-- 2. Porcentaje de clientes atendidos por canales de bajo costo -->
+        <div class="item" onclick="toggleItem(event, 'canalesBajoCosto')">
+            <p class="short">Canales de bajo costo</p>
+            <div id="canalesBajoCosto" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Qué porcentaje de clientes es atendido por canales de bajo costo?</p>
+                <input type="number" name="canalesBajoCosto" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('canalesBajoCosto')">
+            </div>
+        </div>
+
+        <!-- 3. Tiempos de espera -->
+        <div class="item" onclick="toggleItem(event, 'tiemposEspera')">
+            <p class="short">Tiempos de espera</p>
+            <div id="tiemposEspera" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es el tiempo promedio de espera desde el pedido hasta la entrega?</p>
+                <input type="number" name="tiemposEspera" placeholder="Ingrese el tiempo en días" oninput="markAsAnswered('tiemposEspera')">
+            </div>
+        </div>
+
+        <!-- 4. Porcentaje de entregas a tiempo -->
+        <div class="item" onclick="toggleItem(event, 'entregasATiempo')">
+            <p class="short">Entregas a tiempo</p>
+            <div id="entregasATiempo" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Qué porcentaje de las entregas se realiza a tiempo?</p>
+                <input type="number" name="entregasATiempo" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('entregasATiempo')">
+            </div>
+        </div>
+
+        <!-- 5. Porcentaje de artículos entregados sin defectos -->
+        <div class="item" onclick="toggleItem(event, 'entregasSinDefectos')">
+            <p class="short">Artículos sin defectos</p>
+            <div id="entregasSinDefectos" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Qué porcentaje de los artículos entregados están libres de defectos?</p>
+                <input type="number" name="entregasSinDefectos" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('entregasSinDefectos')">
+            </div>
+        </div>
+
+        <!-- 6. Número y frecuencia de quejas de clientes -->
+        <div class="item" onclick="toggleItem(event, 'quejasClientes')">
+            <p class="short">Quejas de clientes</p>
+            <div id="quejasClientes" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es el número y la frecuencia de quejas de clientes?</p>
+                <input type="number" name="quejasClientes" placeholder="Ingrese el número total" oninput="markAsAnswered('quejasClientes')">
+            </div>
+        </div>
+
+        <!-- 7. Número de incidentes de garantía -->
+        <div class="item" onclick="toggleItem(event, 'incidentesGarantia')">
+            <p class="short">Garantía</p>
+            <div id="incidentesGarantia" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuántos incidentes de garantía se han registrado?</p>
+                <input type="number" name="incidentesGarantia" placeholder="Ingrese el número total" oninput="markAsAnswered('incidentesGarantia')">
+            </div>
+        </div>
+
+        <!-- 8. Pedidos perfectos -->
+        <div class="item" onclick="toggleItem(event, 'pedidosPerfectos')">
+            <p class="short">Pedidos perfectos</p>
+            <div id="pedidosPerfectos" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Qué porcentaje de pedidos se consideran perfectos?</p>
+                <input type="number" name="pedidosPerfectos" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('pedidosPerfectos')">
+            </div>
+        </div>
+
+        <!-- 9. Pérdidas por falta de inventarios -->
+        <div class="item" onclick="toggleItem(event, 'perdidasInventarios')">
+            <p class="short">Pérdidas por inventarios</p>
+            <div id="perdidasInventarios" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es el porcentaje de pérdidas debido a la falta de inventarios?</p>
+                <input type="number" name="perdidasInventarios" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('perdidasInventarios')">
+            </div>
+        </div>
+
+        <!-- 10. Segmentos de mercado -->
+        <div class="item" onclick="toggleItem(event, 'segmentosMercado')">
+            <p class="short">Segmentos de mercado</p>
+            <div id="segmentosMercado" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Qué segmentos de mercado representan su principal enfoque?</p>
+                <input type="text" name="segmentosMercado" placeholder="Describa los segmentos" oninput="markAsAnswered('segmentosMercado')">
+            </div>
+        </div>
+
+
+        
+    </section>
+
+    <section id="procesos_items" class="section hidden">
+        <p>Seleccione los indicadores que desea proporcionar:</p>
+
+        <!-- Costo por unidad de producción -->
+        <div class="item" onclick="toggleItem(event, 'costoUnidadProduccion')">
+            <p class="short">Costo por unidad de producción</p>
+            <div id="costoUnidadProduccion" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es el costo por unidad de producción para sus productos homogéneos?</p>
+                <input type="number" name="costoUnidadProduccion" placeholder="Ingrese el costo por unidad" oninput="markAsAnswered('costoUnidadProduccion')">
+            </div>
+        </div>
+
+        <!-- Gastos de marketing, venta, distribución y administración -->
+        <div class="item" onclick="toggleItem(event, 'gastosOperativos')">
+            <p class="short">Gastos operativos</p>
+            <div id="gastosOperativos" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Qué porcentaje de los costos totales corresponde a gastos de marketing, venta, distribución y administración?</p>
+                <input type="number" name="gastosOperativos" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('gastosOperativos')">
+            </div>
+        </div>
+
+        <!-- Número de procesos con mejoras sustanciales -->
+        <div class="item" onclick="toggleItem(event, 'mejorasProcesos')">
+            <p class="short">Mejoras en procesos</p>
+            <div id="mejorasProcesos" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuántos procesos han experimentado mejoras sustanciales recientemente?</p>
+                <input type="number" name="mejorasProcesos" placeholder="Ingrese el número de procesos" oninput="markAsAnswered('mejorasProcesos')">
+            </div>
+        </div>
+
+        <!-- Porcentaje de defectos en partes por millón -->
+        <div class="item" onclick="toggleItem(event, 'defectosPPM')">
+            <p class="short">Defectos en partes por millón</p>
+            <div id="defectosPPM" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es el porcentaje de defectos en partes por millón en su producción?</p>
+                <input type="number" name="defectosPPM" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('defectosPPM')">
+            </div>
+        </div>
+
+        <!-- Porcentaje de desechos y desperdicios -->
+        <div class="item" onclick="toggleItem(event, 'desechosDesperdicios')">
+            <p class="short">Desechos y desperdicios</p>
+            <div id="desechosDesperdicios" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Qué porcentaje del costo de materias primas corresponde a desechos y desperdicios?</p>
+                <input type="number" name="desechosDesperdicios" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('desechosDesperdicios')">
+            </div>
+        </div>
+
+        <!-- Tiempo de ciclo -->
+        <div class="item" onclick="toggleItem(event, 'tiempoCiclo')">
+            <p class="short">Tiempo de ciclo</p>
+            <div id="tiempoCiclo" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuántos días toma el ciclo desde el comienzo de la producción hasta el producto terminado?</p>
+                <input type="number" name="tiempoCiclo" placeholder="Ingrese los días" oninput="markAsAnswered('tiempoCiclo')">
+            </div>
+        </div>
+
+        <!-- Duración del proceso -->
+        <div class="item" onclick="toggleItem(event, 'duracionProceso')">
+            <p class="short">Duración del proceso</p>
+            <div id="duracionProceso" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuánto tiempo se utiliza realmente para procesar el producto?</p>
+                <input type="number" name="duracionProceso" placeholder="Ingrese el tiempo en horas" oninput="markAsAnswered('duracionProceso')">
+            </div>
+        </div>
+
+        <!-- Porcentaje de utilización de la capacidad -->
+        <div class="item" onclick="toggleItem(event, 'utilizacionCapacidad')">
+            <p class="short">Utilización de capacidad</p>
+            <div id="utilizacionCapacidad" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Qué porcentaje de la capacidad total se utiliza actualmente?</p>
+                <input type="number" name="utilizacionCapacidad" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('utilizacionCapacidad')">
+            </div>
+        </div>
+
+        <!-- Días de inventario -->
+        <div class="item" onclick="toggleItem(event, 'diasInventario')">
+            <p class="short">Días de inventario</p>
+            <div id="diasInventario" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuántos días de inventario tiene su empresa en promedio?</p>
+                <input type="number" name="diasInventario" placeholder="Ingrese el número de días" oninput="markAsAnswered('diasInventario')">
+            </div>
+        </div>
+
+        <!-- Días de ventas en cuentas por cobrar -->
+        <div class="item" onclick="toggleItem(event, 'cuentasPorCobrar')">
+            <p class="short">Cuentas por cobrar</p>
+            <div id="cuentasPorCobrar" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuántos días en promedio se tardan las cuentas por cobrar?</p>
+                <input type="number" name="cuentasPorCobrar" placeholder="Ingrese los días" oninput="markAsAnswered('cuentasPorCobrar')">
+            </div>
+        </div>
+
+        <!-- Porcentaje de existencias agotadas -->
+        <div class="item" onclick="toggleItem(event, 'existenciasAgotadas')">
+            <p class="short">Existencias agotadas</p>
+            <div id="existenciasAgotadas" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Qué porcentaje de existencias se encuentra agotado actualmente?</p>
+                <input type="number" name="existenciasAgotadas" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('existenciasAgotadas')">
+            </div>
+        </div>
+
+        <!-- Ciclo operativo -->
+        <div class="item" onclick="toggleItem(event, 'cicloOperativo')">
+            <p class="short">Ciclo operativo</p>
+            <div id="cicloOperativo" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuántos días toma el ciclo operativo (cuentas por cobrar + inventario - cuentas por pagar)?</p>
+                <input type="number" name="cicloOperativo" placeholder="Ingrese los días" oninput="markAsAnswered('cicloOperativo')">
+            </div>
+        </div>
+
+    </section>
+
+    <section id="finanzas_items" class="section hidden">
+        <p>Seleccione los indicadores que desea proporcionar:</p>
+
+        <!-- Margen de beneficio -->
+        <div class="item" onclick="toggleItem(event, 'margenBeneficio')">
+            <p class="short">Margen de beneficio</p>
+            <div id="margenBeneficio" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es el beneficio neto después de impuestos de su empresa?</p>
+                <input type="number" name="margenBeneficio" placeholder="Ingrese el monto ($)" oninput="markAsAnswered('margenBeneficio')">
+            </div>
+        </div>
+
+        <!-- Rendimiento sobre capital invertido (RCI) -->
+        <div class="item" onclick="toggleItem(event, 'rendimientoRCI')">
+            <p class="short">Rendimiento sobre capital invertido (RCI)</p>
+            <div id="rendimientoRCI" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es el rendimiento sobre el capital invertido de su empresa? (RCI = Margen de beneficio / Capital total * 100)</p>
+                <input type="number" name="rendimientoRCI" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('rendimientoRCI')">
+            </div>
+        </div>
+
+        <!-- Capital circulante -->
+        <div class="item" onclick="toggleItem(event, 'capitalCirculante')">
+            <p class="short">Capital circulante</p>
+            <div id="capitalCirculante" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es el capital circulante de su empresa? (Capital circulante = Existencias + Cuentas por cobrar – Cuentas por pagar)</p>
+                <input type="number" name="capitalCirculante" placeholder="Ingrese el monto ($)" oninput="markAsAnswered('capitalCirculante')">
+            </div>
+        </div>
+
+        <!-- Costo del capital -->
+        <div class="item" onclick="toggleItem(event, 'costoCapital')">
+            <p class="short">Costo del capital</p>
+            <div id="costoCapital" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es el costo del capital en su empresa?</p>
+                <input type="number" name="costoCapital" placeholder="Ingrese el monto ($)" oninput="markAsAnswered('costoCapital')">
+            </div>
+        </div>
+
+        <!-- Beneficio económico -->
+        <div class="item" onclick="toggleItem(event, 'beneficioEconomico')">
+            <p class="short">Beneficio económico</p>
+            <div id="beneficioEconomico" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es el beneficio económico de su empresa? (Beneficio económico = Margen de beneficio – Costo del capital)</p>
+                <input type="number" name="beneficioEconomico" placeholder="Ingrese el monto ($)" oninput="markAsAnswered('beneficioEconomico')">
+            </div>
+        </div>
+
+        <!-- Liquidez -->
+        <div class="item" onclick="toggleItem(event, 'liquidez')">
+            <p class="short">Liquidez</p>
+            <div id="liquidez" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es el nivel de liquidez de su empresa? (Liquidez = Activo realizable a corto plazo / Pasivo exigible a corto plazo)</p>
+                <input type="number" name="liquidez" placeholder="Ingrese el valor" oninput="markAsAnswered('liquidez')">
+            </div>
+        </div>
+
+        <!-- Razón de endeudamiento -->
+        <div class="item" onclick="toggleItem(event, 'razonEndeudamiento')">
+            <p class="short">Razón de endeudamiento</p>
+            <div id="razonEndeudamiento" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es la razón de endeudamiento de su empresa? (Razón de endeudamiento = Pasivo total / Activo total)</p>
+                <input type="number" name="razonEndeudamiento" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('razonEndeudamiento')">
+            </div>
+        </div>
+
+        <!-- Margen de utilidad por producto -->
+        <div class="item" onclick="toggleItem(event, 'utilidadPorProducto')">
+            <p class="short">Margen de utilidad por producto</p>
+            <div id="utilidadPorProducto" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es el margen de utilidad por producto? (Margen = Ventas del producto – Costos y gastos del producto)</p>
+                <input type="number" name="utilidadPorProducto" placeholder="Ingrese el monto ($)" oninput="markAsAnswered('utilidadPorProducto')">
+            </div>
+        </div>
+
+        <!-- Inventario inmovilizado -->
+        <div class="item" onclick="toggleItem(event, 'inventarioInmovilizado')">
+            <p class="short">Inventario inmovilizado</p>
+            <div id="inventarioInmovilizado" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Qué porcentaje de inventario está inmovilizado? (Inventario inmovilizado = Stock inmovilizado / Inventario * 100)</p>
+                <input type="number" name="inventarioInmovilizado" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('inventarioInmovilizado')">
+            </div>
+        </div>
+
+        <!-- Ventas / Activo total -->
+        <div class="item" onclick="toggleItem(event, 'ventasActivoTotal')">
+            <p class="short">Ventas / Activo total</p>
+            <div id="ventasActivoTotal" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es la relación entre ventas y activo total en su empresa?</p>
+                <input type="number" name="ventasActivoTotal" placeholder="Ingrese el valor" oninput="markAsAnswered('ventasActivoTotal')">
+            </div>
+        </div>
+
+        <!-- Gastos de venta / Ventas -->
+        <div class="item" onclick="toggleItem(event, 'gastosVentaVentas')">
+            <p class="short">Gastos de venta / Ventas</p>
+            <div id="gastosVentaVentas" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Qué porcentaje de ventas corresponde a gastos de venta?</p>
+                <input type="number" name="gastosVentaVentas" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('gastosVentaVentas')">
+            </div>
+        </div>
+
+        <!-- Sueldos / Ventas -->
+        <div class="item" onclick="toggleItem(event, 'sueldosVentas')">
+            <p class="short">Sueldos / Ventas</p>
+            <div id="sueldosVentas" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Qué porcentaje de ventas corresponde a sueldos?</p>
+                <input type="number" name="sueldosVentas" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('sueldosVentas')">
+            </div>
+        </div>
+
+        <!-- Renta local / Ventas -->
+        <div class="item" onclick="toggleItem(event, 'rentaVentas')">
+            <p class="short">Renta / Ventas</p>
+            <div id="rentaVentas" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Qué porcentaje de ventas corresponde a la renta de locales?</p>
+                <input type="number" name="rentaVentas" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('rentaVentas')">
+            </div>
+        </div>
+
+        <!-- Ventas / Gastos -->
+        <div class="item" onclick="toggleItem(event, 'ventasGastos')">
+            <p class="short">Ventas / Gastos</p>
+            <div id="ventasGastos" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>¿Cuál es la relación entre las ventas y los gastos totales?</p>
+                <input type="number" name="ventasGastos" placeholder="Ingrese el valor" oninput="markAsAnswered('ventasGastos')">
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    let proveedoresCompletado = false; // variable global para rastrear si el usuario ya completó la sección proveedores
+
+    function mostrarMensajeBienvenida() {
+        const mensaje = document.getElementById('mensajeBienvenida');
+        const mensaje2 = document.getElementById('mensajeBienvenida2');
+        const mensaje3 = document.getElementById('mensajeBienvenida3');
+        mensaje.classList.remove('hidden'); // Muestra el contenedor
+        setTimeout(() => {
+            mensaje.classList.add('visible'); // Activa el efecto de entrada
+            mensaje2.classList.remove('hidden'); // Prepara el segundo mensaje            
+            setTimeout(() => {
+                mensaje2.classList.add('visible'); // Muestra el segundo mensaje
+                mensaje3.classList.remove('hidden'); // Prepara el segundo mensaje
+                setTimeout(() => {
+                    mensaje3.classList.add('visible'); // Muestra el segundo mensaje
+                }, 1000); // Breve retraso para activar la transición
+            }, 1000); // Breve retraso para activar la transición
+        }, 100); // Retraso corto para garantizar la transición
+    }
+
+    function ocultarMensaje() {
+        document.getElementById('mensajes').classList.add('hidden');
+        document.getElementById('informacionBasica').classList.remove('hidden');
+    }
+
+
+    function validarInformacionBasica() {
+        const sector = document.getElementById('sector');
+        const tamanioEmpresa = document.getElementById('tamanioEmpresa');
+
+        // Reinicia estilos previos
+        sector.classList.remove('error');
+        tamanioEmpresa.classList.remove('error');
+
+        let valid = true;
+
+        // Valida "Sector de actividad"
+        if (sector.value === "") {
+            sector.classList.add('error');
+            valid = false;
+        }
+
+        // Valida "Tamaño de la empresa"
+        if (tamanioEmpresa.value === "") {
+            tamanioEmpresa.classList.add('error');
+            valid = false;
+        }
+
+        if (!valid) {
+             alert('Por favor, complete los campos obligatorios.');
+             return;
+        }
+
+        // Procesa la información si todo está correcto
+        console.log('Información Básica:', {
+            sector: sector.value,
+            tamanioEmpresa: tamanioEmpresa.value,
+        });
+
+        // Oculta la sección y continúa con el autodiagnóstico
+        document.getElementById('informacionBasica').classList.add('hidden');
+
+        // Muestra las secciones de navegación
+        document.getElementById('mensajeAutodiagnostico').classList.remove('hidden');
+        document.getElementById('nav-sections').classList.remove('hidden');
+    }
+
+
+
+    // Función para mostrar y ocultar preguntas al hacer clic en el ítem
+    function toggleItem(event, itemId) {
+        event.stopPropagation(); // Evita que el evento se propague al documento
+        const itemDetail = document.getElementById(itemId);
+        const isHidden = itemDetail.classList.contains('hidden');
+        document.querySelectorAll('.item-detail').forEach(detail => {
+            if (detail !== itemDetail) {
+                detail.classList.add('hidden'); // Ocultar todas excepto la actual
+            }
+        });
+        if (isHidden) {
+            itemDetail.classList.remove('hidden'); // Solo mostrar si estaba oculta
+        }
+    }
+
+    // Ocultar todas las preguntas al hacer clic fuera de los ítems
+    document.addEventListener('click', (e) => {
+        const isItem = e.target.closest('.item');
+        if (!isItem) {
+            document.querySelectorAll('.item-detail').forEach(detail => detail.classList.add('hidden'));
+        }
+    });
+
+    // Marcar ítems como contestados
+    function markAsAnswered(itemId) {
+        const item = document.querySelector(`div#${itemId}`).parentElement; // Selecciona el ítem contenedor
+        const input = document.querySelector(`div#${itemId} input`); // Selecciona el campo de entrada asociado
+
+        if (input && input.value.trim() !== '') {
+            // Si hay texto en el campo, marca el ítem como contestado
+            item.classList.add('answered');
+        } else {
+            // Si el campo está vacío, quita la clase 'answered'
+            item.classList.remove('answered');
+        }
+    }
+
+    // Función para cambiar de sección
+    function showSection(sectionId) {
+        document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+        document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function procesarCantidadProveedores() {
+        const cantidad = parseInt(document.getElementById('cantidadProveedores').value);
+        if (!cantidad || cantidad <= 0) {
+            alert('Por favor, ingrese una cantidad válida de proveedores.');
+            return;
+        }
+
+        // Calcular el 20% de los proveedores
+        const importantes = Math.ceil(cantidad * 0.2);
+        document.getElementById('cantidadImportantes').textContent = importantes;
+
+        // Generar campos dinámicos
+        const camposContainer = document.getElementById('camposProveedores');
+        camposContainer.innerHTML = ''; // Limpiar contenido previo
+        for (let i = 1; i <= importantes; i++) {
+            const campo = document.createElement('div');
+            campo.innerHTML = `
+                <input type="text" id="proveedor${i}" placeholder="Ingrese el nombre del proveedor ${i}">
+            `;
+            camposContainer.appendChild(campo);
+        }
+
+        // Mostrar la siguiente sección
+        document.getElementById('proveedores').classList.add('hidden');
+        document.getElementById('proveedoresMasImportantes').classList.remove('hidden');
+    }
+
+    function mostrarItemsProveedores() {
+        const camposContainer = document.getElementById('camposProveedores');
+        const inputs = camposContainer.querySelectorAll('input');
+        const nombres = [];
+        inputs.forEach(input => {
+            if (input.value.trim() === '') {
+                alert('Por favor, complete todos los campos de los proveedores.');
+                return;
+            }
+            nombres.push(input.value);
+        });
+
+        // Marcar la sección como completada
+        proveedoresCompletado = true;
+
+        // Mostrar ítems
+        // document.getElementById('proveedoresMasImportantes').classList.add('hidden');
+        document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+        document.getElementById('proveedores_items').classList.remove('hidden');
+    }
+    
+    function mostrarItemsDistribucion() {
+        document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+        document.getElementById('distribucion_items').classList.remove('hidden');
+    }
+
+    function mostrarSeccionProveedores() {
+        if (proveedoresCompletado) {
+            // Redirigir a proveedores_items si la sección ya fue completada
+            document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+            document.getElementById('proveedores_items').classList.remove('hidden');
+        } else {
+            // Mostrar la sección proveedores por primera vez
+            document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+            document.getElementById('proveedores').classList.remove('hidden');
+        }
+    }
+
+    function irAlInicio() {
+        window.location.href = 'index.html'; // Redirige a la página "index.html"
+}
+
+function irASeccionAnterior() {
+    const secciones = document.querySelectorAll('.section'); // Todas las secciones
+    let indexActual = -1;
+
+    // Encuentra el índice de la sección visible
+    secciones.forEach((seccion, index) => {
+        if (!seccion.classList.contains('hidden')) {
+            indexActual = index;
+        }
+    });
+
+    if (indexActual > 0) {
+        // Oculta la sección actual
+        secciones[indexActual].classList.add('hidden');
+
+        // Muestra la sección anterior
+        secciones[indexActual - 1].classList.remove('hidden');
+        secciones[indexActual - 1].scrollIntoView({ behavior: 'smooth' }); // Desplazamiento suave
+    } else {
+        console.log('No hay sección anterior disponible.');
+    }
+}
+
+
+</script>
+
+</body>
+</html>

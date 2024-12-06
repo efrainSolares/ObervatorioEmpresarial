@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Observatorio Empresarial</title>
+</head>
+<body>
+    <div class="barra-azul"></div>
+    <header>
+        <div class="logo-container">
+            <img src="Imágenes/Logo_UAdeC.png" alt="Universidad Autónoma de Coahuila" class="logo">
+            <img src="Imágenes/Logo_CIDESIE.png" alt="CIDESIE" class="logo">
+        </div>
+         <!-- Menú hamburguesa para vista móvil -->
+        <div class="mobile-nav-icon">
+            <span>&#9776;</span> <!-- Icono de menú hamburguesa -->
+        </div>
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="sectores.html">Sectores</a></li>
+                <li><a href="noticias.html">Noticias</a></li>
+                <li><a href="oportunidades.html">Oportunidades de Inversión</a></li>
+                <li><a href="acerca.html">Acerca de</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>        
+    </header>
+        <div class="hero-container">
+            <img src="Imágenes/Fondo_observatorio.png" alt="Fondo del Observatorio Empresarial" class="hero-image">
+            <div class="overlay-left">
+                <h1>Bienvenido(a) al Observatorio Empresarial</h1>
+                <p>del Centro de Investigación para el Desarrollo Sostenible e Innovación Empresarial</p>
+            </div>
+            <a href="acerca.html" class="btn-descubre-mas">Descubre más</a>
+        </div>
+        <div class="text-center">
+            <p>
+                Creado por el <a href="https://www.uadec.mx/cidesie/" target="_blank" class="highlight-link">CIDESIE</a>, 
+                el Observatorio Empresarial tiene como objetivo ofrecer análisis detallados sobre el entorno económico
+                y empresarial del noreste de México mediante un enfoque basado en datos, fomentando el desarrollo empresarial estratégico e informado.
+            </p>
+            <p>
+                A través de estudios de mercado exhaustivos en diferentes sectores, ofrecemos análisis respaldados por evidencia
+                que pueden ayudarte a mejorar tus estrategias empresariales actuales o a crear nuevas.
+            </p>
+            <p>
+                Desde el desarrollo de talento y habilidades hasta el análisis financiero, contamos con numerosos estudios relevantes,
+                y si no encuentras lo que necesitas, podemos ayudarte a desarrollarlo.
+            </p>
+        </div>
+        
+        <div class="news-bar">
+            <div class="news-content">
+                <div class="news-item">
+                    Actualización del mercado empresarial.
+                    <a href="noticia1.html" class="more-info">Información</a>
+                </div>
+                <div class="news-item">
+                    Nuevas oportunidades de inversión.
+                    <a href="noticia2.html" class="more-info">Información</a>
+                </div>
+                <div class="news-item">
+                    Resultados del último estudio económico.
+                    <a href="noticia3.html" class="more-info">Información</a>
+                </div>
+            </div>
+            <button class="news-control prev" onclick="scrollNews(-1)">&#8249;</button>
+            <button class="news-control next" onclick="scrollNews(1)">&#8250;</button>
+        </div>
+        
+                                   
+        
+        <div class="content">
+            <aside class="sidebar left">
+                <h2>Sitios de interés</h2>
+                <div class="sitio-interes">
+                    <a href="https://www.inegi.org.mx/app/mapa/denue/default.aspx" target="_blank">
+                        <img src="Imágenes/mapa_economico.png" alt="Cartografía económica">
+                        Cartografía económica
+                    </a>
+                </div>
+                <div class="sitio-interes">
+                    <a href="https://www.inegi.org.mx/temas/pib/" target="_blank">
+                        <img src="Imágenes/sectores_productivos.png" alt="Economía y sectores productivos">
+                        Economía y sectores productivos
+                    </a>
+                </div>
+                <div class="sitio-interes">
+                    <a href="https://www.bancomundial.org/es/country/mexico/overview" target="_blank">
+                        <img src="Imágenes/panorama_general.jpg" alt="México: panorama general">
+                        México: panorama general
+                    </a>
+                </div>
+                <div class="sitio-interes">
+                    <a href="https://www.torreon.gob.mx/licitaciones_2024.html" target="_blank">
+                        <img src="Imágenes/Torreon.png" alt="licitaciones_2024">
+                        Licitaciones Públicas Torreón 2024
+                    </a>
+                </div>
+                <div class="sitio-interes">
+                    <a href="https://www.gob.mx/se/acciones-y-programas/temas-de-interes-de-la-secretaria-de-economia" target="_blank">
+                        <img src="Imágenes/interes_SE.jpg" alt="Temas de interés de la SE">
+                        Temas de interés de la SE
+                    </a>
+                </div>
+                <div class="sitio-interes">
+                    <a href="https://www.worldbank.org" target="_blank">
+                        <img src="Imágenes/interes_7.png" alt="Datos globales sobre desarrollo económico, estadísticas empresariales y financiamiento">
+                        Banco Mundial (World Bank)
+                    </a>
+                </div>
+                <div class="sitio-interes">
+                    <a href="https://www.inegi.org.mx/" target="_blank">
+                        <img src="Imágenes/interes_6.png" alt="INEGI">
+                        INEGI (Instituto Nacional de Estadística y Geografía)
+                    </a>
+                </div>
+            </aside>
+            <section class="servicios">
+                <h2>Servicios</h2>
+                <div class="proyecto-evaluacion">
+                    <a href="autodiagnostico.html" class="enlace-proyecto">Diagnóstico automatizado</a>
+                    <img src="Imágenes/diagnostico_automatizado.png" alt="Diagnóstico automatizado" class="imagen-proyecto">                    
+                </div>     
+                <div class="proyecto-evaluacion">
+                    <a href="https://ciencia-basica.github.io/sistema-integral-seleccion-proyectos/frontend/" class="enlace-proyecto">Evaluación y selección de proyectos</a>
+                    <img src="Imágenes/evaluacion_seleccion_proyectos.png" alt="Evaluación y selección de proyectos" class="imagen-proyecto">                    
+                </div>                
+            </section>
+            <aside class="sidebar right">
+                <div class="subsection">
+                    <h3>La industria manufacturera en la Laguna</h3>
+                    <a href="articulo1.html">Breve descripción del artículo 1</a>
+                    <img src="Imágenes/imagen-articulo1.jpg" alt="Descripción de la imagen 1">
+                </div>
+                <div class="subsection">
+                    <h3>La industria automotríz en la Laguna</h3>
+                    <a href="articulo2.html">Breve descripción del artículo 2</a>
+                    <img src="Imágenes/imagen-articulo2.png" alt="Descripción de la imagen 2">
+                </div>
+                <div class="subsection">
+                    <h3>Manufactura de chips</h3>
+                    <a href="articulo3.html">Breve descripción del artículo 3</a>
+                    <img src="Imágenes/imagen-articulo3.png" alt="Descripción de la imagen 3">
+                </div>
+            </aside>
+        </div>
+        <div>
+            <section class="dashboards-interes">
+                <h2>Dashboards de Interés</h2>
+                <p class="subtitulo-dashboards">Los dashboards ofrecen herramientas poderosas para el análisis de mercados, investigación de la competencia, innovación empresarial, gestión de recursos humanos, análisis financiero, y el tratamiento de problemas de sostenibilidad y desarrollo, facilitando la toma de decisiones basada en datos.</p>   
+                <div class="contenedor-imagenes">
+                    <img src="Imágenes/dashboard-1.png" alt="Dashboard 1" class="img-dashboard">
+                    <img src="Imágenes/dashboard-2.png" alt="Dashboard 1" class="img-dashboard">
+                    <img src="Imágenes/dashboard-3.png" alt="Dashboard 1" class="img-dashboard">
+                    <img src="Imágenes/dashboard-4.png" alt="Dashboard 1" class="img-dashboard">
+                    <img src="Imágenes/dashboard-5.png" alt="Dashboard 1" class="img-dashboard">
+                    <img src="Imágenes/dashboard-6.png" alt="Dashboard 1" class="img-dashboard">
+                </div> 
+            </section>
+        </div>
+        <div>
+            <section id="publicaciones">
+                <h2>Publicaciones</h2>
+                <p class="subtitulo">Exploración detallada de temas específicos para promover sociedades transformadoras alineadas hacia la declaración de los Objetivos de Desarrollo Sostenible (ODS) para que sirvan de apoyo a la competitividad, productividad y capacidad innovadora.</p>
+                <!-- Contenido de la sección Publicaciones aquí -->
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 CIDESIE, UAdeC</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.mobile-nav-icon span').addEventListener('click', function() {
+                var nav = document.querySelector('.mobile-nav');
+                nav.classList.toggle('show');
+                if (nav.style.display === "block") {
+                    nav.style.display = "none";
+                } else {
+                    nav.style.display = "block";
+                }
+            });
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    //console.log(entry); // PARA DEPURACIÓN
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1; // Hace las imágenes visibles
+                    }
+                });
+            }, { threshold: 1 }); // Ajusta el threshold según cuánto de la sección debe ser visible para activar la animación
+
+            // Observa cada imagen
+            document.querySelectorAll('.img-dashboard').forEach(img => {
+                observer.observe(img);
+            });
+        });
+
+        let currentIndex = 0;
+
+        function scrollNews(direction) {
+            const content = document.querySelector('.news-content');
+            const items = document.querySelectorAll('.news-item');
+            const totalItems = items.length;
+
+            // Calcula el nuevo índice
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = totalItems - 1; // Vuelve al último
+            if (currentIndex >= totalItems) currentIndex = 0; // Vuelve al primero
+
+            // Desplaza el contenedor
+            const width = items[0].offsetWidth;
+            content.style.transform = `translateX(-${currentIndex * width}px)`;
+        }
+
+        // Desplazamiento automático
+        setInterval(() => scrollNews(1), 5000); // Cambia cada 5 segundos
+    </script>
+</body>
+</html>
