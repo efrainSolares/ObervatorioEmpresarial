@@ -104,7 +104,7 @@ nav {
 }
 
 #informacionBasica input, #informacionBasica select {
-    width: 100%;
+    width: 95%;
     padding: 8px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -125,6 +125,15 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
 
 input.error, select.error {
     border: 2px solid red; /* Resalta el borde en rojo */
@@ -299,4 +308,78 @@ input[type="number"], input[type="text"] {
 
 #informacion-basica button:hover {
     background-color: #003f87;
+}
+
+/* Estilo base del ícono */
+.info-icon {
+    font-size: 1em;
+    color: #007bff;
+    margin-left: 8px;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Tooltip al pasar el cursor */
+.info-icon::after {
+    content: attr(data-tooltip); /* Usa el contenido del atributo data-tooltip */
+    position: absolute;
+    top: -40px; /* Ajusta la posición vertical */
+    left: 50%; /* Centra horizontalmente */
+    transform: translateX(-50%);
+    background-color: #007bff; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 0.7em;
+    white-space: nowrap; /* Evita que el texto se divida en líneas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para el tooltip */
+    opacity: 0; /* Oculta el tooltip inicialmente */
+    pointer-events: none; /* No permite interacción */
+    transition: opacity 0.3s ease-in-out; /* Transición suave */
+    z-index: 9999; /* Asegura que se muestre encima de otros elementos */
+    font-family: 'Arial', sans-serif; /* Cambia el tipo de letra */
+}
+
+/* Muestra el tooltip al pasar el cursor */
+.info-icon:hover::after {
+    opacity: 1; /* Hace visible el tooltip */
+}
+
+textarea {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    resize: vertical; /* Permite cambiar el tamaño verticalmente */
+}
+
+textarea:focus {
+    border-color: #0056b3;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+}
+
+.register-option {
+    display: flex;
+    align-items: center; /* Alinea verticalmente el checkbox y el texto */
+    gap: 4px; /* Reduce el espacio horizontal entre el checkbox y el texto */
+}
+
+.register-option label {
+    margin: 0; /* Elimina márgenes adicionales en el texto */
+}
+
+.register-option input[type="checkbox"] {
+    margin: 0; /* Elimina márgenes adicionales en el checkbox */
+}
+
+.hidden {
+    display: none;
+}
+
+#registroOpcional {
+    margin-top: 20px;
 }
