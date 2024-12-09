@@ -66,16 +66,14 @@
             </div>
         </section>
 
-        <!-- Nueva sección: Información Básica -->
         <div id="informacionBasica" class="section hidden">
             <h2>Información Básica</h2>
-            <p>Por favor, proporcione la siguiente información antes de comenzar el autodiagnóstico:</p>
             <form id="formInformacionBasica">
-                <label for="nombreEmpresa">Nombre de la empresa:</label>
-                <input type="text" id="nombreEmpresa" placeholder="Ingrese el nombre de la empresa">
-            
+                <label for="nombreEmpresa">Alias de la empresa:</label>
+                <input type="text" id="nombreEmpresa" placeholder="Ingrese el alias de la empresa" required>
+        
                 <label for="sector">Sector de actividad:</label>
-                <select id="sector">
+                <select id="sector" required>
                     <option value="" disabled selected>Seleccione el sector</option>
                     <option value="manufactura">Manufactura</option>
                     <option value="comercio">Comercio</option>
@@ -83,30 +81,46 @@
                     <option value="tecnologia">Tecnología</option>
                     <option value="otros">Otros</option>
                 </select>
-            
+        
                 <label for="tamanioEmpresa">Tamaño de la empresa:</label>
-                <select id="tamanioEmpresa">
+                <select id="tamanioEmpresa" required>
                     <option value="" disabled selected>Seleccione el tamaño</option>
                     <option value="micro">Micro</option>
                     <option value="pequena">Pequeña</option>
                     <option value="mediana">Mediana</option>
                     <option value="grande">Grande</option>
                 </select>
-            
-                <label>
-                    <input type="checkbox" id="guardarDatos"> Deseo registrar mis datos para recuperarlos en el futuro.
-                </label>
-            
+        
+                <label for="mision">Misión de la empresa:</label>
+                <textarea id="mision" placeholder="Describa la misión de la empresa" rows="4" required></textarea>
+        
+                <label for="vision">Visión de la empresa:</label>
+                <textarea id="vision" placeholder="Describa la visión de la empresa" rows="4" required></textarea>
+
+                <div class="register-option">
+                    <input type="checkbox" id="registrarDatos" name="registrarDatos" onclick="toggleRegistro()">
+                    <label for="registrarDatos">Deseo registrar mis datos.</label>
+                </div>
+        
+                <div id="registroOpcional" class="hidden">
+                    <label for="correo">Correo electrónico:</label>
+                    <input type="email" id="correo" name="correo" placeholder="Ingrese su correo electrónico">
+        
+                    <label for="contrasena">Contraseña:</label>
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña">
+                </div>
+        
                 <button type="button" onclick="validarInformacionBasica()">Continuar</button>
-            </form>                        
+            </form>
         </div>
-    
+        
+        
     <!-- Sección de Proveedores -->
     <section id="proveedores" class="section hidden">
         <h2>Proveedores</h2>
         <div id="proveedoresStep1">
             <h3>Información Inicial</h3>
-            <p>¿Cuántos proveedores tiene su empresa?</p>
+            <p>¿De cuántos proveedores desea proporcionar información?</p>
             <input type="number" id="cantidadProveedores" placeholder="Ingrese el número de proveedores" min="1">
             <button onclick="procesarCantidadProveedores()">Continuar</button>
         </div>
@@ -130,7 +144,10 @@
         <div class="item" onclick="toggleItem(event, 'proveedores1')">
             <p class="short">Compras hechas electrónicamente</p>
             <div id="proveedores1" class="item-detail hidden">
-                <p>¿Qué porcentaje de las compras realizadas por su empresa se gestionan electrónicamente (EDI o Internet)?</p>
+                <p>
+                    ¿Qué porcentaje de compras realizadas por su empresa se gestionan electrónicamente (EDI o Internet)?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="Este porcentaje mide cuántas de sus compras se gestionan electrónicamente mediante EDI o plataformas en línea, lo que puede mejorar la eficiencia operativa."></i>
+                </p>
                 <input type="number" name="proveedores1" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores1')">
             </div>
         </div>
@@ -138,7 +155,10 @@
         <div class="item" onclick="toggleItem(event, 'proveedores3')">
             <p class="short">Tiempo de espera</p>
             <div id="proveedores3" class="item-detail hidden">
-                <p>¿Cuánto tiempo, en promedio, transcurre desde que realiza un pedido hasta que lo recibe?</p>
+                <p>
+                    ¿Cuánto tiempo, en promedio, transcurre desde que realiza un pedido hasta que lo recibe?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="El tiempo promedio de entrega es el lapso entre realizar un pedido a un proveedor y recibir los productos o materiales solicitados."></i>
+                </p>
                 <input type="number" name="proveedores3" placeholder="Ingrese el tiempo en días" oninput="markAsAnswered('proveedores3')">
             </div>
         </div>
@@ -146,7 +166,10 @@
         <div class="item" onclick="toggleItem(event, 'proveedores4')">
             <p class="short">Porcentaje de entregas puntuales</p>
             <div id="proveedores4" class="item-detail hidden">
-                <p>¿Qué porcentaje de las entregas de sus proveedores se realiza puntualmente?</p>
+                <p>
+                    ¿Qué porcentaje de las entregas de sus proveedores se realiza puntualmente?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="El porcentaje de entregas puntuales mide la confiabilidad de los proveedores para entregar en las fechas acordadas."></i>
+                </p>
                 <input type="number" name="proveedores4" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores4')">
             </div>
         </div>
@@ -154,7 +177,10 @@
         <div class="item" onclick="toggleItem(event, 'proveedores5')">
             <p class="short">Porcentaje de pedidos fuera de plazo</p>
             <div id="proveedores5" class="item-detail hidden">
-                <p>¿Cuál es el porcentaje de pedidos que llegan fuera del plazo acordado con sus proveedores?</p>
+                <p>
+                    ¿Cuál es el porcentaje de pedidos que llegan fuera del plazo acordado con sus proveedores?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="El porcentaje de pedidos fuera de plazo indica cuántas entregas de los proveedores no cumplen con las fechas de entrega acordadas."></i>
+                </p>
                 <input type="number" name="proveedores5" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores5')">
             </div>
         </div>
@@ -162,7 +188,10 @@
         <div class="item" onclick="toggleItem(event, 'proveedores6')">
             <p class="short">Partes defectuosas por millón (PPM)</p>
             <div id="proveedores6" class="item-detail hidden">
-                <p>¿Qué proporción de los pedidos entrantes contiene partes defectuosas (medido en partes por millón - PPM)?</p>
+                <p>
+                    ¿Qué proporción de los pedidos entrantes contiene partes defectuosas (medido en partes por millón - PPM)?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="Las partes defectuosas en partes por millón (PPM) es un indicador clave de la calidad de los productos recibidos de los proveedores."></i>
+                </p>
                 <input type="number" name="proveedores6" placeholder="Ingrese el valor" oninput="markAsAnswered('proveedores6')">
             </div>
         </div>
@@ -174,10 +203,12 @@
                 <ol>
                     <li>
                         ¿Qué porcentaje de las materias primas entregadas cumple con las especificaciones técnicas acordadas?
+                        <i class="fas fa-info-circle info-icon" data-tooltip="Este porcentaje refleja cuántas materias primas entregadas cumplen con las especificaciones técnicas acordadas entre su empresa y el proveedor."></i>
                         <input type="number" name="conformidadEspecificaciones" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores7')">
                     </li>
                     <li>
                         ¿Con qué frecuencia detecta desviaciones en las especificaciones de las materias primas entregadas?
+                        <i class="fas fa-info-circle info-icon" data-tooltip="La frecuencia de desviaciones mide qué tan a menudo los materiales entregados no cumplen con las especificaciones técnicas establecidas."></i>
                         <select name="frecuenciaDesviaciones" oninput="markAsAnswered('proveedores7')">
                             <option value="" disabled selected>Seleccione</option>
                             <option value="nunca">Nunca</option>
@@ -252,7 +283,10 @@
         <div class="item" onclick="toggleItem(event, 'proveedores8')">
             <p class="short">Proveedores calificados sin inspección previa</p>
             <div id="proveedores8" class="item-detail hidden">
-                <p>¿Qué porcentaje de proveedores calificados pueden entregar sin inspección previa?</p>
+                <p>
+                    ¿Qué porcentaje de proveedores calificados pueden entregar sin inspección previa?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="El porcentaje de proveedores que pueden entregar sin inspección previa refleja la confianza en la calidad y consistencia de sus proveedores calificados."></i>
+                </p>
                 <input type="number" name="proveedores8" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores8')">
             </div>
         </div>
@@ -260,7 +294,10 @@
         <div class="item" onclick="toggleItem(event, 'proveedores9')">
             <p class="short">Porcentaje de pedidos perfectos recibidos</p>
             <div id="proveedores9" class="item-detail hidden">
-                <p>¿Qué porcentaje de pedidos se reciben perfectos sin defectos o problemas?</p>
+                <p>
+                    ¿Qué porcentaje de pedidos se reciben perfectos sin defectos o problemas?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="Los pedidos perfectos son aquellos que llegan en las condiciones esperadas, sin defectos ni problemas relacionados con el pedido."></i>
+                </p>
                 <input type="number" name="proveedores9" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores9')">
             </div>
         </div>
@@ -268,7 +305,10 @@
         <div class="item" onclick="toggleItem(event, 'proveedores10')">
             <p class="short">Innovaciones propuestas por proveedores</p>
             <div id="proveedores10" class="item-detail hidden">
-                <p>¿Cuántas innovaciones han sido propuestas por sus proveedores?</p>
+                <p>
+                    ¿Cuántas innovaciones han sido propuestas por sus proveedores?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="El número de innovaciones propuestas por los proveedores indica su nivel de colaboración para aportar nuevas ideas o procesos a su empresa."></i>
+                </p>
                 <input type="number" name="proveedores10" placeholder="Ingrese el número de innovaciones" oninput="markAsAnswered('proveedores10')">
             </div>
         </div>
@@ -276,7 +316,10 @@
         <div class="item" onclick="toggleItem(event, 'proveedores11')">
             <p class="short">Alianzas con proveedores</p>
             <div id="proveedores11" class="item-detail hidden">
-                <p>¿Tiene alianzas estratégicas con sus proveedores?</p>
+                <p>
+                    ¿Tiene alianzas estratégicas con sus proveedores?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="Las alianzas estratégicas con proveedores son relaciones a largo plazo para compartir riesgos, beneficios e innovaciones en la cadena de suministro."></i>
+                </p>
                 <input type="text" name="proveedores11" placeholder="Describa las alianzas" oninput="markAsAnswered('proveedores11')">
             </div>
         </div>
@@ -284,7 +327,10 @@
         <div class="item" onclick="toggleItem(event, 'proveedores12')">
             <p class="short">Planificación de inventarios</p>
             <div id="proveedores12" class="item-detail hidden">
-                <p>¿Cómo amplía la planificación de inventario en colaboración con proveedores?</p>
+                <p>
+                    ¿Cómo amplía la planificación de inventario en colaboración con proveedores?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="La planificación colaborativa de inventarios implica trabajar junto a sus proveedores para garantizar niveles óptimos de inventario y reducir costos de almacenamiento."></i>
+                </p>
                 <input type="text" name="proveedores12" placeholder="Describa su proceso" oninput="markAsAnswered('proveedores12')">
             </div>
         </div>
@@ -292,8 +338,20 @@
         <div class="item" onclick="toggleItem(event, 'proveedores13')">
             <p class="short">Evaluación con herramientas sólidas</p>
             <div id="proveedores13" class="item-detail hidden">
-                <p>¿Cómo evalúa a sus proveedores utilizando herramientas específicas?</p>
+                <p>
+                    ¿Cómo evalúa a sus proveedores utilizando herramientas específicas?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="La evaluación de proveedores mediante herramientas específicas permite medir su desempeño en calidad, costos, tiempo de entrega y otros criterios clave."></i>
+                </p>
                 <input type="text" name="proveedores13" placeholder="Describa la herramienta" oninput="markAsAnswered('proveedores13')">
+                <p class="short">
+                    ¿Desea obtener una herramienta para evaluar a sus proveedores?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="Esta herramienta le permitirá analizar y calificar el desempeño de sus proveedores en términos de calidad, tiempo de entrega, costos y otros criterios clave."></i>
+                </p>
+                <select name="herramientaEvaluacion" id="herramientaEvaluacion" oninput="markAsAnswered('proveedores13')">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
             </div>
         </div>
     </section>
@@ -553,21 +611,28 @@
         <div class="item" onclick="toggleItem(event, 'margenBeneficio')">
             <p class="short">Margen de beneficio</p>
             <div id="margenBeneficio" class="item-detail hidden" onclick="event.stopPropagation()">
-                <p>¿Cuál es el beneficio neto después de impuestos de su empresa?</p>
+                <p>
+                    ¿Cuál es el beneficio neto después de impuestos de su empresa?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="El beneficio neto después de impuestos es la ganancia que queda después de deducir todos los costos, impuestos y otros gastos."></i>
+                </p>
                 <input type="number" name="margenBeneficio" placeholder="Ingrese el monto ($)" oninput="markAsAnswered('margenBeneficio')">
             </div>
         </div>
 
-        <!-- Rendimiento sobre capital invertido (RCI) -->
+        <!-- Rendimiento sobre capital invertido (RCI)  Recuerda: Capital Total = Patrimonio Neto de la Empresa + Deuda Total, donde Patrimonio Neto contiene existencias en inventarios y en procesos de producción así como cuentas por cobrar; mientras que la Deuda Total contienen cuentas por pagar-->
         <div class="item" onclick="toggleItem(event, 'rendimientoRCI')">
             <p class="short">Rendimiento sobre capital invertido (RCI)</p>
             <div id="rendimientoRCI" class="item-detail hidden" onclick="event.stopPropagation()">
-                <p>¿Cuál es el rendimiento sobre el capital invertido de su empresa? (RCI = Margen de beneficio / Capital total * 100)</p>
-                <input type="number" name="rendimientoRCI" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('rendimientoRCI')">
+                <p>
+                    ¿Cuál es el Capital Total?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="El capital total incluye todos los activos líquidos y no líquidos, considerando capital circulante (existencias, cuentas por cobrar y cuentas por pagar)."></i>                </p>
+                <input type="number" name="rendimientoRCI" placeholder="Capital Total" oninput="markAsAnswered('rendimientoRCI')">
             </div>
         </div>
 
         <!-- Capital circulante -->
+         
+        <!--
         <div class="item" onclick="toggleItem(event, 'capitalCirculante')">
             <p class="short">Capital circulante</p>
             <div id="capitalCirculante" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -576,7 +641,7 @@
             </div>
         </div>
 
-        <!-- Costo del capital -->
+        <!-- Costo del capital --
         <div class="item" onclick="toggleItem(event, 'costoCapital')">
             <p class="short">Costo del capital</p>
             <div id="costoCapital" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -584,8 +649,9 @@
                 <input type="number" name="costoCapital" placeholder="Ingrese el monto ($)" oninput="markAsAnswered('costoCapital')">
             </div>
         </div>
+    -->
 
-        <!-- Beneficio económico -->
+        <!-- Beneficio económico --
         <div class="item" onclick="toggleItem(event, 'beneficioEconomico')">
             <p class="short">Beneficio económico</p>
             <div id="beneficioEconomico" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -593,12 +659,16 @@
                 <input type="number" name="beneficioEconomico" placeholder="Ingrese el monto ($)" oninput="markAsAnswered('beneficioEconomico')">
             </div>
         </div>
+        -->
 
         <!-- Liquidez -->
         <div class="item" onclick="toggleItem(event, 'liquidez')">
             <p class="short">Liquidez</p>
             <div id="liquidez" class="item-detail hidden" onclick="event.stopPropagation()">
-                <p>¿Cuál es el nivel de liquidez de su empresa? (Liquidez = Activo realizable a corto plazo / Pasivo exigible a corto plazo)</p>
+                <p>
+                    ¿Cuál es el nivel de liquidez de su empresa?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="La liquidez mide la capacidad de una empresa para cumplir con sus obligaciones financieras a corto plazo. Se calcula como Activo realizable a corto plazo dividido entre Pasivo exigible a corto plazo."></i>
+                </p>
                 <input type="number" name="liquidez" placeholder="Ingrese el valor" oninput="markAsAnswered('liquidez')">
             </div>
         </div>
@@ -607,7 +677,10 @@
         <div class="item" onclick="toggleItem(event, 'razonEndeudamiento')">
             <p class="short">Razón de endeudamiento</p>
             <div id="razonEndeudamiento" class="item-detail hidden" onclick="event.stopPropagation()">
-                <p>¿Cuál es la razón de endeudamiento de su empresa? (Razón de endeudamiento = Pasivo total / Activo total)</p>
+                <p>
+                    ¿Cuál es la razón de endeudamiento de su empresa?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="La razón de endeudamiento mide el nivel de deuda de la empresa en relación con sus activos totales. Se calcula como Pasivo total / Activo total."></i>
+                </p>
                 <input type="number" name="razonEndeudamiento" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('razonEndeudamiento')">
             </div>
         </div>
@@ -616,7 +689,10 @@
         <div class="item" onclick="toggleItem(event, 'utilidadPorProducto')">
             <p class="short">Margen de utilidad por producto</p>
             <div id="utilidadPorProducto" class="item-detail hidden" onclick="event.stopPropagation()">
-                <p>¿Cuál es el margen de utilidad por producto? (Margen = Ventas del producto – Costos y gastos del producto)</p>
+                <p>
+                    ¿Cuál es el margen de utilidad por producto?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="El margen de utilidad por producto muestra cuánto gana la empresa por producto después de cubrir los costos y gastos asociados. Se calcula como Ventas del producto – Costos y gastos del producto."></i>
+                </p>
                 <input type="number" name="utilidadPorProducto" placeholder="Ingrese el monto ($)" oninput="markAsAnswered('utilidadPorProducto')">
             </div>
         </div>
@@ -625,7 +701,10 @@
         <div class="item" onclick="toggleItem(event, 'inventarioInmovilizado')">
             <p class="short">Inventario inmovilizado</p>
             <div id="inventarioInmovilizado" class="item-detail hidden" onclick="event.stopPropagation()">
-                <p>¿Qué porcentaje de inventario está inmovilizado? (Inventario inmovilizado = Stock inmovilizado / Inventario * 100)</p>
+                <p>
+                    ¿Qué porcentaje de inventario está inmovilizado?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="El porcentaje de inventario inmovilizado representa la proporción de inventarios que no se han movido o vendido durante un período. Se calcula como (Stock inmovilizado / Inventario total) * 100."></i>
+                </p>
                 <input type="number" name="inventarioInmovilizado" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('inventarioInmovilizado')">
             </div>
         </div>
@@ -634,7 +713,10 @@
         <div class="item" onclick="toggleItem(event, 'ventasActivoTotal')">
             <p class="short">Ventas / Activo total</p>
             <div id="ventasActivoTotal" class="item-detail hidden" onclick="event.stopPropagation()">
-                <p>¿Cuál es la relación entre ventas y activo total en su empresa?</p>
+                <p>
+                    ¿Cuál es la relación entre ventas y activo total en su empresa?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="La relación Ventas / Activo total mide la eficiencia de la empresa al utilizar sus activos para generar ventas."></i>
+                </p>
                 <input type="number" name="ventasActivoTotal" placeholder="Ingrese el valor" oninput="markAsAnswered('ventasActivoTotal')">
             </div>
         </div>
@@ -643,7 +725,10 @@
         <div class="item" onclick="toggleItem(event, 'gastosVentaVentas')">
             <p class="short">Gastos de venta / Ventas</p>
             <div id="gastosVentaVentas" class="item-detail hidden" onclick="event.stopPropagation()">
-                <p>¿Qué porcentaje de ventas corresponde a gastos de venta?</p>
+                <p>
+                    ¿Qué porcentaje de ventas corresponde a gastos de venta?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="El porcentaje de ventas que corresponde a gastos de venta incluye todos los costos relacionados con las actividades de comercialización y promoción."></i>
+                </p>
                 <input type="number" name="gastosVentaVentas" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('gastosVentaVentas')">
             </div>
         </div>
@@ -652,7 +737,10 @@
         <div class="item" onclick="toggleItem(event, 'sueldosVentas')">
             <p class="short">Sueldos / Ventas</p>
             <div id="sueldosVentas" class="item-detail hidden" onclick="event.stopPropagation()">
-                <p>¿Qué porcentaje de ventas corresponde a sueldos?</p>
+                <p>
+                    ¿Qué porcentaje de ventas corresponde a sueldos?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="El porcentaje de ventas correspondiente a sueldos incluye todos los pagos a empleados como proporción de los ingresos totales por ventas."></i>
+                </p>
                 <input type="number" name="sueldosVentas" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('sueldosVentas')">
             </div>
         </div>
@@ -661,7 +749,10 @@
         <div class="item" onclick="toggleItem(event, 'rentaVentas')">
             <p class="short">Renta / Ventas</p>
             <div id="rentaVentas" class="item-detail hidden" onclick="event.stopPropagation()">
-                <p>¿Qué porcentaje de ventas corresponde a la renta de locales?</p>
+                <p>
+                    ¿Qué porcentaje de ventas corresponde a la renta de locales?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="El porcentaje de ventas correspondiente a la renta de locales mide cuánto de los ingresos se destina al pago de alquileres o arrendamientos de instalaciones."></i>
+                </p>
                 <input type="number" name="rentaVentas" placeholder="Ingrese el porcentaje (%)" oninput="markAsAnswered('rentaVentas')">
             </div>
         </div>
@@ -670,7 +761,10 @@
         <div class="item" onclick="toggleItem(event, 'ventasGastos')">
             <p class="short">Ventas / Gastos</p>
             <div id="ventasGastos" class="item-detail hidden" onclick="event.stopPropagation()">
-                <p>¿Cuál es la relación entre las ventas y los gastos totales?</p>
+                <p>
+                    ¿Cuál es la relación entre las ventas y los gastos totales?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="La relación Ventas / Gastos muestra cuántos ingresos se generan por cada unidad monetaria de gastos totales, incluidos salarios, marketing, y otros costos operativos."></i>
+                </p>
                 <input type="number" name="ventasGastos" placeholder="Ingrese el valor" oninput="markAsAnswered('ventasGastos')">
             </div>
         </div>
@@ -705,37 +799,74 @@
 
 
     function validarInformacionBasica() {
+        const nombreEmpresa = document.getElementById('nombreEmpresa');
         const sector = document.getElementById('sector');
         const tamanioEmpresa = document.getElementById('tamanioEmpresa');
-
-        // Reinicia estilos previos
-        sector.classList.remove('error');
-        tamanioEmpresa.classList.remove('error');
+        const mision = document.getElementById('mision');
+        const vision = document.getElementById('vision');
 
         let valid = true;
 
-        // Valida "Sector de actividad"
-        if (sector.value === "") {
-            sector.classList.add('error');
+        // Función para marcar los campos en rojo
+        function marcarCampoError(campo) {
+            campo.style.borderColor = 'red';
+            campo.style.boxShadow = '0 0 5px rgba(255, 0, 0, 0.5)';
+        }
+
+        // Función para resetear el estilo de los campos
+        function resetearCampo(campo) {
+            campo.style.borderColor = ''; // Resetear al estilo predeterminado
+            campo.style.boxShadow = ''; // Eliminar sombras
+        }
+
+        // Validar cada campo
+        resetearCampo(nombreEmpresa);
+        if (nombreEmpresa.value.trim() === '') {
+            marcarCampoError(nombreEmpresa);
             valid = false;
         }
 
-        // Valida "Tamaño de la empresa"
-        if (tamanioEmpresa.value === "") {
-            tamanioEmpresa.classList.add('error');
+        resetearCampo(sector);
+        if (sector.value === '') {
+            marcarCampoError(sector);
             valid = false;
         }
 
-        if (!valid) {
-             alert('Por favor, complete los campos obligatorios.');
-             return;
+        resetearCampo(tamanioEmpresa);
+        if (tamanioEmpresa.value === '') {
+            marcarCampoError(tamanioEmpresa);
+            valid = false;
         }
 
-        // Procesa la información si todo está correcto
-        console.log('Información Básica:', {
+        resetearCampo(mision);
+        if (mision.value.trim() === '') {
+            marcarCampoError(mision);
+            valid = false;
+        }
+
+        resetearCampo(vision);
+        if (vision.value.trim() === '') {
+            marcarCampoError(vision);
+            valid = false;
+        }
+
+        
+        //if (!valid) {
+        //    alert('Por favor, complete todos los campos obligatorios.');
+        //    return;
+        // }
+
+        // Procesar datos
+        const datos = {
+            nombreEmpresa: nombreEmpresa.value.trim(),
             sector: sector.value,
             tamanioEmpresa: tamanioEmpresa.value,
-        });
+            mision: mision.value.trim(),
+            vision: vision.value.trim(),
+        };
+
+        console.log('Información Básica:', datos);
+
 
         // Oculta la sección y continúa con el autodiagnóstico
         document.getElementById('informacionBasica').classList.add('hidden');
@@ -745,8 +876,7 @@
         document.getElementById('nav-sections').classList.remove('hidden');
     }
 
-
-
+    
     // Función para mostrar y ocultar preguntas al hacer clic en el ítem
     function toggleItem(event, itemId) {
         event.stopPropagation(); // Evita que el evento se propague al documento
@@ -791,14 +921,11 @@
     }
 
     function procesarCantidadProveedores() {
-        const cantidad = parseInt(document.getElementById('cantidadProveedores').value);
-        if (!cantidad || cantidad <= 0) {
+        const importantes = parseInt(document.getElementById('cantidadProveedores').value);
+        if (!importantes || importantes <= 0) {
             alert('Por favor, ingrese una cantidad válida de proveedores.');
             return;
         }
-
-        // Calcular el 20% de los proveedores
-        const importantes = Math.ceil(cantidad * 0.2);
         document.getElementById('cantidadImportantes').textContent = importantes;
 
         // Generar campos dinámicos
@@ -881,6 +1008,18 @@ function irASeccionAnterior() {
         console.log('No hay sección anterior disponible.');
     }
 }
+
+function toggleRegistro() {
+    const registroOpcional = document.getElementById("registroOpcional");
+    const checkbox = document.getElementById("registrarDatos");
+
+    if (checkbox.checked) {
+        registroOpcional.classList.remove("hidden");
+    } else {
+        registroOpcional.classList.add("hidden");
+    }
+}
+
 
 
 </script>
