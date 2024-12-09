@@ -1,0 +1,183 @@
+/* AcercaDeNosotros.css */
+
+/* Estilos globales específicos para esta página */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9; /* Fondo claro */
+    color: #000000; /* Texto oscuro */
+}
+
+/* Header */
+header {
+    position: fixed; /* Fija el header en la parte superior de la pantalla */
+    top: 0; /* Alinea el header en la parte superior de la ventana del navegador */
+    width: 100%; /* Asegura que el header se extienda a lo ancho de la pantalla */
+    z-index: 1000; /* Asegura que el header se muestre sobre otros elementos de la página */
+    background-color: #fff; /* Opcional: especifica un fondo para mejorar la legibilidad */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Opcional: añade sombra para un efecto visual */
+    color: white;
+    text-align: center;
+}
+
+.logo-container {
+    display: inline-block; /* Permite que el logo y el texto estén en línea */
+    vertical-align: middle; /* Alinea el logo verticalmente con el texto */
+    margin-right: 250px; /* Espacio entre el logo y el texto */
+}
+
+.logo-container img {
+    height: 70px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0; /* Eliminando el padding predeterminado */
+    margin: 0; /* Eliminando el margen predeterminado */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Asegurando que los elementos estén centrados verticalmente */
+}
+
+nav li {
+    margin: 0 5px; /* Reduciendo el espacio horizontal entre elementos si es necesario */
+}
+
+
+nav a {
+    padding: 0.5em 1em; /* Ajustando el padding para reducir el espacio vertical */
+    color: #000; /* Asegurando que el texto sea negro */
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+/* Contenido principal */
+main {
+    padding: 50px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+main h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #0047ab;
+    margin-bottom: 20px;
+}
+
+main h2 {
+    color: #003580;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+main p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+main ul {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+main ul li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+/* Botones o links adicionales */
+.button-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.button-container a {
+    text-decoration: none;
+    background-color: #0047ab;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.button-container a:hover {
+    background-color: #003580;
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.barra-azul {
+    width: 100%;
+    height: 10px; /* Ajusta la altura según lo que desees */
+    background-color: #007BFF; /* Azul institucional */
+    position: fixed; /* Fija la barra en la parte superior */
+    top: 0; /* Asegura que esté al inicio */
+    left: 0;
+    z-index: 1100; /* Coloca la barra por encima de otros elementos */
+}
+
+
+
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 500px; /* Ajusta según el tamaño deseado */
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor */
+}
+
+.overlay-left {
+    position: absolute;
+    top: 35%; /* Ajusta la posición vertical */
+    left: 0; /* Asegura que el rectángulo comience desde el borde izquierdo */
+    background-color: rgba(255, 255, 255, 0.8); /* Azul translúcido */
+    color: #0047ab;
+    padding: 20px 50px; /* Más largo horizontalmente */
+    border-radius: 0 10px 10px 0; /* Bordes redondeados solo a la derecha */
+    text-align: left; /* Alinea el texto a la izquierda */
+    max-width: 50%; /* Ajusta el ancho máximo */
+}
+
+.overlay-left h1 {
+    font-size: 1.5em; /* Ajusta el tamaño del texto */
+    margin-bottom: 10px;
+}
+
+.overlay-left p {
+    font-size: 1.6em;
+    margin-bottom: 20px;
+}
