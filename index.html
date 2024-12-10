@@ -9,32 +9,14 @@
 <body>
     <div class="barra-azul"></div>
     <header>
-        <div class="logo-container">
-            <img src="Imágenes/Logo_UAdeC.png" alt="Universidad Autónoma de Coahuila" class="logo">
-            <img src="Imágenes/Logo_CIDESIE.png" alt="CIDESIE" class="logo">
-        </div>
-         <!-- Menú hamburguesa para vista móvil -->
-        <div class="mobile-nav-icon">
-            <span>&#9776;</span> <!-- Icono de menú hamburguesa -->
-        </div>
-        <nav class="mobile-nav">
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="sectores.html">Sectores</a></li>
-                <li><a href="noticias.html">Noticias</a></li>
-                <li><a href="oportunidades.html">Oportunidades de Inversión</a></li>
-                <li><a href="AcercaDeNosotros.html">Acerca de</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>        
     </header>
         <div class="hero-container">
             <img src="Imágenes/Fondo_observatorio.png" alt="Fondo del Observatorio Empresarial" class="hero-image">
             <div class="overlay-left">
                 <h1>Bienvenido(a) al Observatorio Empresarial</h1>
                 <p>del Centro de Investigación para el Desarrollo Sostenible e Innovación Empresarial</p>
+                <a href="AcercaDeNosotros.html" class="btn-descubre-mas">Descubre más</a>
             </div>
-            <a href="AcercaDeNosotros.html" class="btn-descubre-mas">Descubre más</a>
         </div>
         <div class="text-center">
             <p>
@@ -174,6 +156,15 @@
         <p>&copy; 2025 CIDESIE, UAdeC</p>
     </footer>
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+                fetch("header.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.querySelector("header").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error cargando el header:", error));
+            });
+
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('.mobile-nav-icon span').addEventListener('click', function() {
                 var nav = document.querySelector('.mobile-nav');

@@ -20,6 +20,94 @@ body {
 }
 
 
+@media (max-width: 768px) {
+    /* Header y navegación */
+    header {
+        flex-direction: column;
+        padding: 10px 5px;
+        text-align: center;
+    }
+
+    .logo-container {
+        display: flex; /* Mantiene las imágenes alineadas horizontalmente */
+        justify-content: center; /* Centra las imágenes dentro del contenedor */
+        gap: 10px; /* Espaciado entre las imágenes */
+    }
+
+    .logo-container img {
+        max-height: 50px; /* Ajusta según el diseño deseado */
+        cursor: pointer; /* Cambia el cursor al de un enlace */
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    nav ul li {
+        width: 100%;
+    }
+
+    nav a {
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    /* Hero container */
+    .hero-container {
+        height: 200px;
+    }
+
+    .overlay-left {
+        position: fixed; /* Fija el overlay a la ventana del navegador */
+        left: 0; /* Fija el overlay al borde izquierdo */
+        right: 0; /* Fija el overlay al borde derecho */
+        top: 0; /* Alinea al inicio del contenedor */
+        width: 100%; /* Asegura que ocupe todo el ancho */
+        height: auto; /* Ajusta la altura automáticamente según el contenido */
+        padding: 15px; /* Reduce el padding para pantallas pequeñas */
+        font-size: 1rem; /* Ajusta el tamaño del texto */
+        max-width: none; /* Elimina restricciones de ancho */
+    }
+
+    .btn-descubre-mas {
+        top: calc(20% + 90px);
+        margin-top: 20px; /* Aumenta el espacio para separarlo del overlay */
+        font-size: 0.8em;
+    }
+
+    /* Barra de noticias */
+    .news-bar {
+        height: 100px;
+    }
+
+    .news-item {
+        font-size: 1em;
+        padding-bottom: 20px;
+    }
+
+    .more-info {
+        font-size: 0.6em;
+        padding: 5px 10px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        display: none;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    /* Texto general */
+    body {
+        font-size: 1rem;
+    }
+}
+
+
 .hero-container {
     position: relative;
     width: 100%;
@@ -42,7 +130,7 @@ body {
     padding: 20px 50px; /* Más largo horizontalmente */
     border-radius: 0 10px 10px 0; /* Bordes redondeados solo a la derecha */
     text-align: left; /* Alinea el texto a la izquierda */
-    max-width: 40%; /* Ajusta el ancho máximo */
+    max-width: 100%; /* Ajusta el ancho máximo */
 }
 
 .overlay-left h1 {
@@ -58,7 +146,8 @@ body {
 .btn-descubre-mas {
     position: absolute;
     left: 10%; /* Alinea el botón con el rectángulo */
-    top: calc(20% + 110px); /* Ajusta la distancia desde el rectángulo */
+    top: calc(20% + 80px); /* Ajusta la distancia desde el rectángulo */
+    margin-top: 20px; /* Añade espacio entre el botón y el contenido anterior */
     padding: 10px 20px;
     background-color: #0056b3; /* Azul más oscuro */
     color: white;
@@ -262,7 +351,7 @@ nav a:hover {
     display: flex; /* Activa Flexbox */
     flex-direction: column; /* Organiza los hijos verticalmente */
     justify-content: space-between; /* Distribuye el espacio uniformemente */
-    height: 100vh; /* O usa 100% dependiendo del contenedor padre */
+    height: 100%; /* O usa 100% dependiendo del contenedor padre */
     width: 20%;
     padding: 10px;
 }
@@ -275,7 +364,7 @@ nav a:hover {
 .sidebar .sitio-interes a img {
     width: 40px; /* Establece un tamaño pequeño para las imágenes */
     height: 40px; /* Mantiene las imágenes cuadradas para facilitar el efecto redondeado */
-    border-radius: 50%; /* Crea bordes redondeados para hacer las imágenes circulares */
+    border-radius: 80%; /* Crea bordes redondeados para hacer las imágenes circulares */
     object-fit: cover; /* Asegura que el contenido de la imagen se cubra adecuadamente */
     margin-right: 10px; /* Añade espacio a la derecha de la imagen */
     float: left; /* Posiciona la imagen a la izquierda del texto */
@@ -423,6 +512,7 @@ nav a:hover {
 }
 
 .img-dashboard {
+    max-width: 100%; /* La imagen no excede el ancho del contenedor */
     width: 250px; /* Ajusta según el tamaño deseado */
     height: auto;
     border-radius: 10px; /* Opcional: bordes redondeados */
@@ -462,6 +552,54 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+
+/* Estilo general para mobile-nav */
+.mobile-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav li {
+    position: relative; /* Necesario para posicionar el menú desplegable */
+}
+
+/* Oculta el menú desplegable inicialmente */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Posiciona el menú justo debajo del elemento principal */
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+/* Aparece el menú al pasar el cursor */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Estilo para los enlaces del menú desplegable */
+.dropdown-menu li {
+    padding: 5px 20px;
+}
+
+.dropdown-menu li a {
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* Efecto al pasar el cursor sobre las opciones */
+.dropdown-menu li a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+
 
 @media (max-width: 768px) {
     .content, .sidebar, .servicios {
@@ -518,6 +656,7 @@ footer {
     .mobile-nav ul {
         list-style-type: none; /* Sin viñetas */
         padding: 0; /* Sin padding */
+        margin: 0;
     }
 
     .mobile-nav ul li a {
