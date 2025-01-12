@@ -21,10 +21,10 @@
         <h2>¿En cuál(es) área(s) desea autodiagnosticarse?</h2>
     </div>
     <ul class="nav-sections">
+        <li><button onclick="showSection('finanzas_items')">Salud financiera</button></li>
         <li><button onclick="mostrarSeccionProveedores()">Proveedores</button>
         <li><button onclick="showSection('distribucion_items')">Distribución y clientes</button></li>
         <li><button onclick="showSection('procesos_items')">Procesos</button></li>
-        <li><button onclick="showSection('finanzas_items')">Salud financiera</button></li>
     </ul>
 </nav>
 
@@ -605,11 +605,11 @@
     </section>
 
     <section id="finanzas_items" class="section hidden">
-        <p>Seleccione los indicadores que desea proporcionar:</p>
+        <p>Seleccione los indicadores que desea proporcionar (los campos obligatorios están marcados con <span class="required">*</span>):</p>
 
         <!-- Margen de beneficio -->
         <div class="item" onclick="toggleItem(event, 'margenBeneficio')">
-            <p class="short">Margen de beneficio</p>
+            <p class="short">Margen de beneficio<span class="required">*</span></p>
             <div id="margenBeneficio" class="item-detail hidden" onclick="event.stopPropagation()">
                 <p>
                     ¿Cuál es el beneficio neto después de impuestos de su empresa?
@@ -621,7 +621,7 @@
 
         <!-- Rendimiento sobre capital invertido (RCI)  Recuerda: Capital Total = Patrimonio Neto de la Empresa + Deuda Total, donde Patrimonio Neto contiene existencias en inventarios y en procesos de producción así como cuentas por cobrar; mientras que la Deuda Total contienen cuentas por pagar-->
         <div class="item" onclick="toggleItem(event, 'rendimientoRCI')">
-            <p class="short">Rendimiento sobre capital invertido (RCI)</p>
+            <p class="short">Rendimiento sobre capital invertido<span class="required">*</span></p>
             <div id="rendimientoRCI" class="item-detail hidden" onclick="event.stopPropagation()">
                 <p>
                     ¿Cuál es el Capital Total?
@@ -663,11 +663,16 @@
 
         <!-- Liquidez -->
         <div class="item" onclick="toggleItem(event, 'liquidez')">
-            <p class="short">Liquidez</p>
+            <p class="short">Liquidez<span class="required">*</span></p>
             <div id="liquidez" class="item-detail hidden" onclick="event.stopPropagation()">
                 <p>
-                    ¿Cuál es el nivel de liquidez de su empresa?
-                    <i class="fas fa-info-circle info-icon" data-tooltip="La liquidez mide la capacidad de una empresa para cumplir con sus obligaciones financieras a corto plazo. Se calcula como Activo realizable a corto plazo dividido entre Pasivo exigible a corto plazo."></i>
+                    ¿Cuál es el Activo Realizable a Corto Plazo de su empresa?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="Bienes y derechos convertibles en efectivo dentro de 12 meses."></i>
+                </p>
+                <input type="number" name="Activo-Realizable" placeholder="Ingrese el valor" oninput="markAsAnswered('liquidez')">
+                <p>
+                    ¿Cuál es el Pasivo Exigible a Corto Plazo de su empresa?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="Deudas y obligaciones que deben pagarse dentro de 12 meses."></i>
                 </p>
                 <input type="number" name="liquidez" placeholder="Ingrese el valor" oninput="markAsAnswered('liquidez')">
             </div>
@@ -675,7 +680,7 @@
 
         <!-- Razón de endeudamiento -->
         <div class="item" onclick="toggleItem(event, 'razonEndeudamiento')">
-            <p class="short">Razón de endeudamiento</p>
+            <p class="short">Razón de endeudamiento<span class="required">*</span></p>
             <div id="razonEndeudamiento" class="item-detail hidden" onclick="event.stopPropagation()">
                 <p>
                     ¿Cuál es la razón de endeudamiento de su empresa?
@@ -686,16 +691,22 @@
         </div>
 
         <!-- Margen de utilidad por producto -->
-        <div class="item" onclick="toggleItem(event, 'utilidadPorProducto')">
-            <p class="short">Margen de utilidad por producto</p>
-            <div id="utilidadPorProducto" class="item-detail hidden" onclick="event.stopPropagation()">
+        <div class="item" onclick="toggleItem(event, 'utilidadProducto')">
+            <p class="short">Margen de utilidad por producto<span class="required">*</span></p>
+            <div id="utilidadProducto" class="item-detail hidden" onclick="event.stopPropagation()">
                 <p>
-                    ¿Cuál es el margen de utilidad por producto?
-                    <i class="fas fa-info-circle info-icon" data-tooltip="El margen de utilidad por producto muestra cuánto gana la empresa por producto después de cubrir los costos y gastos asociados. Se calcula como Ventas del producto – Costos y gastos del producto."></i>
+                    ¿Cuántos productos desea evaluar?
                 </p>
-                <input type="number" name="utilidadPorProducto" placeholder="Ingrese el monto ($)" oninput="markAsAnswered('utilidadPorProducto')">
-            </div>
-        </div>
+                <input type="number" id="numProductos" name="numProductos"  min="1" placeholder="Ingrese la cantidad de productos" oninput="markAsAnswered('utilidadProducto')">
+                <button type="button" onclick="generarCamposProductos()">Agregar Productos</button>
+                <!-- Contenedor dinámico para los productos -->
+                <div id="productosContainer"></div>
+                <!-- Botón para calcular el margen de utilidad -->
+                <button type="button" onclick="calcularMargen()">Calcular Margen de Utilidad</button>
+                <!-- Resultado del cálculo -->
+                <div id="resultadoMargen"></div>
+            </div>        
+        </div>        
 
         <!-- Inventario inmovilizado -->
         <div class="item" onclick="toggleItem(event, 'inventarioInmovilizado')">
@@ -874,6 +885,7 @@
         // Muestra las secciones de navegación
         document.getElementById('mensajeAutodiagnostico').classList.remove('hidden');
         document.getElementById('nav-sections').classList.remove('hidden');
+        showSection('finanzas_items')
     }
 
     
@@ -1020,6 +1032,55 @@ function toggleRegistro() {
     }
 }
 
+function generarCamposProductos() {
+    const numProductos = document.getElementById('numProductos').value;
+    const productosContainer = document.getElementById('productosContainer');
+    productosContainer.innerHTML = "";  // Limpiar contenido previo
+    console.log('numProductos:', numProductos);
+
+    // Validar número de productos
+    if (numProductos <= 0) {
+        alert("Ingrese un número válido de productos.");
+        return;
+    }
+
+    // Crear campos para cada producto
+    for (let i = 1; i <= numProductos; i++) {
+        const productoDiv = document.createElement('div');
+        productoDiv.className = 'producto-item';
+        productoDiv.innerHTML = `
+            <h4>Producto ${i}</h4>
+            <label for="ventas${i}">Ventas:</label>
+            <input type="number" id="ventas${i}" name="ventas${i}" placeholder="Ingrese las ventas" required>
+
+            <label for="costos${i}">Costos:</label>
+            <input type="number" id="costos${i}" name="costos${i}" placeholder="Ingrese los costos" required>
+
+            <label for="gastos${i}">Gastos:</label>
+            <input type="number" id="gastos${i}" name="gastos${i}" placeholder="Ingrese los gastos" required>
+
+            <br><br>
+        `;
+        productosContainer.appendChild(productoDiv);
+    }
+}
+
+function calcularMargen() {
+    const numProductos = document.getElementById('numProductos').value;
+    let resultadoTexto = "<h3>Resultados de Margen de Utilidad:</h3>";
+
+    for (let i = 1; i <= numProductos; i++) {
+        const ventas = parseFloat(document.getElementById(`ventas${i}`).value) || 0;
+        const costos = parseFloat(document.getElementById(`costos${i}`).value) || 0;
+        const gastos = parseFloat(document.getElementById(`gastos${i}`).value) || 0;
+
+        const margen = ventas - (costos + gastos);
+
+        resultadoTexto += `<p>Producto ${i}: Margen de utilidad = ${margen.toFixed(2)}</p>`;
+    }
+
+    document.getElementById('resultadoMargen').innerHTML = resultadoTexto;
+}
 
 
 </script>
