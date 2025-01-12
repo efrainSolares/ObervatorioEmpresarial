@@ -411,3 +411,41 @@ textarea:focus {
         font-size: 0.9em; /* Ajusta el tamaño según lo necesites */
     }
 }
+
+#productosContainer {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.producto-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.producto-item input {
+    margin-bottom: 10px;
+    width: 60%;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+.required {
+    color: red;
+    font-weight: bold;
+}
