@@ -449,3 +449,23 @@ button:hover {
     color: red;
     font-weight: bold;
 }
+
+#salud-financiera {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+#periodoTiempo {
+    width: 50%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#formularioInformacion {
+    margin-top: 20px;
+}
