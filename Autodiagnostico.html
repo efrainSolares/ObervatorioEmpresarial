@@ -142,9 +142,46 @@
     </section>
     <div id="contenedor_proveedores">        
         <section id="proveedores_items_template" class="section hidden">
-            <p>Seleccione los indicadores que desea proporcionar:</p>
+            <p>Seleccione los indicadores que desea proporcionar (los campos obligatorios están marcados con <span class="required">*</span>):</p>
         
             <!-- Ítems con preguntas -->
+            <div class="item" onclick="toggleItem(event, 'proveedores14')">
+                <p class="short">Metodología OTIF (On Time In Full)<span class="required">*</span></p>
+                <div id="proveedores14" class="item-detail hidden">
+                    <!-- Indicador 1: Entregas a tiempo -->
+                    <p>
+                        ¿Qué porcentaje de las entregas realizadas por este proveedor llegan a tiempo?
+                        <i class="fas fa-info-circle info-icon" data-tooltip="Este indicador mide la puntualidad de las entregas realizadas por sus proveedores en relación con las fechas acordadas."></i>
+                    </p>
+                    <input type="number" name="entregas_a_tiempo" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('entregas_a_tiempo')">
+                    
+                    <!-- Indicador 2: Entregas completas -->
+                    <p>
+                        ¿Qué porcentaje de las entregas realizadas por este proveedor cumplen con la cantidad total solicitada (sin faltantes)?
+                        <i class="fas fa-info-circle info-icon" data-tooltip="Este indicador mide la exactitud de las entregas en términos de cumplir con el volumen total solicitado."></i>
+                    </p>
+                    <input type="number" name="entregas_completas" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('entregas_completas')">
+                </div>
+            </div>
+
+            <div class="item" onclick="toggleItem(event, 'proveedores15')">
+                <p class="short">Calidad de insumos<span class="required">*</span></p>
+                <div id="proveedores15" class="item-detail hidden">
+                    <p>
+                        ¿Qué nivel de calidad tienen los insumos de este proveedor?
+                        <i class="fas fa-info-circle info-icon" data-tooltip="Especifique, del 1 al 5 qué tan buena es la calidad de los insumos que proporciona este proveedor"></i>
+                    </p>
+                    <select name="calidadInsumos" oninput="markAsAnswered('proveedores15')">
+                        <option value="" disabled selected>Seleccione</option>
+                        <option value="1">Calidad pésima</option>
+                        <option value="2">Calidad baja</option>
+                        <option value="3">Calidad regular</option>
+                        <option value="4">Calidad buena</option>
+                        <option value="5">Calidad excelente</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="item" onclick="toggleItem(event, 'proveedores1')">
                 <p class="short">Compras hechas electrónicamente</p>
                 <div id="proveedores1" class="item-detail hidden">
@@ -202,6 +239,97 @@
             </div>
              -->
         
+            <div class="item" onclick="toggleItem(event, 'proveedores8')">
+                <p class="short">Proveedores calificados sin inspección previa</p>
+                <div id="proveedores8" class="item-detail hidden">
+                    <p>
+                        ¿Este proveedor está calificado para entregar sin inspección previa?
+                        <i class="fas fa-info-circle info-icon" data-tooltip="El proveedor puede entregar sin inspección previa reflejando la confianza en la calidad y consistencia de sus productos."></i>
+                    </p>
+                    <input type="number" name="proveedores8" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores8')">
+                </div>
+            </div>
+        
+            <!--
+            <div class="item" onclick="toggleItem(event, 'proveedores9')">
+                <p class="short">Porcentaje de pedidos perfectos recibidos</p>
+                <div id="proveedores9" class="item-detail hidden">
+                    <p>
+                        ¿Qué porcentaje de pedidos se reciben perfectos sin defectos o problemas?
+                        <i class="fas fa-info-circle info-icon" data-tooltip="Los pedidos perfectos son aquellos que llegan en las condiciones esperadas, sin defectos ni problemas relacionados con el pedido."></i>
+                    </p>
+                    <input type="number" name="proveedores9" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores9')">
+                </div>
+            </div>
+             -->
+        
+            <div class="item" onclick="toggleItem(event, 'proveedores10')">
+                <p class="short">Innovaciones propuestas por proveedores</p>
+                <div id="proveedores10" class="item-detail hidden">
+                    <p>
+                        ¿Cuántas innovaciones han sido propuestas por este proveedor?
+                        <i class="fas fa-info-circle info-icon" data-tooltip="El número de innovaciones propuestas por el proveedor indica su nivel de colaboración para aportar nuevas ideas o procesos a su empresa."></i>
+                    </p>
+                    <input type="number" name="proveedores10" placeholder="Ingrese el número de innovaciones" oninput="markAsAnswered('proveedores10')">
+                </div>
+            </div>
+        
+            <div class="item" onclick="toggleItem(event, 'proveedores11')">
+                <p class="short">Alianzas con proveedores</p>
+                <div id="proveedores11" class="item-detail hidden">
+                    <p>¿Tiene alianzas estratégicas con este proveedor?</p>
+                    <!-- Menú desplegable -->
+                    <select name="alianzasProveedor" id="alianzasProveedor" onchange="mostrarCamposAlianzas(this.value)">
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+            
+                    <!-- Campo adicional si responde "Sí" -->
+                    <div id="tipoAlianzas" class="hidden">
+                        <p>¿Qué tipo de alianzas?</p>
+                        <input type="text" name="tipoAlianzas" placeholder="Describa las alianzas" oninput="markAsAnswered('proveedores11')">
+                    </div>
+            
+                    <!-- Campo adicional si responde "No" -->
+                    <div id="probabilidadAlianzas" class="hidden">
+                        <p>¿Qué probabilidad hay de que las establezca?</p>
+                        <select name="probabilidadAlianzas" oninput="markAsAnswered('proveedores11')">
+                            <option value="" disabled selected>Seleccione una opción</option>
+                            <option value="Muy probable">Muy probable</option>
+                            <option value="Probable">Probable</option>
+                            <option value="Algo probable">Algo probable</option>
+                            <option value="Poco probable">Poco probable</option>
+                            <option value="Casi imposible">Casi imposible</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="item" onclick="toggleItem(event, 'proveedores12')">
+                <p class="short">Planificación de inventarios</p>
+                <div id="proveedores12" class="item-detail hidden">
+                    <p>¿Participa este proveedor en la planificación de inventarios?</p>
+                    <!-- Menú desplegable para elegir entre "Sí" y "No" -->
+                    <select name="planificacionInventario" id="planificacionInventario" onchange="mostrarNivelColaboracion(this.value)">
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+            
+                    <!-- Campo adicional si responde "Sí" -->
+                    <div id="nivelColaboracion" class="hidden">
+                        <p>¿Qué tan activamente amplía la planificación de inventarios?</p>
+                        <select name="nivelColaboracion" oninput="markAsAnswered('proveedores12')">
+                            <option value="" disabled selected>Seleccione una opción</option>
+                            <option value="Muy Activamente">Muy Activamente</option>
+                            <option value="Algo Activamente">Algo Activamente</option>
+                            <option value="Poco Activamente">Poco Activamente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>            
+            
             <div class="item" onclick="toggleItem(event, 'proveedores7')">
                 <p class="short">Evaluación de la calidad de materias primas</p>
                 <div id="proveedores7" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -286,104 +414,31 @@
                 </div>
             </div>    
         
-            <div class="item" onclick="toggleItem(event, 'proveedores8')">
-                <p class="short">Proveedores calificados sin inspección previa</p>
-                <div id="proveedores8" class="item-detail hidden">
-                    <p>
-                        ¿Este proveedor está calificado para entregar sin inspección previa?
-                        <i class="fas fa-info-circle info-icon" data-tooltip="El proveedor puede entregar sin inspección previa reflejando la confianza en la calidad y consistencia de sus productos."></i>
-                    </p>
-                    <input type="number" name="proveedores8" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores8')">
-                </div>
-            </div>
-        
-            <!--
-            <div class="item" onclick="toggleItem(event, 'proveedores9')">
-                <p class="short">Porcentaje de pedidos perfectos recibidos</p>
-                <div id="proveedores9" class="item-detail hidden">
-                    <p>
-                        ¿Qué porcentaje de pedidos se reciben perfectos sin defectos o problemas?
-                        <i class="fas fa-info-circle info-icon" data-tooltip="Los pedidos perfectos son aquellos que llegan en las condiciones esperadas, sin defectos ni problemas relacionados con el pedido."></i>
-                    </p>
-                    <input type="number" name="proveedores9" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('proveedores9')">
-                </div>
-            </div>
-             -->
-        
-            <div class="item" onclick="toggleItem(event, 'proveedores10')">
-                <p class="short">Innovaciones propuestas por proveedores</p>
-                <div id="proveedores10" class="item-detail hidden">
-                    <p>
-                        ¿Cuántas innovaciones han sido propuestas por este proveedor?
-                        <i class="fas fa-info-circle info-icon" data-tooltip="El número de innovaciones propuestas por el proveedor indica su nivel de colaboración para aportar nuevas ideas o procesos a su empresa."></i>
-                    </p>
-                    <input type="number" name="proveedores10" placeholder="Ingrese el número de innovaciones" oninput="markAsAnswered('proveedores10')">
-                </div>
-            </div>
-        
-            <div class="item" onclick="toggleItem(event, 'proveedores11')">
-                <p class="short">Alianzas con proveedores</p>
-                <div id="proveedores11" class="item-detail hidden">
-                    <p>
-                        ¿Tiene alianzas estratégicas con este proveedor?
-                        <i class="fas fa-info-circle info-icon" data-tooltip="Las alianzas estratégicas con proveedores son relaciones a largo plazo para compartir riesgos, beneficios e innovaciones en la cadena de suministro."></i>
-                    </p>
-                    <input type="text" name="proveedores11" placeholder="Describa las alianzas" oninput="markAsAnswered('proveedores11')">
-                </div>
-            </div>
-        
-            <div class="item" onclick="toggleItem(event, 'proveedores12')">
-                <p class="short">Planificación de inventarios</p>
-                <div id="proveedores12" class="item-detail hidden">
-                    <p>
-                        ¿Cómo amplía la planificación de inventario en colaboración con este proveedor?
-                        <i class="fas fa-info-circle info-icon" data-tooltip="La planificación colaborativa de inventarios implica trabajar junto a sus proveedores para garantizar niveles óptimos de inventario y reducir costos de almacenamiento."></i>
-                    </p>
-                    <input type="text" name="proveedores12" placeholder="Describa su proceso" oninput="markAsAnswered('proveedores12')">
-                </div>
-            </div>
-        
-            <div class="item" onclick="toggleItem(event, 'proveedores13')">
-                <p class="short">Evaluación con herramientas sólidas</p>
-                <div id="proveedores13" class="item-detail hidden">
-                    <p>
-                        ¿Cómo evalúa a sus proveedores utilizando herramientas específicas?
-                        <i class="fas fa-info-circle info-icon" data-tooltip="La evaluación de proveedores mediante herramientas específicas permite medir su desempeño en calidad, costos, tiempo de entrega y otros criterios clave."></i>
-                    </p>
-                    <input type="text" name="proveedores13" placeholder="Describa la herramienta" oninput="markAsAnswered('proveedores13')">
-                    <p class="short">
-                        ¿Desea obtener una herramienta para evaluar a sus proveedores?
-                        <i class="fas fa-info-circle info-icon" data-tooltip="Esta herramienta le permitirá analizar y calificar el desempeño de sus proveedores en términos de calidad, tiempo de entrega, costos y otros criterios clave."></i>
-                    </p>
-                    <select name="herramientaEvaluacion" id="herramientaEvaluacion" oninput="markAsAnswered('proveedores13')">
-                        <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="si">Sí</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
-            </div> 
-
-            <div class="item" onclick="toggleItem(event, 'proveedores14')">
-                <p class="short">Metodología OTIF (On Time In Full)</p>
-                <div id="proveedores14" class="item-detail hidden">
-                    <!-- Indicador 1: Entregas a tiempo -->
-                    <p>
-                        ¿Qué porcentaje de las entregas realizadas por este proveedor llegan a tiempo?
-                        <i class="fas fa-info-circle info-icon" data-tooltip="Este indicador mide la puntualidad de las entregas realizadas por sus proveedores en relación con las fechas acordadas."></i>
-                    </p>
-                    <input type="number" name="entregas_a_tiempo" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('entregas_a_tiempo')">
-                    
-                    <!-- Indicador 2: Entregas completas -->
-                    <p>
-                        ¿Qué porcentaje de las entregas realizadas por este proveedor cumplen con la cantidad total solicitada (sin faltantes)?
-                        <i class="fas fa-info-circle info-icon" data-tooltip="Este indicador mide la exactitud de las entregas en términos de cumplir con el volumen total solicitado."></i>
-                    </p>
-                    <input type="number" name="entregas_completas" placeholder="Ingrese el porcentaje" oninput="markAsAnswered('entregas_completas')">
-                </div>
-            </div>
-            
         </section>
     </div>
+        
+    <div id="pantallaEvaluacion" class="hidden">
+        <div class="item" onclick="toggleItem(event, 'proveedores13')">
+            <p class="short">Evaluación con herramientas sólidas</p>
+            <div id="proveedores13" class="item-detail hidden">
+                <p>
+                    ¿Cómo evalúa a sus proveedores utilizando herramientas específicas?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="La evaluación de proveedores mediante herramientas específicas permite medir su desempeño en calidad, tiempo, y cumplimiento."></i>
+                </p>
+                <input type="text" name="proveedores13" placeholder="Describa la herramienta" oninput="markAsAnswered('proveedores13')">
+                <p class="short">
+                    ¿Desea obtener una herramienta para evaluar a sus proveedores?
+                    <i class="fas fa-info-circle info-icon" data-tooltip="Esta herramienta le permitirá analizar y calificar el desempeño de sus proveedores en términos de calidad, tiempo y cumplimiento."></i>
+                </p>
+                <select name="herramientaEvaluacion" id="herramientaEvaluacion" oninput="markAsAnswered('proveedores13')">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+        </div>
+    </div> 
+
     <div id="navegacion-proveedores" class="hidden">
         <button id="atrasBtn" onclick="atrasProveedor()">Atrás</button>
         <button id="siguienteBtn" onclick="siguienteProveedor()">Siguiente</button>
@@ -674,7 +729,7 @@
                 </p>
                 <input type="number" name="capitalPropio" placeholder="Capital propio" oninput="markAsAnswered('rendimientoRCI')">
                 <p>
-                    ¿Cuál es el monto de financiamiento que se deben a la actualidad?
+                    ¿Cuál es el monto del financiamiento que se debe actualmente?
                     <i class="fas fa-info-circle info-icon" data-tooltip="Financiamientos externos que la empresa adquiere de instituciones financieras o terceros, generando obligaciones de pago con intereses."></i>
                 </p>
                 <input type="number" name="prestamos" placeholder="Capital proveniente de préstamos" oninput="markAsAnswered('rendimientoRCI')">
@@ -752,16 +807,15 @@
             <div id="nivelRiesgo" class="item-detail hidden" onclick="event.stopPropagation()">
                 <p>
                     ¿Cuál es el nivel de riesgo que usted aprecia en su empresa?
-                    <i class="fas fa-info-circle info-icon" data-tooltip="El nivel de riesgo mide la probabilidad e impacto de eventos adversos en una empresa. Se clasifica del 1 (riesgo nulo) al 5 (riesgo extremo), considerando amenazas financieras, operativas y estratégicas."></i>
+                    <i class="fas fa-info-circle info-icon" data-tooltip="El nivel de riesgo mide la probabilidad e impacto de eventos adversos en una empresa. Se clasifica del 1 (riesgo bajo) al 4 (riesgo extremo), considerando amenazas financieras, operativas y estratégicas."></i>
                 </p>
                 
                 <select name="nivelRiesgo" oninput="markAsAnswered('nivelRiesgo')">
                     <option value="" disabled selected>Seleccione</option>
-                    <option value="1">1-Riesgo nulo</option>
-                    <option value="2">2-Riesgo bajo</option>
-                    <option value="3">3-Riesgo regular</option>
-                    <option value="4">4-Riesgo alto</option>
-                    <option value="5">5-Riesgo extremo</option>
+                    <option value="1">1-Riesgo bajo</option>
+                    <option value="2">2-Riesgo medio</option>
+                    <option value="3">3-Riesgo alto</option>
+                    <option value="4">4-Riesgo extremo</option>
                     <option value="no_seguro">No estoy seguro</option>
                 </select>
             </div>
@@ -772,18 +826,14 @@
             <p class="short">Margen de utilidad por producto<span class="required">*</span></p>
             <div id="utilidadProducto" class="item-detail hidden" onclick="event.stopPropagation()">
                 <p>
-                    ¿Cuántos productos estima usted que representan el 80% del margen de beneficio de la empresa?
+                    ¿Cuántos productos estima usted que representan al menos el 80% del margen de beneficio de la empresa?
                     <i class="fas fa-info-circle info-icon" data-tooltip="El llamado conjunhto de Pareto: 20% de los productos que aportan el 80% del beneficio a la empresa"></i>
                 </p>
                 <input type="number" id="numProductos" name="numProductos"  min="1" placeholder="Ingrese la cantidad de productos"">
-                <p>
-                    ¿Cuáles son las ventas que estos productos generaron en el último periodo [NOTA: se solicitará al usuario el mismo período que proporcionó en "Margen de Beneficio de la empresa"]?
-                </p>
-                <input type="number" id="ventasTotales" name="ventasTotales"  min="1" placeholder="Ingrese las ventas de los productos de Pareto">
                 <button type="button" onclick="generarCamposProductos()">Agregar Productos</button>
                 <!-- Contenedor dinámico para los productos -->
                 <div id="productosContainer"></div>
-                <button type="button" onclick="markAsAnswered('utilidadProducto'); document.getElementById('utilidadProducto').classList.add('hidden')">Calcular Margen de Utilidad</button>
+                <button id="botonCalcularMagen" class = "hidden" type="button" onclick="markAsAnswered('utilidadProducto'); document.getElementById('utilidadProducto').classList.add('hidden')">Calcular Margen de Utilidad</button>
                 <!-- Botón para calcular el margen de utilidad 
                 <button type="button" onclick="calcularMargen()">Calcular Margen de Utilidad</button>
                 Resultado del cálculo
@@ -1080,6 +1130,9 @@ function toggleRegistro() {
 function generarCamposProductos() {
     const numProductos = document.getElementById('numProductos').value;
     const productosContainer = document.getElementById('productosContainer');
+    const botonCalcularMagen = document.getElementById('botonCalcularMagen');
+    botonCalcularMagen.classList.remove("hidden");    
+    registroOpcional.classList.remove("hidden");
     productosContainer.innerHTML = "";  // Limpiar contenido previo
 
     // Validar número de productos
@@ -1101,6 +1154,10 @@ function generarCamposProductos() {
             <div style="margin-bottom: 10px;">
                 <label for="costosProducto${i}">Costos:</label><br>
                 <input type="number" id="costosProducto${i}" name="costosProducto${i}" placeholder="Ingrese los costos">
+            </div>
+            <div style="margin-bottom: 10px;">
+                <label for="gastosProducto${i}">Gastos:</label><br>
+                <input type="number" id="gastosProducto${i}" name="gastosProducto${i}" placeholder="Ingrese los gastos">
             </div>
 
             <br><br>
@@ -1133,39 +1190,73 @@ function mostrarSubcategorias() {
 
     if (sector === 'manufactura') {
         opciones = `
-            <label for="subcategoria">Seleccione la subcategoría:</label>
-            <select id="subcategoria" name="subcategoria">
-                <option value="311">Fabricación de alimentos</option>
-                <option value="312">Fabricación de bebidas y productos de tabaco</option>
-                <option value="313">Fabricación de textiles</option>
-                <option value="314">Confección de productos textiles, excepto prendas de vestir</option>
-                <option value="325">Industria química</option>
-                <option value="otros">Otros</option>
+            <label for="subcategoria">Seleccione la subcategoría (Ctrl en Windows o Cmd en Mac para seleccionar varias):</label>
+            <select id="subcategoriasManufacturas" name="subcategoriasManufacturas" multiple>
+                <option value="311"> Industria alimentaria</option>
+                <option value="312"> Industria de las bebidas y del tabaco</option>
+                <option value="313"> Fabricación de insumos textiles y acabado de textiles</option>
+                <option value="314"> Fabricación de productos textiles, excepto prendas de vestir</option>
+                <option value="315"> Fabricación de prendas de vestir</option>
+                <option value="316"> Curtido y acabado de cuero y piel, y fabricación de productos de cuero, piel y materiales sucedáneos</option>
+                <option value="321"> Industria de la madera</option>
+                <option value="322"> Industria del papel</option>
+                <option value="323"> Impresión e industrias conexas</option>
+                <option value="324"> Fabricación de productos derivados del petróleo y del carbón</option>
+                <option value="325"> Industria química</option>
+                <option value="326"> Industria del plástico y del hule</option>
+                <option value="327"> Fabricación de productos a base de minerales no metálicos</option>
+                <option value="331"> Industrias metálicas básicas</option>
+                <option value="332"> Fabricación de productos metálicos</option>
+                <option value="333"> Fabricación de maquinaria y equipo</option>
+                <option value="334"> Fabricación de equipo de computación, comunicación, medición y de otros equipos, componentes y accesorios electrónicos</option>
+                <option value="335"> Fabricación de accesorios, aparatos eléctricos y equipo de generación de energía eléctrica</option>
+                <option value="336"> Fabricación de equipo de transporte</option>
+                <option value="337"> Fabricación de muebles, colchones y persianas</option>
+                <option value="339"> Otras industrias manufactureras</option>
             </select>
         `;
     } else if (sector === 'comercio') {
         opciones = `
-            <label for="subcategoria">Seleccione la subcategoría:</label>
-            <select id="subcategoria" name="subcategoria">
-                <option value="431">Comercio al por mayor</option>
-                <option value="461">Comercio al por menor</option>
-                <option value="otros">Otros</option>
+            <label for="subcategoria">Seleccione la subcategoría (Ctrl en Windows o Cmd en Mac para seleccionar varias):</label>
+            <select id="subcategoriasComercio" name="subcategoriasComercio" multiple>
+                <option value="431">Comercio al por mayor de abarrotes, alimentos, bebidas, hielo y tabaco</option>
+                <option value="432">Comercio al por mayor de productos textiles y calzado</option>
+                <option value="433">Comercio al por mayor de productos farmacéuticos</option>
+                <option value="434">Comercio al por mayor de materias primas agropecuarias</option>
+                <option value="435">Comercio al por mayor de maquinaria, equipo y muebles</option>
+                <option value="436">Comercio al por mayor de camiones y de partes para vehículos automotores</option>
+                <option value="437">Intermediación de comercio al por mayor</option>
+                <option value="461">Comercio al por menor de abarrotes, alimentos, bebidas, hielo y tabaco</option>
+                <option value="462">Comercio al por menor en tiendas de autoservicio y departamentales</option>
+                <option value="463">Comercio al por menor de productos textiles, excepto ropa</option>
+                <option value="464">Comercio al por menor de artículos para el cuidado de la salud</option>
+                <option value="465">Comercio al por menor de artículos de papelería, libros y revistas</option>
+                <option value="466">Comercio al por menor de enseres domésticos, computadoras y accesorios electrónicos</option>
+                <option value="467">Comercio al por menor de artículos de ferretería y jardinería</option>
+                <option value="468">Comercio al por menor de vehículos de motor, motocicletas y bicicletas</option>
+                <option value="469">Comercio al por menor exclusivamente a través de internet y catálogos impresos</option>
             </select>
         `;
     } else if (sector === 'servicios') {
         opciones = `
-            <label for="subcategoria">Seleccione la subcategoría:</label>
+            <label for="subcategoria">Seleccione la subcategoría (Ctrl en Windows o Cmd en Mac para seleccionar varias):</label>
             <select id="subcategoria" name="subcategoria">
+                <option value="51">Información en medios masivos</option>
                 <option value="52">Servicios financieros y de seguros</option>
+                <option value="53">Servicios inmobiliarios y de alquiler de bienes muebles</option>
+                <option value="54">Servicios profesionales, científicos y técnicos</option>
+                <option value="55">Corporativos</option>
+                <option value="56">Servicios de apoyo a los negocios y manejo de desechos</option>
                 <option value="61">Servicios educativos</option>
                 <option value="62">Servicios de salud y de asistencia social</option>
-                <option value="72">Servicios de alojamiento temporal y de alimentos</option>
-                <option value="otros">Otros</option>
+                <option value="71">Servicios de esparcimiento culturales y deportivos</option>
+                <option value="72">Servicios de alojamiento temporal y de preparación de alimentos</option>
+                <option value="81">Otros servicios excepto actividades gubernamentales</option>
             </select>
         `;
     } else if (sector === 'tecnologia') {
         opciones = `
-            <label for="subcategoria">Seleccione la subcategoría:</label>
+            <label for="subcategoria">Seleccione la subcategoría (Ctrl en Windows o Cmd en Mac para seleccionar varias):</label>
             <select id="subcategoria" name="subcategoria">
                 <option value="5415">Servicios de diseño de sistemas de cómputo y software</option>
                 <option value="334">Fabricación de equipo de computación y electrónica</option>
@@ -1180,6 +1271,8 @@ function mostrarSubcategorias() {
 function mostrarProveedor(index, proveedores) {
     const secciones = document.querySelectorAll('.proveedor-seccion');
     const navegacion = document.getElementById('navegacion-proveedores');
+    const pantallaEvaluacion = document.getElementById('pantallaEvaluacion');
+    const informacionProveedores = document.getElementById('contenedor_proveedores');
 
     // Validar el índice para que esté dentro del rango
     if (index >= 0 && index < proveedores.length) {
@@ -1196,7 +1289,9 @@ function mostrarProveedor(index, proveedores) {
     } else {
         navegacion.classList.add('hidden');
         if (index >= proveedores.length) {
-            alert('Has completado todos los proveedores.');
+            // Aquí se realiza la transición a la pantalla de evaluación
+            informacionProveedores.classList.add('hidden'); // Oculta la pantalla actual
+            pantallaEvaluacion.classList.remove('hidden'); // Muestra la pantalla de evaluación
         }
     }
 
@@ -1215,7 +1310,6 @@ function siguienteProveedor() {
     } else if (currentProveedorIndex === nombresProveedores.length - 1) {
         currentProveedorIndex++;
         mostrarProveedor(currentProveedorIndex, nombresProveedores);
-        alert('Has completado todos los proveedores.');
     }
 }
 
@@ -1275,7 +1369,33 @@ function generarSeccionesProveedores(proveedores) {
 
 }
 
+    function mostrarCamposAlianzas(valor) {
+        // Obtener los contenedores de los campos adicionales
+        const tipoAlianzas = document.getElementById('tipoAlianzas');
+        const probabilidadAlianzas = document.getElementById('probabilidadAlianzas');
 
+        // Mostrar y ocultar los campos correspondientes
+        if (valor === "Sí") {
+            tipoAlianzas.classList.remove('hidden');
+            probabilidadAlianzas.classList.add('hidden');
+        } else if (valor === "No") {
+            tipoAlianzas.classList.add('hidden');
+            probabilidadAlianzas.classList.remove('hidden');
+        } else {
+            tipoAlianzas.classList.add('hidden');
+            probabilidadAlianzas.classList.add('hidden');
+        }
+    }
+
+    function mostrarNivelColaboracion(valor) {
+        const nivelColaboracion = document.getElementById('nivelColaboracion');
+
+        if (valor === "Sí") {
+            nivelColaboracion.classList.remove('hidden');
+        } else {
+            nivelColaboracion.classList.add('hidden');
+        }
+    }
 
 </script>
 
