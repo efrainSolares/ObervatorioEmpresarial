@@ -458,6 +458,18 @@ button:hover {
     background-color: #f9f9f9;
 }
 
+#navegacion-proveedores {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    gap: 10px; /* Espaciado entre los botones */
+    margin-top: 20px;
+}
+
+#navegacion-proveedores.hidden {
+    display: none; /* Oculta la navegación cuando no es necesaria */
+}
+
+
 #periodoTiempo {
     width: 50%;
     padding: 8px;
@@ -468,4 +480,32 @@ button:hover {
 
 #formularioInformacion {
     margin-top: 20px;
+}
+
+#subcategoriasComercio {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: auto;
+}
+
+.pantalla-evaluacion {
+    text-align: center;
+    padding: 40px;
+    background-color: #f9f9f9; /* Fondo claro */
+    color: #333; /* Texto oscuro */
+}
+
+.evaluacion-titulo {
+    font-size: 2.5rem; /* Tamaño de letra grande */
+    color: #004080; /* Azul corporativo */
+    margin-bottom: 20px;
+}
+
+.evaluacion-descripcion {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 30px;
 }
