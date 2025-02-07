@@ -22,9 +22,10 @@
     </div>
     <ul class="nav-sections">
         <li><button onclick="showSection('finanzas_items')">Salud financiera</button></li>
+        <li><button onclick="mostrarSeccionPropuesta()">Propuesta de valor</button>
         <li><button onclick="mostrarSeccionProveedores()">Proveedores</button>
-            <li><button onclick="mostrarSeccionDistribuidores()">Canales de distribución</button>
-            <li><button onclick="showSection('clientes_items')">Clientes</button></li>
+        <li><button onclick="mostrarSeccionDistribuidores()">Canales de distribución</button>
+        <li><button onclick="showSection('clientes_items')">Clientes</button></li>
         <li><button onclick="showSection('procesos_items')">Procesos</button></li>
     </ul>
 </nav>
@@ -130,6 +131,17 @@
             <button onclick="procesarCantidadDistribuidores()">Continuar</button>
         </div>
     </section>
+        
+    <!-- Sección Propuesta de valor -->
+    <section id="propuesta" class="section hidden">
+        <h2>Propuesta</h2>
+        <div id="propuestaStep1">
+            <h3>Información Inicial</h3>
+            <p>¿Cuántos de sus productos generaron el 80% de los beneficios en el último periodo?</p>
+            <input type="number" id="cantidadPropuesta" placeholder="Ingrese el número de productos" min="1">
+            <button onclick="procesarCantidadPropuesta()">Continuar</button>
+        </div>
+    </section>
     
     <section id="distribuidoresMasImportantes" class="section hidden">
         <h2>Distribuidores</h2>
@@ -138,6 +150,17 @@
             <p>Por favor, proporcione información sobre los <span id="cantidadDistribuidoresImportantes"></span> distribuidores más importantes:</p>
             <div id="camposDistribuidores"></div>
                 <button onclick="mostrarItemsDistribuidores()">Siguiente</button>
+            </div>
+        </div>
+    </section>
+    
+    <section id="propuestaMasImportantes" class="section hidden">
+        <h2>Propuesta de valor</h2>
+        <div>
+            <h3>Productos más importantes</h3>
+            <p>Por favor, proporcione información sobre los <span id="cantidadPropuestaImportantes"></span> productos más importantes:</p>
+            <div id="camposPropuesta"></div>
+                <button onclick="mostrarItemsPropuesta()">Siguiente</button>
             </div>
         </div>
     </section>
@@ -155,9 +178,9 @@
                     </p>
                     <select name="calidadInsumosDistribuidor" onchange="markAsAnswered('distribuidores1')">
                         <option value="" disabled selected>Seleccione</option>
-                        <option value="1">Calidad pésima</option>
-                        <option value="2">Calidad baja</option>
-                        <option value="3">Calidad regular</option>
+                        <option value="1">Calidad muy mala</option>
+                        <option value="2">Calidad mala</option>
+                        <option value="3">Calidad aceptable</option>
                         <option value="4">Calidad buena</option>
                         <option value="5">Calidad excelente</option>
                     </select>
@@ -195,7 +218,7 @@
                         <option value="" disabled selected>Seleccione</option>
                         <option value="1">1-Muy bajo</option>
                         <option value="2">2-Bajo</option>
-                        <option value="3">3-Regular</option>
+                        <option value="3">3-Aceptable</option>
                         <option value="4">4-Alto</option>
                         <option value="5">5-Muy alto</option>
                         <option value="no_seguro">No estoy seguro</option>
@@ -236,6 +259,91 @@
         </section>
     </div>
 
+    <div id="contenedor_propuesta">        
+        <section id="propuesta_items_template" class="section hidden">
+            <p>Seleccione los indicadores que desea proporcionar (los campos más importantes están marcados con <span class="required">*</span>):</p>
+        
+            <div class="item" onclick="toggleItem(event, 'razonesCompra')">
+                <p class="short">Razones principales por las que sus clientes compran el producto:</p>
+                <div id="razonesCompra" class="item-detail hidden" onclick="event.stopPropagation()">
+                    <p>Seleccione las razones aplicables:</p>
+                    <div class="razones-lista">
+                        <label><input type="checkbox" name="razonesCompra" value="sinRival"> No hay un producto rival en el segmento de mercado a que se dirige</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="prestigioMarca"> Por el prestigio de su marca</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="innovador"> Por ser innovador</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="precioBajo"> Su precio es más bajo que el de sus competidores</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="mejorNecesidades"> Satisface mejor las necesidades de los clientes que sus competidores</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="mayorCalidad"> Mayor calidad</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="mejorPresentacion"> Mejor presentación</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="habilidadVentas"> La habilidad de su departamento de ventas y marketing</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="ventaOnline"> Porque se vende en línea</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="eficienciaDistribucion"> La eficiencia de sus canales de distribución</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="alianzaDistribuidores"> Por tener alianzas con distribuidores</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="alianzaClientes"> Por tener alianzas con clientes</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="excelenciaServicio"> Excelencia en el servicio a clientes</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="opcionesPago"> Por opciones de pago diferidas</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="promociones"> Por promociones</label><br>
+                        <label><input type="checkbox" name="razonesCompra" value="otra"> Otra</label>
+                    </div>
+                </div>
+            </div>            
+            
+            <div class="item" onclick="toggleItem(event, 'utilidadProductoPeriodo')">
+                <p class="short">Seleccione la afirmación con la que está más de acuerdo:</p>
+                <div id="utilidadProductoPeriodo" class="item-detail hidden" onclick="event.stopPropagation()">
+                    <p>Diga con cuál de las afirmaciones está más de acuerdo:</p>
+                    <select name="utilidadPeriodo" id="utilidadPeriodoSelect">
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="creciendo">En el último período la utilidad asociada al producto está creciendo</option>
+                        <option value="estable">En el último período la utilidad asociada al producto se ha mantenido estable</option>
+                        <option value="decreciendo">En el último período la utilidad asociada al producto está decreciendo</option>
+                        <option value="prefieroNoContestar">Prefiero no contestar</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="item" onclick="toggleItem(event, 'amenazaCompetencia')">
+                <p class="short">Seleccione el nivel de amenaza que percibe por la competencia:</p>
+                <div id="amenazaCompetencia" class="item-detail hidden" onclick="event.stopPropagation()">
+                    <p>¿Se siente amenazado por la competencia de este producto?</p>
+                    <select name="nivelAmenaza" id="nivelAmenazaSelect" onchange="mostrarRazonesCompetencia(this.value)">
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="fuertemente">Fuertemente</option>
+                        <option value="algo">Algo</option>
+                        <option value="poco">Poco</option>
+                        <option value="nada">Nada o casi nada</option>
+                        <option value="prefieroNoContestar">Prefiero no contestar</option>
+                    </select>                    
+            
+                    <!-- Razones adicionales si se selecciona "Fuertemente" o "Algo" -->
+                    <div id="razonesCompetencia" class="hidden">
+                        <p>Marque las razones principales por las que la competencia podría reducir la utilidad del producto a corto o mediano plazo:</p>
+                        <div class="razones-lista">
+                            <label><input type="checkbox" name="razonesCompetencia" value="innovacion"> Su capacidad de innovación</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="prestigio"> Mayor prestigio de la marca</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="precio"> Menor precio</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="mejorNecesidades"> Satisfacer mejor las necesidades de los clientes</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="calidad"> Mayor calidad</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="presentacion"> Mejor presentación</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="ventaOnline"> Por vender en línea</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="canalesDistribucion"> Mejores canales de distribución</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="habilidadVentas"> La habilidad de su departamento de ventas y marketing</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="alianzaDistribuidores"> Por tener alianzas con distribuidores</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="alianzaClientes"> Por tener alianzas con clientes</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="alianzaProveedores"> Por tener alianzas con proveedores</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="servicioClientes"> Mejor servicio a clientes</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="opcionesPago"> Por brindar opciones de pago diferidas</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="promociones"> Por promociones</label><br>
+                            <label><input type="checkbox" name="razonesCompetencia" value="otra"> Otra</label>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            
+        </section>
+    </div>
+
+       
         
     <!-- Sección de Proveedores -->
     <section id="proveedores" class="section hidden">
@@ -292,9 +400,9 @@
                     </p>
                     <select name="calidadInsumos" oninput="markAsAnswered('proveedores15')">
                         <option value="" disabled selected>Seleccione</option>
-                        <option value="1">Calidad pésima</option>
-                        <option value="2">Calidad baja</option>
-                        <option value="3">Calidad regular</option>
+                        <option value="1">Calidad muy mala</option>
+                        <option value="2">Calidad mala</option>
+                        <option value="3">Calidad aceptable</option>
                         <option value="4">Calidad buena</option>
                         <option value="5">Calidad excelente</option>
                     </select>
@@ -553,6 +661,7 @@
                     <option value="" disabled selected>Seleccione una opción</option>
                     <option value="si">Sí</option>
                     <option value="no">No</option>
+                    <option value="quiza">Quizá si tuviera más información</option>
                 </select>
             </div>
         </div>
@@ -567,6 +676,11 @@
         <button id="atrasBtn_distribuidores" onclick="atrasDistribuidor()">Atrás</button>
         <button id="siguienteBtn_distribuidores" onclick="siguienteDistribuidor()">Siguiente</button>
     </div>   
+    
+    <div id="navegacion-propuesta" class="hidden">
+        <button id="atrasBtn_propuesta" onclick="atrasPropuesta()">Atrás</button>
+        <button id="siguienteBtn_propuesta" onclick="siguientePropuesta()">Siguiente</button>
+    </div>  
 
     
 
@@ -602,10 +716,11 @@
                 </p>                
                 <select name="nivelCalidad" oninput="markAsAnswered('nivelCalidad')">
                     <option value="" disabled selected>Seleccione</option>
-                    <option value="1">1-Calidad mínima</option>
-                    <option value="2">2-Calidad aceptable</option>
-                    <option value="3">3-Calidad alta</option>
-                    <option value="4">4-Calidad excelente</option>
+                    <option value="1">Calidad muy mala</option>
+                    <option value="2">Calidad mala</option>
+                    <option value="3">Calidad aceptable</option>
+                    <option value="4">Calidad buena</option>
+                    <option value="5">Calidad excelente</option>
                     <option value="no_seguro">No estoy seguro</option>
                 </select>
             </div>
@@ -640,14 +755,14 @@
         
                 <!-- Pregunta adicional -->
                 <div id="preguntaEfectividad" class="hidden">
-                    <p>¿QUÉ TAN EFECTIVAS SON ESTAS POLÍTICAS?</p>
+                    <p>¿Qué tan efectivas son estas políticas?</p>
                     <select name="efectividadPoliticas" id="efectividadPoliticas">
                         <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="5">5 - Muy efectivo</option>
-                        <option value="4">4 - Bastante efectivo</option>
-                        <option value="3">3 - Moderadamente efectivo</option>
-                        <option value="2">2 - Poco efectivo</option>
-                        <option value="1">1 - Nada efectivo</option>
+                        <option value="5">5 - Muy efectivas</option>
+                        <option value="4">4 - Efectivas</option>
+                        <option value="3">3 - Algo efectivas</option>
+                        <option value="2">2 - Poco efectivas</option>
+                        <option value="1">1 - Nada efectivas</option>
                     </select>
                 </div>
             </div>
@@ -707,7 +822,7 @@
                     </select>
         
                     <!-- Pregunta 2 -->
-                    <p>¿Qué tan frecuentemente propone innovaciones a la empresa cliente?</p>
+                    <p>¿Qué tan frecuentemente propone innovaciones a las empresas clientes?</p>
                     <select name="frecuenciaInnovaciones" id="frecuenciaInnovaciones">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="nunca">Nunca</option>
@@ -949,15 +1064,6 @@
             </div>
         </div>
 
-        <!-- Días de ventas en cuentas por cobrar -->
-        <div class="item" onclick="toggleItem(event, 'cuentasPorCobrar')">
-            <p class="short">Cuentas por cobrar</p>
-            <div id="cuentasPorCobrar" class="item-detail hidden" onclick="event.stopPropagation()">
-                <p>¿Cuántos días en promedio se tardan las cuentas por cobrar?</p>
-                <input type="number" name="cuentasPorCobrar" placeholder="Ingrese los días" oninput="markAsAnswered('cuentasPorCobrar')">
-            </div>
-        </div>
-
         <!-- Porcentaje de existencias agotadas -->
         <div class="item" onclick="toggleItem(event, 'existenciasAgotadas')">
             <p class="short">Existencias agotadas</p>
@@ -1178,8 +1284,10 @@
     // Inicializa el índice del proveedor actual
     let currentProveedorIndex = 0;
     let currentDistribuidorIndex = 0;
+    let currentPropuestaIndex = 0;
     let nombresProveedores = [];
     let nombresDistribuidores = [];
+    let nombresPropuesta = [];
 
     function mostrarMensajeBienvenida() {
         const mensaje = document.getElementById('mensajeBienvenida');
@@ -1352,7 +1460,6 @@
 
     function procesarCantidadDistribuidores() {
         const importantes = parseInt(document.getElementById('cantidadDistribuidores').value);
-        console.log('No. distribuidores = ',importantes);
         if (!importantes || importantes <= 0) {
             alert('Por favor, ingrese una cantidad válida de distribuidores.');
             return;
@@ -1374,6 +1481,31 @@
         document.getElementById('distribuidores').classList.add('hidden');
         document.getElementById('distribuidoresMasImportantes').classList.remove('hidden');
     }
+
+    function procesarCantidadPropuesta() {
+        const importantes = parseInt(document.getElementById('cantidadPropuesta').value);
+        if (!importantes || importantes <= 0) {
+            alert('Por favor, ingrese una cantidad válida de productos.');
+            return;
+        }
+        document.getElementById('cantidadPropuestaImportantes').textContent = importantes;
+
+        // Generar campos dinámicos
+        const camposContainer = document.getElementById('camposPropuesta');
+        camposContainer.innerHTML = ''; // Limpiar contenido previo
+        for (let i = 1; i <= importantes; i++) {
+            const campo = document.createElement('div');
+            campo.innerHTML = `
+                <input type="text" id="producto${i}" placeholder="Ingrese el alias del producto ${i}">
+            `;
+            camposContainer.appendChild(campo);
+        }
+
+        // Mostrar la siguiente sección
+        document.getElementById('propuesta').classList.add('hidden');
+        document.getElementById('propuestaMasImportantes').classList.remove('hidden');
+    }
+
 
     function mostrarItemsProveedores() {
         document.getElementById('proveedoresMasImportantes').classList.add('hidden');
@@ -1404,6 +1536,21 @@
         
         generarSeccionesDistribuidores(nombresDistribuidores);
     }
+
+function mostrarItemsPropuesta() {
+    document.getElementById('propuestaMasImportantes').classList.add('hidden');
+    const camposContainer = document.getElementById('camposPropuesta');
+    const inputs = camposContainer.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.value.trim() === '') {
+            alert('Por favor, complete todos los campos de los productos en la propuesta de valor.');
+            return;
+        }
+        nombresPropuesta.push(input.value);
+    });
+    
+    generarSeccionesPropuesta(nombresPropuesta);
+}
     
     function mostrarItemsDistribucion() {
         document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
@@ -1422,9 +1569,15 @@
         document.getElementById('distribuidores').classList.remove('hidden');
     }
 
+    function mostrarSeccionPropuesta() {
+        // Mostrar la sección distribuidores por primera vez
+        document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+        document.getElementById('propuesta').classList.remove('hidden');
+    }
+
     function irAlInicio() {
         window.location.href = 'index.html'; // Redirige a la página "index.html"
-}
+    }
 
 function irASeccionAnterior() {
     const secciones = document.querySelectorAll('.section'); // Todas las secciones
@@ -1524,7 +1677,7 @@ function mostrarSubcategorias() {
     if (sector === 'manufactura') {
         opciones = `
             <label for="subcategoria">Seleccione la subcategoría (Ctrl en Windows o Cmd en Mac para seleccionar varias):</label>
-            <select id="subcategoriasManufacturas" name="subcategoriasManufacturas" multiple>
+            <select id="subcategoria" name="subcategoria">
                 <option value="311"> Industria alimentaria</option>
                 <option value="312"> Industria de las bebidas y del tabaco</option>
                 <option value="313"> Fabricación de insumos textiles y acabado de textiles</option>
@@ -1551,7 +1704,7 @@ function mostrarSubcategorias() {
     } else if (sector === 'comercio') {
         opciones = `
             <label for="subcategoria">Seleccione la subcategoría (Ctrl en Windows o Cmd en Mac para seleccionar varias):</label>
-            <select id="subcategoriasComercio" name="subcategoriasComercio" multiple>
+            <select id="subcategoria" name="subcategoria">
                 <option value="431">Comercio al por mayor de abarrotes, alimentos, bebidas, hielo y tabaco</option>
                 <option value="432">Comercio al por mayor de productos textiles y calzado</option>
                 <option value="433">Comercio al por mayor de productos farmacéuticos</option>
@@ -1671,6 +1824,41 @@ function mostrarDistribuidor(index, distribuidores) {
     atrasBtn_distribuidores.disabled = index <= 0;
 }
 
+function mostrarPropuesta(index, propuesta) {
+    const secciones = document.querySelectorAll('.propuesta-seccion');
+    const navegacion = document.getElementById('navegacion-propuesta');
+    const pantallaEvaluacion = document.getElementById('pantallaEvaluacion');
+    const informacionPropuesta = document.getElementById('contenedor_propuesta');
+
+    // Validar el índice para que esté dentro del rango
+    if (index >= 0 && index < propuesta.length) {
+        secciones.forEach((seccion, i) => {
+            if (i === index) {
+                seccion.classList.remove('hidden');
+                document.getElementById('camposPropuesta').innerText = `Indicadores para: ${propuesta[i]}`;
+            } else {
+                seccion.classList.add('hidden');
+            }
+        });
+
+        navegacion.classList.remove('hidden');
+    } else {
+        navegacion.classList.add('hidden');
+        if (index >= propuesta.length) {
+            // Aquí se realiza la transición a la pantalla de evaluación
+            informacionPropuesta.classList.add('hidden'); // Oculta la pantalla actual
+            pantallaEvaluacion.classList.remove('hidden'); // Muestra la pantalla de evaluación
+        }
+    }
+
+    // Actualiza el estado de los botones
+    const siguienteBtn_propuesta = document.getElementById('siguienteBtn_propuesta');
+    const atrasBtn_propuesta = document.getElementById('atrasBtn_propuesta');
+
+    siguienteBtn_propuesta.textContent = index >= propuesta.length - 1 ? 'Finalizar' : 'Siguiente';
+    atrasBtn_propuesta.disabled = index <= 0;
+}
+
 
 function siguienteProveedor() {
     if (currentProveedorIndex < nombresProveedores.length - 1) {
@@ -1703,6 +1891,23 @@ function atrasDistribuidor() {
     if (currentDistribuidorIndex > 0) {
         currentDistribuidorIndex--;
         mostrarDistribuidor(currentDistribuidorIndex, nombresDistribuidores);
+    }
+}
+
+function siguientePropuesta() {
+    if (currentPropuestaIndex < nombresPropuesta.length - 1) {
+        currentPropuestaIndex++;
+        mostrarPropuesta(currentPropuestaIndex, nombresPropuesta);
+    } else if (currentPropuestaIndex === nombresPropuesta.length - 1) {
+        currentPropuestaIndex++;
+        mostrarPropuesta(currentPropuestaIndex, nombresPropuesta);
+    }
+}
+
+function atrasPropuesta() {
+    if (currentPropuestaIndex > 0) {
+        currentPropuestaIndex--;
+        mostrarPropuesta(currentPropuestaIndex, nombresPropuesta);
     }
 }
 
@@ -1797,6 +2002,51 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
     }
+    
+
+    // Generar las secciones al cargar la página
+    function generarSeccionesPropuesta(propuesta) {
+        const container = document.getElementById('contenedor_propuesta');
+        const template = document.getElementById('propuesta_items_template');
+
+        container.innerHTML = ''; // Limpiar contenido previo
+
+        propuesta.forEach((nombresPropuesta, index) => {
+            const clone = template.cloneNode(true);
+            clone.id = `propuesta_items_${index}`;
+            clone.classList.add('propuesta-seccion', 'hidden');
+
+            const title = document.createElement('h3');
+            title.textContent = `Indicadores para: ${nombresPropuesta}`;
+            clone.prepend(title);
+
+            // Actualiza los identificadores únicos dentro del clon
+            const inputs = clone.querySelectorAll('input, select, textarea');
+            inputs.forEach((input, i) => {
+                input.id = `${input.id}_propuesta_${index}_${i}`;
+                input.name = `${input.name}_propuesta_${index}_${i}`;
+            });
+
+            // Actualiza botones o ítems que necesiten toggleItem
+            const items = clone.querySelectorAll('.toggleable-item');
+            items.forEach((item, i) => {
+                item.setAttribute('data-index', `${index}_${i}`);
+            });
+
+            container.appendChild(clone);
+
+            // Mostrar la primera sección por defecto
+            mostrarPropuesta(currentPropuestaIndex, propuesta);
+        });
+
+            function asignarEventosToggle() {
+                const toggleables = document.querySelectorAll('.toggleable-item');
+                toggleables.forEach((item) => {
+                    item.addEventListener('click', () => toggleItem(item));
+                });
+            }
+    }
+
 
     function mostrarCamposAlianzas(valor) {
         // Obtener los contenedores de los campos adicionales
@@ -1859,7 +2109,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function mostrarRazonesCompetencia(value) {
+        const razonesCompetencia = document.getElementById('razonesCompetencia');
 
+        // Mostrar el bloque de razones solo si se selecciona "Fuertemente" o "Algo"
+        if (value === "fuertemente" || value === "algo") {
+            console.log('Dentro');
+            razonesCompetencia.classList.remove('hidden');
+        } else {
+            console.log('Fuera');
+            razonesCompetencia.classList.add('hidden');
+        }
+    }
 
 
 </script>
