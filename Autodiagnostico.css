@@ -480,6 +480,17 @@ button:hover {
     display: none; /* Oculta la navegación cuando no es necesaria */
 }
 
+#navegacion-propuesta {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    gap: 10px; /* Espaciado entre los botones */
+    margin-top: 20px;
+}
+
+#navegacion-propuesta.hidden {
+    display: none; /* Oculta la navegación cuando no es necesaria */
+}
+
 
 #periodoTiempo {
     width: 50%;
