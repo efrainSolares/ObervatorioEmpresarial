@@ -26,7 +26,8 @@
         <li><button onclick="mostrarSeccionProveedores()">Proveedores</button>
         <li><button onclick="mostrarSeccionDistribuidores()">Canales de distribución</button>
         <li><button onclick="showSection('clientes_items')">Clientes</button></li>
-        <li><button onclick="showSection('procesos_items')">Procesos</button></li>
+        <li><button onclick="generarPreguntasProductos()">Procesos</button></li>
+        <li><button onclick="generarPreguntasRecursos()">Recursos</button></li>
     </ul>
 </nav>
 
@@ -981,9 +982,30 @@
     </section>
 
     <section id="procesos_items" class="section hidden">
+        <div class="item" id="procesosSection" onclick="toggleItem(event, 'procesos')">
+            <p class="short">Evaluación de Procesos</p>
+            <div id="procesos" class="item-detail hidden">
+                <p>Seleccione los costos asociados a cada producto:</p>
+                <div id="procesosContainer"></div> <!-- Questions will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <section id="recursos_items" class="section hidden">
+        <div class="item" id="recursosSection" onclick="toggleItem(event, 'recursos')">
+            <p class="short">Evaluación de recursos clave</p>
+            <div id="recursos" class="item-detail hidden">
+                <p>Seleccione la información sobre los recursos clave:</p>
+                <div id="recursosContainer"></div> <!-- Questions will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+<!-- 
+    <section id="procesos_items" class="section hidden">
         <p>Seleccione los indicadores que desea proporcionar:</p>
 
-        <!-- Costo por unidad de producción -->
+        <!- - Costo por unidad de producción - ->
         <div class="item" onclick="toggleItem(event, 'costoUnidadProduccion')">
             <p class="short">Costo por unidad de producción</p>
             <div id="costoUnidadProduccion" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -992,7 +1014,7 @@
             </div>
         </div>
 
-        <!-- Gastos de marketing, venta, distribución y administración -->
+        <!- - Gastos de marketing, venta, distribución y administración - ->
         <div class="item" onclick="toggleItem(event, 'gastosOperativos')">
             <p class="short">Gastos operativos</p>
             <div id="gastosOperativos" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1001,7 +1023,7 @@
             </div>
         </div>
 
-        <!-- Número de procesos con mejoras sustanciales -->
+        <!- - Número de procesos con mejoras sustanciales - ->
         <div class="item" onclick="toggleItem(event, 'mejorasProcesos')">
             <p class="short">Mejoras en procesos</p>
             <div id="mejorasProcesos" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1010,7 +1032,7 @@
             </div>
         </div>
 
-        <!-- Porcentaje de defectos en partes por millón -->
+        <!- - Porcentaje de defectos en partes por millón - ->
         <div class="item" onclick="toggleItem(event, 'defectosPPM')">
             <p class="short">Defectos en partes por millón</p>
             <div id="defectosPPM" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1019,7 +1041,7 @@
             </div>
         </div>
 
-        <!-- Porcentaje de desechos y desperdicios -->
+        <!- - Porcentaje de desechos y desperdicios - ->
         <div class="item" onclick="toggleItem(event, 'desechosDesperdicios')">
             <p class="short">Desechos y desperdicios</p>
             <div id="desechosDesperdicios" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1028,7 +1050,7 @@
             </div>
         </div>
 
-        <!-- Tiempo de ciclo -->
+        <!- - Tiempo de ciclo - ->
         <div class="item" onclick="toggleItem(event, 'tiempoCiclo')">
             <p class="short">Tiempo de ciclo</p>
             <div id="tiempoCiclo" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1037,7 +1059,7 @@
             </div>
         </div>
 
-        <!-- Duración del proceso -->
+        <!- - Duración del proceso - ->
         <div class="item" onclick="toggleItem(event, 'duracionProceso')">
             <p class="short">Duración del proceso</p>
             <div id="duracionProceso" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1046,7 +1068,7 @@
             </div>
         </div>
 
-        <!-- Porcentaje de utilización de la capacidad -->
+        <!- - Porcentaje de utilización de la capacidad - ->
         <div class="item" onclick="toggleItem(event, 'utilizacionCapacidad')">
             <p class="short">Utilización de capacidad</p>
             <div id="utilizacionCapacidad" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1055,7 +1077,7 @@
             </div>
         </div>
 
-        <!-- Días de inventario -->
+        <!- - Días de inventario - ->
         <div class="item" onclick="toggleItem(event, 'diasInventario')">
             <p class="short">Días de inventario</p>
             <div id="diasInventario" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1064,7 +1086,7 @@
             </div>
         </div>
 
-        <!-- Porcentaje de existencias agotadas -->
+        <!- - Porcentaje de existencias agotadas - ->
         <div class="item" onclick="toggleItem(event, 'existenciasAgotadas')">
             <p class="short">Existencias agotadas</p>
             <div id="existenciasAgotadas" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1073,7 +1095,7 @@
             </div>
         </div>
 
-        <!-- Ciclo operativo -->
+        <!- - Ciclo operativo - ->
         <div class="item" onclick="toggleItem(event, 'cicloOperativo')">
             <p class="short">Ciclo operativo</p>
             <div id="cicloOperativo" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1083,6 +1105,7 @@
         </div>
 
     </section>
+-->
 
     <section id="finanzas_items" class="section hidden">
         <p>Seleccione los indicadores que desea proporcionar (los campos obligatorios están marcados con <span class="required">*</span>):</p>
@@ -2121,6 +2144,215 @@ document.addEventListener('DOMContentLoaded', () => {
             razonesCompetencia.classList.add('hidden');
         }
     }
+
+    function generarPreguntasProductos() {
+        showSection('procesos_items');
+        const cantidad = document.getElementById("cantidadPropuesta").value;
+        const procesosContainer = document.getElementById("procesosContainer");
+
+        procesosContainer.innerHTML = ""; // Clear previous content
+
+        for (let i = 0; i < cantidad; i++) {
+            const nombreProducto = nombresPropuesta[i] ? nombresPropuesta[i].trim() : `Producto ${i + 1}`;
+
+            // Create product section
+            const productoDiv = document.createElement("div");
+            productoDiv.classList.add("producto-evaluacion");
+
+            productoDiv.innerHTML = `
+                <h3>${nombreProducto}</h3>
+
+                <p>Con respecto al costo total del producto, los costos derivados de mermas y desperdicios son:</p>
+                <select name="mermas_${i}">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="nulos">Prácticamente nulos</option>
+                    <option value="menos5">Menos del 5%</option>
+                    <option value="5a10">Entre el 5 y el 10%</option>
+                    <option value="10a15">Entre el 10 y el 15%</option>
+                    <option value="mas15">Más del 15%</option>
+                    <option value="noContest">Prefiero no contestar</option>
+                </select>
+
+                <p>Con respecto al costo total del producto, los costos por pérdidas de tiempo en la cadena de producción son:</p>
+                <select name="perdidasTiempo_${i}">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="nulos">Prácticamente nulos</option>
+                    <option value="menos5">Menos del 5%</option>
+                    <option value="5a10">Entre el 5 y el 10%</option>
+                    <option value="10a15">Entre el 10 y el 15%</option>
+                    <option value="mas15">Más del 15%</option>
+                    <option value="noContest">Prefiero no contestar</option>
+                </select>
+
+                 <p>Con respecto al costo total del producto, los costos por consumo excesivo son:</p>
+                <select name="consumoExcesivo_${i}">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="nulos">Prácticamente nulos</option>
+                    <option value="menos5">Menos del 5%</option>
+                    <option value="5a10">Entre el 5 y el 10%</option>
+                    <option value="10a15">Entre el 10 y el 15%</option>
+                    <option value="mas15">Más del 15%</option>
+                    <option value="noContest">Prefiero no contestar</option>
+                </select>
+
+                <p>Con respecto al costo total del producto, los costos asociados al aseguramiento y mejora de la calidad son:</p>
+                <select name="aseguramientoCalidad_${i}">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="menos5">Menos del 5%</option>
+                    <option value="5a10">Entre el 5 y el 10%</option>
+                    <option value="10a15">Entre el 10 y el 15%</option>
+                    <option value="15a20">Entre el 15 y el 20%</option>
+                    <option value="20a30">Entre el 20 y el 30%</option>
+                    <option value="mas30">Más del 30%</option>
+                    <option value="noContest">Prefiero no contestar</option>
+                </select>
+
+                <p>Con respecto al costo total del producto, los costos generados por ociosidad son:</p>
+                <select name="aseguramientoCalidad_${i}">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="menos5">Menos del 1%</option>
+                    <option value="5a10">Entre el 1 y el 5%</option>
+                    <option value="15a20">Entre el 5 y el 10%</option>>
+                    <option value="mas30">Más del 10%</option>
+                    <option value="noContest">Prefiero no contestar</option>
+                </select>
+
+                <p>¿Existe plan de producción de este producto?</p>
+                <select name="planProduccion_${i}">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <p>¿Existe mapa de las actividades clave del proceso de producción?</p>
+                <select name="mapaActividades_${i}">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+
+                <p>Compare el tiempo del proceso de producción con la competencia:</p>
+                <select name="comparacionTiempo_${i}">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="muchoMenor">Mucho menor</option>
+                    <option value="menor">Menor</option>
+                    <option value="igual">Aproximadamente igual</option>
+                    <option value="mayor">Mayor</option>
+                    <option value="muchoMayor">Mucho mayor</option>
+                    <option value="noContest">Prefiero no contestar</option>
+                </select>
+
+                <p>Compare la calidad del producto con la de sus competidores:</p>
+                <select name="comparacionCalidad_${i}">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="muchoMenor">Mucho menor</option>
+                    <option value="menor">Menor</option>
+                    <option value="igual">Aproximadamente igual</option>
+                    <option value="mayor">Mayor</option>
+                    <option value="muchoMayor">Mucho mayor</option>
+                    <option value="noContest">Prefiero no contestar</option>
+                </select>
+
+                <p>Ha implementado las normas de calidad y posee certificaciones?</p>
+                <select name="certificacionesCalidad_${i}">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="totalmente">Totalmente</option>
+                    <option value="parcialmente">Parcialmente</option>
+                    <option value="no">No</option>
+                </select>
+            `;
+
+            procesosContainer.appendChild(productoDiv);
+        }
+    }
+
+
+    function generarPreguntasRecursos() {
+        showSection('recursos_items');
+        const cantidad = document.getElementById("cantidadPropuesta").value;
+        const recursosContainer = document.getElementById("recursosContainer");
+
+        recursosContainer.innerHTML = ""; // Clear previous content
+
+        for (let i = 0; i < cantidad; i++) {
+            const nombreProducto = nombresPropuesta[i] ? nombresPropuesta[i].trim() : `Producto ${i + 1}`;
+
+            // Create product section
+            const procesoDiv = document.createElement("div");
+            procesoDiv.classList.add("proceso-evaluacion");
+
+            procesoDiv.innerHTML = `
+                <h3>${nombreProducto}</h3>
+
+                <p>¿Cuántas actividades que generan valor están asociadas a este producto?</p>
+                <input type="number" min="1" id="numActividades_${i}" placeholder="Ingrese cantidad" oninput="generarActividades(${i})">
+
+                <div id="actividadesContainer_${i}"></div>
+            `;
+
+            recursosContainer.appendChild(procesoDiv);
+        }
+    }
+
+    function generarActividades(productoIndex) {
+        const numActividades = document.getElementById(`numActividades_${productoIndex}`).value;
+        const actividadesContainer = document.getElementById(`actividadesContainer_${productoIndex}`);
+
+        actividadesContainer.innerHTML = ""; // Clear previous content
+
+        for (let j = 0; j < numActividades; j++) {
+            const actividadDiv = document.createElement("div");
+            actividadDiv.classList.add("actividad-evaluacion");
+
+            actividadDiv.innerHTML = `
+                <h4>Actividad ${j + 1}</h4>
+
+                <p>Alias de la actividad:</p>
+                <input type="text" id="aliasActividad_${productoIndex}_${j}" placeholder="Ingrese el alias de la actividad">
+
+                <p>¿Cuántos tipos de recursos clave son requeridos para esta actividad?</p>
+                <input type="number" min="1" id="numRecursos_${productoIndex}_${j}" placeholder="Ingrese cantidad" oninput="generarRecursos(${productoIndex}, ${j})">
+
+                <div id="recursosContainer_${productoIndex}_${j}"></div>
+            `;
+
+            actividadesContainer.appendChild(actividadDiv);
+        }
+    }
+
+    function generarRecursos(productoIndex, actividadIndex) {
+        const numRecursos = document.getElementById(`numRecursos_${productoIndex}_${actividadIndex}`).value;
+        const recursosContainer = document.getElementById(`recursosContainer_${productoIndex}_${actividadIndex}`);
+
+        recursosContainer.innerHTML = ""; // Clear previous content
+
+        for (let k = 0; k < numRecursos; k++) {
+            const recursoDiv = document.createElement("div");
+            recursoDiv.classList.add("recurso-evaluacion");
+
+            recursoDiv.innerHTML = `
+                <h5>Recurso ${k + 1}</h5>
+
+                <p>Para este recurso, exprese su nivel de acuerdo con la siguiente afirmación:</p>
+                <p><strong>La empresa dispone del recurso o posee la capacidad de adquirirlo en el momento adecuado.</strong></p>
+                
+                <select name="disponibilidadRecurso_${productoIndex}_${actividadIndex}_${k}">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="completamente_de_acuerdo">Completamente de acuerdo</option>
+                    <option value="de_acuerdo">De acuerdo</option>
+                    <option value="mas_de_acuerdo">Más de acuerdo que en desacuerdo</option>
+                    <option value="neutral">Ni de acuerdo ni en desacuerdo</option>
+                    <option value="mas_en_desacuerdo">Más en desacuerdo que de acuerdo</option>
+                    <option value="en_desacuerdo">En desacuerdo</option>
+                    <option value="completamente_en_desacuerdo">Completamente en desacuerdo</option>
+                    <option value="no_opinar">Prefiero no opinar</option>
+                </select>
+            `;
+
+            recursosContainer.appendChild(recursoDiv);
+        }
+    }
+
 
 
 </script>
