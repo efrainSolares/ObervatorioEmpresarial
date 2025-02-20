@@ -985,7 +985,6 @@
         <div class="item" id="procesosSection" onclick="toggleItem(event, 'procesos')">
             <p class="short">Evaluación de Procesos</p>
             <div id="procesos" class="item-detail hidden">
-                <p>Seleccione los costos asociados a cada producto:</p>
                 <div id="procesosContainer"></div> <!-- Questions will be dynamically added here -->
             </div>
         </div>
@@ -1108,20 +1107,65 @@
 -->
 
     <section id="finanzas_items" class="section hidden">
-        <p>Seleccione los indicadores que desea proporcionar (los campos obligatorios están marcados con <span class="required">*</span>):</p>
-
-        <!-- Menú desplegable para seleccionar el periodo -->
-        <label for="periodoTiempo">Seleccione el periodo de tiempo:</label>
-        <select id="periodoTiempo" name="periodoTiempo" required>
+        <p> Conocer la salud financiera de su empresa es clave para su estabilidad y crecimiento. Por ejemplo,
+            <li>Una empresa con una Rentabilidad Sobre Capital (ROE) alta indica buena rentabilidad para sus inversionistas, pero si su Razón de Endeudamiento es elevada, podría estar operando con demasiado riesgo.</li>
+            <li>Una Liquidez adecuada asegura que pueda cumplir con sus obligaciones de corto plazo.</li>
+            <li>Razón de Solvencia sólida garantiza estabilidad a largo plazo.</li>
+        </p>
+        <h4>Evaluar estos indicadores permite anticipar problemas y tomar decisiones estratégicas para el futuro.</h4>
+        
+        <label for="evaluarSaludFinanciera">¿Desea evaluar la salud financiera actual de su empresa?</label>
+        <select id="evaluarSaludFinanciera" name="evaluarSaludFinanciera"  onchange="mostrarInfoFinanciera(this.value)" required>
             <option value="" disabled selected>Seleccione una opción</option>
-            <option value="mes">Mes</option>
-            <option value="bimestre">Bimestre</option>
-            <option value="trimestre">Trimestre</option>
-            <option value="semestre">Semestre</option>
-            <option value="año">Año</option>
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
         </select>
 
-        <!-- Margen de beneficio -->
+        <!-- SÍ evaluará su salud financiera -->
+        <div id="selectBalanceGeneral" class="hidden">
+            <label>¿Desea proporcionar algunos datos financieros del balance general de su empresa?</label>
+            <select name="proporcionarInfoFinanciera" id="proporcionarInfoFinanciera" onchange="mostrarBalanceGeneral(this.value)">
+                <option value="" disabled selected>Seleccione</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+            </select>
+
+            <!-- SÍ proporcionará datos financieros del balance general -->
+            <div id="divBalanceGeneral" class="hidden">
+                <label for="periodoTiempo">Seleccione la duración del último balance:</label>
+                <select id="periodoTiempo" name="periodoTiempo" required>
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="mes">Mes</option>
+                    <option value="bimestre">Bimestre</option>
+                    <option value="trimestre">Trimestre</option>
+                    <option value="semestre">Semestre</option>
+                    <option value="año">Año</option>
+                </select>            
+                <p>
+                    ROE = Utilidad neta / Capital Propio
+                </p>
+                <input type="number" name="utilidadNeta" placeholder="Ingrese la Utilidad Total en el último periodo">
+                <input type="number" name="capitalPropio" placeholder="Ingrese el Capital Propio en el último periodo">        
+                <p>
+                    Razón de endeudamiento = Pasivo Total / Capital Propio
+                </p>
+                <input type="number" name="" placeholder="Ingrese el Pasivo Total en el último periodo ">
+                <input type="number" name="" placeholder="Ingrese el Capital Propio en el último periodo ">
+                <p>
+                    Liquidez = Activo circulante / Pasivo circulante
+                </p>
+                <input type="number" name="" placeholder="Ingrese el Activo circulante en el último periodo ">
+                <input type="number" name="" placeholder="Ingrese el Pasivo circulante en el último periodo ">
+                <p>
+                    Razón de solvencia = Activo Total / Pasivo Total
+                </p>
+                <input type="number" name="" placeholder="Ingrese el Activo Total en el último periodo ">
+                <input type="number" name="" placeholder="Ingrese el Pasivo Total en el último periodo ">
+            </div>
+        </div>
+        
+
+        <!-- Margen de beneficio - ->
         <div class="item" onclick="toggleItem(event, 'margenBeneficio')">
             <p class="short">Margen de beneficio<span class="required">*</span></p>
             <div id="margenBeneficio" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1133,7 +1177,7 @@
             </div>
         </div>
 
-        <!-- Rendimiento sobre capital invertido (RCI)  Recuerda: Capital Total = Patrimonio Neto de la Empresa + Deuda Total, donde Patrimonio Neto contiene existencias en inventarios y en procesos de producción así como cuentas por cobrar; mientras que la Deuda Total contienen cuentas por pagar-->
+        <!-- Rendimiento sobre capital invertido (RCI)  Recuerda: Capital Total = Patrimonio Neto de la Empresa + Deuda Total, donde Patrimonio Neto contiene existencias en inventarios y en procesos de producción así como cuentas por cobrar; mientras que la Deuda Total contienen cuentas por pagar- ->
         <div class="item" onclick="toggleItem(event, 'rendimientoRCI')">
             <p class="short">Rendimiento sobre capital invertido<span class="required">*</span></p>
             <div id="rendimientoRCI" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1181,7 +1225,7 @@
         </div>
         -->
 
-        <!-- Liquidez -->
+        <!-- Liquidez - ->
         <div class="item" onclick="toggleItem(event, 'liquidez')">
             <p class="short">Liquidez<span class="required">*</span></p>
             <div id="liquidez" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1198,7 +1242,7 @@
             </div>
         </div>
 
-        <!-- Razón de endeudamiento = Pasivo total / Activo total -->
+        <!-- Razón de endeudamiento = Pasivo total / Activo total - ->
         <div class="item" onclick="toggleItem(event, 'razonEndeudamiento')">
             <p class="short">Razón de endeudamiento<span class="required">*</span></p>
             <div id="razonEndeudamiento" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1215,7 +1259,7 @@
             </div>
         </div>
 
-        <!-- Nivel de riesgo -->
+        <!-- Nivel de riesgo - ->
         <div class="item" onclick="toggleItem(event, 'nivelRiesgo')">
             <p class="short">Nivel de riesgo<span class="required">*</span></p>
             <div id="nivelRiesgo" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1235,7 +1279,7 @@
             </div>
         </div>
 
-        <!-- Margen de utilidad por producto -->
+        <!-- Margen de utilidad por producto - ->
         <div class="item" onclick="toggleItem(event, 'utilidadProducto')">
             <p class="short">Margen de utilidad por producto<span class="required">*</span></p>
             <div id="utilidadProducto" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1245,18 +1289,18 @@
                 </p>
                 <input type="number" id="numProductos" name="numProductos"  min="1" placeholder="Ingrese la cantidad de productos"">
                 <button type="button" onclick="generarCamposProductos()">Agregar Productos</button>
-                <!-- Contenedor dinámico para los productos -->
+                <!-- Contenedor dinámico para los productos - ->
                 <div id="productosContainer"></div>
                 <button id="botonCalcularMagen" class = "hidden" type="button" onclick="markAsAnswered('utilidadProducto'); document.getElementById('utilidadProducto').classList.add('hidden')">Calcular Margen de Utilidad</button>
                 <!-- Botón para calcular el margen de utilidad 
                 <button type="button" onclick="calcularMargen()">Calcular Margen de Utilidad</button>
                 Resultado del cálculo
                 <div id="resultadoMargen"></div>
-                 -->
+                 - ->
             </div>        
         </div>        
 
-        <!-- Inventario inmovilizado -->
+        <!-- Inventario inmovilizado - ->
         <div class="item" onclick="toggleItem(event, 'inventarioInmovilizado')">
             <p class="short">Inventario inmovilizado</p>
             <div id="inventarioInmovilizado" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1268,7 +1312,7 @@
             </div>
         </div>
 
-        <!-- Ventas / Activo total -->
+        <!-- Ventas / Activo total - ->
         <div class="item" onclick="toggleItem(event, 'ventas')">
             <p class="short">Ventas</p>
             <div id="ventas" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1300,6 +1344,7 @@
                 <input type="number" name="ventasGastos" placeholder="Ingrese el valor" oninput="markAsAnswered('ventasGastos')">
             </div>
         </div>
+        -->
     </section>
 </main>
 
@@ -2087,7 +2132,37 @@ document.addEventListener('DOMContentLoaded', () => {
             tipoAlianzas.classList.add('hidden');
             probabilidadAlianzas.classList.add('hidden');
         }
+    }  
+
+    function mostrarInfoFinanciera(valor) {
+        // Obtener los contenedores de los campos adicionales
+        const selectBalanceGeneral = document.getElementById('selectBalanceGeneral');
+
+        // Mostrar y ocultar los campos correspondientes
+        if (valor === "Sí") {
+            selectBalanceGeneral.classList.remove('hidden');
+        } else if (valor === "No") {
+            selectBalanceGeneral.classList.add('hidden');
+        } else {
+            selectBalanceGeneral.classList.add('hidden');
+        }
     }
+
+
+    function mostrarBalanceGeneral(valor) {
+        // Obtener los contenedores de los campos adicionales
+        const selectBalanceGeneral = document.getElementById('divBalanceGeneral');
+
+        // Mostrar y ocultar los campos correspondientes
+        if (valor === "Sí") {
+            selectBalanceGeneral.classList.remove('hidden');
+        } else if (valor === "No") {
+            selectBalanceGeneral.classList.add('hidden');
+        } else {
+            selectBalanceGeneral.classList.add('hidden');
+        }
+    }
+
 
     function mostrarNivelColaboracion(valor) {
         const nivelColaboracion = document.getElementById('nivelColaboracion');
@@ -2333,18 +2408,18 @@ document.addEventListener('DOMContentLoaded', () => {
             recursoDiv.innerHTML = `
                 <h5>Recurso ${k + 1}</h5>
 
+                <p>Alias del recurso:</p>
+                <input type="text" id="aliasRecurso_${productoIndex}_${actividadIndex}_${k}" placeholder="Ingrese el alias del recurso">
+
                 <p>Para este recurso, exprese su nivel de acuerdo con la siguiente afirmación:</p>
                 <p><strong>La empresa dispone del recurso o posee la capacidad de adquirirlo en el momento adecuado.</strong></p>
                 
                 <select name="disponibilidadRecurso_${productoIndex}_${actividadIndex}_${k}">
                     <option value="" disabled selected>Seleccione una opción</option>
-                    <option value="completamente_de_acuerdo">Completamente de acuerdo</option>
                     <option value="de_acuerdo">De acuerdo</option>
-                    <option value="mas_de_acuerdo">Más de acuerdo que en desacuerdo</option>
-                    <option value="neutral">Ni de acuerdo ni en desacuerdo</option>
-                    <option value="mas_en_desacuerdo">Más en desacuerdo que de acuerdo</option>
+                    <option value="mas_de_acuerdo">Algo de acuerdo</option>
+                    <option value="mas_en_desacuerdo">Algo en desacuerdo</option>
                     <option value="en_desacuerdo">En desacuerdo</option>
-                    <option value="completamente_en_desacuerdo">Completamente en desacuerdo</option>
                     <option value="no_opinar">Prefiero no opinar</option>
                 </select>
             `;
