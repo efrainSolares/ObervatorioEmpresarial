@@ -491,9 +491,24 @@ button:hover {
     display: none; /* Oculta la navegación cuando no es necesaria */
 }
 
-
 #periodoTiempo {
-    width: 50%;
+    width: 60%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#evaluarSaludFinanciera {
+    width: 45%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#proporcionarInfoFinanciera {
+    width: 22%;
     padding: 8px;
     margin: 10px 0;
     border: 1px solid #ccc;
