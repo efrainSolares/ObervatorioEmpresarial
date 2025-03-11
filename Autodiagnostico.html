@@ -26,6 +26,8 @@
         <li><button onclick="mostrarSeccionProveedores()">Proveedores</button>
         <li><button onclick="mostrarSeccionDistribuidores()">Canales de distribución</button>
         <li><button onclick="showSection('clientes_items')">Clientes</button></li>
+        <li><button onclick="showSection('capitalHumano_items')">Capital humano</button></li>
+        <li><button onclick="showSection('liderazgo_items')">Liderazgo</button></li>
         <li><button onclick="generarPreguntasProductos()">Procesos</button></li>
         <li><button onclick="generarPreguntasRecursos()">Recursos</button></li>
     </ul>
@@ -49,7 +51,9 @@
                     <i>Distribuidores</i>:  Complementa la gestión de tu cadena de suministro.<br>
                     <i>Clientes</i>: Conoce qué tan bien estás satisfaciendo sus necesidades.<br>
                     <i>Procesos</i>: Evalúa la eficiencia en la creación de bienes y servicios.<br>
-                </p>                
+                </p> 
+                <p>La versión actual de esta herramienta se concentra en empresas productoras. Las empresas de servicios y comercio están, por el momento, excluidas.</p>
+                
                 <p>No te preocupes, no hay respuestas correctas o incorrectas, ni tienes que proporcionar aquella información que desconozcas o que no te sientas cómodo(a) proporcionando; sin embargo, recuerda que esta información solamente será usada por ti y, de ser el caso, con fines estrictamente académicos por la UAdeC, además, tal información puede ser muy valiosa para determinar el diagnóstico de tu empresa y para que puedas apreciar la evolución de la misma a través del tiempo.</p>
             </div>
             
@@ -135,12 +139,11 @@
         
     <!-- Sección Propuesta de valor -->
     <section id="propuesta" class="section hidden">
-        <h2>Propuesta</h2>
         <div id="propuestaStep1">
             <h3>Información Inicial</h3>
             <p>¿Cuántos de sus productos generaron el 80% de los beneficios en el último periodo?</p>
             <input type="number" id="cantidadPropuesta" placeholder="Ingrese el número de productos" min="1">
-            <button onclick="procesarCantidadPropuesta()">Continuar</button>
+            <button onclick="procesarCantidadPropuesta(parseInt(document.getElementById('cantidadPropuesta').value), 'propuestaMasImportantes', 'camposPropuesta')">Continuar</button>
         </div>
     </section>
     
@@ -162,6 +165,16 @@
             <p>Por favor, proporcione información sobre los <span id="cantidadPropuestaImportantes"></span> productos más importantes:</p>
             <div id="camposPropuesta"></div>
                 <button onclick="mostrarItemsPropuesta()">Siguiente</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="productosMasImportantes" class="section hidden">
+        <div>
+            <h3>Productos más importantes</h3>
+            <p>Por favor, proporcione información sobre los productos más importantes:</p>
+            <div id="camposProductos"></div>
+                <button onclick="mostrarItemsProductos()">Siguiente</button>
             </div>
         </div>
     </section>
@@ -345,6 +358,15 @@
     </div>
 
        
+    <div id="contenedor_procesos">
+        <section id="procesos_items_template" class="section hidden">
+            <p>ESTO SE DEBE BORRAR!!</p>
+        
+            <div class="item" onclick="toggleItem(event, 'razonesCompra')">
+
+            </div>
+        </section>
+    </div>
         
     <!-- Sección de Proveedores -->
     <section id="proveedores" class="section hidden">
@@ -643,30 +665,30 @@
             </div>    
         
         </section>
-    </div>
-        
-    <div id="pantallaEvaluacion" class="hidden">
-        <div class="item" onclick="toggleItem(event, 'proveedores13')">
-            <p class="short">Evaluación con herramientas sólidas</p>
-            <div id="proveedores13" class="item-detail hidden">
-                <p>
-                    ¿Cómo evalúa a sus proveedores/distribuidores utilizando herramientas específicas?
-                    <i class="fas fa-info-circle info-icon" data-tooltip="La evaluación de proveedores mediante herramientas específicas permite medir su desempeño en calidad, tiempo, y cumplimiento."></i>
-                </p>
-                <input type="text" name="proveedores13" placeholder="Describa la herramienta" oninput="markAsAnswered('proveedores13')">
-                <p class="short">
-                    ¿Desea obtener una herramienta para evaluar a sus proveedores/distribuidores?
-                    <i class="fas fa-info-circle info-icon" data-tooltip="Esta herramienta le permitirá analizar y calificar el desempeño de sus proveedores en términos de calidad, tiempo y cumplimiento."></i>
-                </p>
-                <select name="herramientaEvaluacion" id="herramientaEvaluacion" oninput="markAsAnswered('proveedores13')">
-                    <option value="" disabled selected>Seleccione una opción</option>
-                    <option value="si">Sí</option>
-                    <option value="no">No</option>
-                    <option value="quiza">Quizá si tuviera más información</option>
-                </select>
+    </div>  
+    
+    <section id = "pantallaEvaluacion" class ="section hidden">
+            <div class="item" onclick="toggleItem(event, 'proveedores13')">
+                <p class="short">Evaluación con herramientas sólidas</p>
+                <div id="proveedores13" class="item-detail hidden">
+                    <p>
+                        ¿Cómo evalúa a sus proveedores/distribuidores utilizando herramientas específicas?
+                        <i class="fas fa-info-circle info-icon" data-tooltip="La evaluación de proveedores mediante herramientas específicas permite medir su desempeño en calidad, tiempo, y cumplimiento."></i>
+                    </p>
+                    <input type="text" name="proveedores13" placeholder="Describa la herramienta" oninput="markAsAnswered('proveedores13')">
+                    <p class="short">
+                        ¿Desea obtener una herramienta para evaluar a sus proveedores/distribuidores?
+                        <i class="fas fa-info-circle info-icon" data-tooltip="Esta herramienta le permitirá analizar y calificar el desempeño de sus proveedores en términos de calidad, tiempo y cumplimiento."></i>
+                    </p>
+                    <select name="herramientaEvaluacion" id="herramientaEvaluacion" oninput="markAsAnswered('proveedores13')">
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                        <option value="quiza">Quizá si tuviera más información</option>
+                    </select>
+                </div>
             </div>
-        </div>
-    </div> 
+    </section>
 
     <div id="navegacion-proveedores" class="hidden">
         <button id="atrasBtn" onclick="atrasProveedor()">Atrás</button>
@@ -846,6 +868,459 @@
     </section>
 
 
+    <section id="capitalHumano_items" class="section hidden">
+        <p>Seleccione los indicadores y proporcione la información de la manera más honesta posible:</p>
+        <div class="item" onclick="toggleItem(event, 'nivelConocimientoEmpleados')">
+            <p class="short">Conocimiento de los empleados</p>
+            <div id="nivelConocimientoEmpleados" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>
+                    ¿En qué medida conocen los empleados la misión y la visión de su empresa?
+                </p>                
+                <select name="nivelMisionVision" oninput="markAsAnswered('nivelConocimientoEmpleados')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Totalmemte</option>
+                    <option value="2">En buena medida</option>
+                    <option value="3">En cierta medida</option>
+                    <option value="4">Poco o nada</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+
+                <p>
+                    ¿En qué medida conocen los empleados las estrategias de la empresa para crear valor?
+                </p>                
+                <select name="nivelEstrategias" oninput="markAsAnswered('nivelConocimientoEmpleados')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Totalmemte</option>
+                    <option value="2">En buena medida</option>
+                    <option value="3">En cierta medida</option>
+                    <option value="4">Poco o nada</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+                
+                <p>
+                    ¿En qué medida está el capital humano alineado con las estrategias de la empresa para crear valor?
+                </p>                
+                <select name="nivelEstrategias" oninput="markAsAnswered('nivelConocimientoEmpleados')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Totalmemte</option>
+                    <option value="2">En buena medida</option>
+                    <option value="3">En cierta medida</option>
+                    <option value="4">Poco o nada</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="item" onclick="toggleItem(event, 'nivelCompetencias')">
+            <p class="short">Competencias profesionales</p>
+            <div id="nivelCompetencias" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>
+                    ¿Están definidos los conocimientos y habilidades que cada puesto requiere?
+                </p>                
+                <select name="nivelConocimientosHabilidades" oninput="markAsAnswered('nivelCompetencias')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Sí, siempre</option>
+                    <option value="2">En la mayoría de los casos</option>
+                    <option value="3">En algunos casos</option>
+                    <option value="4">En pocos casos</option>
+                    <option value="no">No</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+                
+                <p>
+                    ¿Cumplen los empleados con esos requerimientos?
+                </p>                
+                <select name="nivelCumplimiento" oninput="markAsAnswered('nivelCompetencias')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Sí, siempre</option>
+                    <option value="2">En la mayoría de los casos</option>
+                    <option value="3">En algunos casos</option>
+                    <option value="4">En pocos casos</option>
+                    <option value="no">No</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="item" onclick="toggleItem(event, 'puestosClave')">
+            <p class="short">Puestos clave y resto de personal</p>
+            <div id="puestosClave" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>
+                    ¿Están ocupados los puestos clave por personas competentes?
+                </p>                
+                <select name="puestosOcupados" oninput="markAsAnswered('puestosClave')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Sí, siempre</option>
+                    <option value="2">En la mayoría de los casos</option>
+                    <option value="3">En algunos casos</option>
+                    <option value="4">En pocos casos</option>
+                    <option value="no">No</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+                
+                <p>
+                    Evalúe el nivel de rotación del personal clave:
+                </p>                
+                <select name="nivelRotacion" oninput="markAsAnswered('puestosClave')" onchange="mostrarNivelRotacion(this.value)">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Muy alto</option>
+                    <option value="2">Alto</option>
+                    <option value="3">Moderado</option>
+                    <option value="4">Bajo</option>
+                    <option value="no">Muy bajo</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+
+                <div id="selectPoliticasRotacion" class="hidden">
+                    <p>
+                        Existen políticas para reducir la rotación del personal clave:
+                    </p>                
+                    <select id="politicasRotacion" name="politicasRotacion">
+                        <option value="" disabled selected>Seleccione</option>
+                        <option value="1">Sí</option>
+                        <option value="2">Sí, pero no funcionan</option>
+                        <option value="3">No</option>
+                    </select>
+                </div>
+                
+                <p>
+                    Evalúe el nivel de rotación del personal restante:
+                </p>                
+                <select id="nivelRotacionResto" name="nivelRotacionResto" oninput="markAsAnswered('puestosClave')"  onchange="mostrarNivelRotacionRestante(this.value)">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Muy alto</option>
+                    <option value="2">Alto</option>
+                    <option value="3">Moderado</option>
+                    <option value="4">Bajo</option>
+                    <option value="no">Muy bajo</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+
+                <div id="selectPoliticasRotacionResto" class="hidden">
+                    <p>
+                        Existen políticas para reducir la rotación del resto del personal:
+                    </p>                
+                    <select id="politicasRotacionResto" name="politicasRotacionResto">
+                        <option value="" disabled selected>Seleccione</option>
+                        <option value="1">Sí</option>
+                        <option value="2">Sí, pero no funcionan</option>
+                        <option value="3">No</option>
+                    </select>
+                </div>
+                
+                <p>
+                    ¿Existen estrategias para atraer el mejor talento a los puestos clave?
+                </p>   
+                <select id="estrategiasAtraccion" name="estrategiasAtraccion" oninput="markAsAnswered('puestosClave')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Sí</option>
+                    <option value="2">En cierta medida</option>
+                    <option value="3">No</option>
+                </select>
+                
+                <p>
+                    ¿Utiliza herramientas formales para decisiones de selección y promoción del personal?
+                </p>   
+                <select id="herramientasSeleccion" name="herramientasSeleccion" oninput="markAsAnswered('puestosClave')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Sí</option>
+                    <option value="2">No</option>
+                    <option value="3">Podrían interesarme</option>
+                </select>
+                
+                <p>
+                    ¿Existen estrategias de capacitación del personal que ocupa puestos clave?
+                </p>   
+                <select id="capacitacionClave" name="capacitacionClave" oninput="markAsAnswered('puestosClave')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Sí, paratodos</option>
+                    <option value="2">En la mayoría de los casos</option>
+                    <option value="3">En algunos casos</option>
+                    <option value="4">En pocos casos</option>
+                    <option value="5">No</option>
+                </select>
+                
+                <p>
+                    ¿Existen políticas de formación, capacitación y superación del resto del personal?
+                </p>   
+                <select id="capacitacionClaveResto" name="capacitacionClaveResto" oninput="markAsAnswered('puestosClave')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Sí, paratodos</option>
+                    <option value="2">En la mayoría de los casos</option>
+                    <option value="3">En algunos casos</option>
+                    <option value="4">En pocos casos</option>
+                    <option value="5">No</option>
+                </select>
+                
+                <p>
+                    ¿Se respeta la equidad de género en el personal clave de la empresa?
+                </p>   
+                <select id="equidadGenero" name="equidadGenero" oninput="markAsAnswered('puestosClave')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Totalmente</option>
+                    <option value="2">En buena medida</option>
+                    <option value="3">En alguna medida</option>
+                    <option value="4">Poco o nada</option>
+                </select>
+                
+                <p>
+                    ¿Se respeta la equidad de género en el resto del personal?
+                </p>   
+                <select id="equidadGeneroResto" name="equidadGeneroResto" oninput="markAsAnswered('puestosClave')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Totalmente</option>
+                    <option value="2">En buena medida</option>
+                    <option value="3">En alguna medida</option>
+                    <option value="4">Poco o nada</option>
+                </select>
+            </div>
+        </div>
+    </section>
+    
+    <section id="liderazgo_items" class="section hidden">
+        <p>Seleccione los indicadores y proporcione la información de la manera más honesta posible:</p>
+        <div class="item" onclick="toggleItem(event, 'liderEmpresa')">
+            <p class="short">Líder(es) de la empresa</p>
+            <div id="liderEmpresa" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>
+                    ¿En qué medida el líder (los líderes) de la empresa normalmente estimula(n) la mejora continua y la innovación?
+                </p>                
+                <select name="nivelEstimulo" oninput="markAsAnswered('liderEmpresa')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Totalmente</option>
+                    <option value="2">En buena medida</option>
+                    <option value="3">En alguna medida</option>
+                    <option value="4">Poco o nada</option>
+                </select>
+
+                <p>
+                    ¿En qué medida el líder (los líderes) de la empresa posee aptitud técnica?
+                </p>                
+                <select name="nivelAptitudTecnica" oninput="markAsAnswered('liderEmpresa')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Totalmemte</option>
+                    <option value="2">En buena medida</option>
+                    <option value="3">En cierta medida</option>
+                    <option value="4">Poco o nada</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+
+                <p>
+                    ¿En qué medida el líder (los líderes) de la empresa estimula(n) la mejora continua y la innovación?
+                </p>                
+                <select name="nivelMejoraInnovacion" oninput="markAsAnswered('liderEmpresa')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Totalmemte</option>
+                    <option value="2">En buena medida</option>
+                    <option value="3">En cierta medida</option>
+                    <option value="4">Poco o nada</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+
+                <p>
+                    ¿Cuáles son las fuentes principales de proyectos de innovación?
+                </p>                
+                <select name="fuentesProyectos" oninput="markAsAnswered('liderEmpresa')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">El personal clave</option>
+                    <option value="2">El resto del personal</option>
+                    <option value="3">La dirección e la empresa</option>
+                </select>
+
+                <p>
+                    Cuando se aborda un proyecto de mejora o innovación, ¿el líder (los líderes) dedica(n) tiempo a comunicar la estrategia de forma adecuada?
+                </p>                
+                <select name="nuevoProyectoMejora" oninput="markAsAnswered('liderEmpresa')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Siempre o casi siempre</option>
+                    <option value="2">Frecuentemente</option>
+                    <option value="3">Con poca frecuencia</option>
+                    <option value="4">Nunca o casi nunca</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+
+                <p>
+                    Cuando se aborda un proyecto de mejora o innovación, ¿el líder (los líderes) se comunica(n) apropiadamente con el personal clave?
+                </p>                
+                <select name="nuevoProyectoMejoraClave" oninput="markAsAnswered('liderEmpresa')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Siempre o casi siempre</option>
+                    <option value="2">Frecuentemente</option>
+                    <option value="3">Con poca frecuencia</option>
+                    <option value="4">Nunca o casi nunca</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+
+                <p>
+                    ¿Cómo evalúa la resistencia al cambio por parte del personal clave?
+                </p>                
+                <select name="resistenciaClave" oninput="markAsAnswered('liderEmpresa')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Mucha</option>
+                    <option value="2">Moderada</option>
+                    <option value="3">Poca o ninguna</option>
+                </select>
+
+                <p>
+                    Cuando se aborda un proyecto de mejora o innovación, ¿el líder (los líderes) expresa(n) clara y continuamente los objetivos y beneficios?
+                </p>                
+                <select name="objetivosBeneficios" oninput="markAsAnswered('liderEmpresa')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Siempre o casi siempre</option>
+                    <option value="2">Frecuentemente</option>
+                    <option value="3">Con poca frecuencia</option>
+                    <option value="4">Nunca o casi nunca</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+
+                <p>
+                    Cuando se aborda un proyecto de mejora o innovación, ¿el líder (los líderes) se involucra(n) activamente en el mismo?
+                </p>                
+                <select name="liderInvolucramiento" oninput="markAsAnswered('liderEmpresa')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Siempre o casi siempre</option>
+                    <option value="2">Frecuentemente</option>
+                    <option value="3">Con poca frecuencia</option>
+                    <option value="4">Nunca o casi nunca</option>
+                    <option value="no_seguro">No estoy seguro</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="item" onclick="toggleItem(event, 'benchmarking')">
+            <p class="short">Cultura innovadora</p>
+            <div id="benchmarking" class="item-detail hidden" onclick="event.stopPropagation()">
+                <p>
+                    ¿Se compara y se toma referencia de la competencia con las empresas y sectores de más alto rendimiento?
+                </p>                
+                <select name="comparacionEmpresas" oninput="markAsAnswered('benchmarking')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Sí, de forma sistemática</option>
+                    <option value="2">Sí, frecuentemente</option>
+                    <option value="3">Solo ocasionalmente</option>
+                    <option value="4">Nunca o casi nunca</option>
+                </select>
+                
+                <p>
+                    ¿Con qué frecuencia se detectan neceidades y oportunidades de mejora?
+                </p>                
+                <select name="oportunidadesMejora" oninput="markAsAnswered('benchmarking')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Continuamente</option>
+                    <option value="2">Frecuentemente</option>
+                    <option value="3">Poco frecuentemente</option>
+                    <option value="4">Nunca o casi nunca</option>
+                </select>                
+                
+                <p>
+                    ¿Con qué frecuencia se lanzan nuevos productos o servicios?
+                </p>                
+                <select name="nuevosProductosServicios" oninput="markAsAnswered('benchmarking')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="2">Frecuentemente</option>
+                    <option value="3">Poco frecuentemente</option>
+                    <option value="4">Nunca o casi nunca</option>
+                </select>
+                
+                <p>
+                    ¿Con qué frecuencia se implementan mejoras e innovaciones en procesos?
+                </p>                
+                <select name="mejorasInnovaciones" oninput="markAsAnswered('benchmarking')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Continuamente</option>
+                    <option value="2">Frecuentemente</option>
+                    <option value="3">Poco frecuentemente</option>
+                    <option value="4">Nunca o casi nunca</option>
+                </select>
+                
+                <p>
+                    ¿Con qué frecuencia se implementan mejoras en el diseño?
+                </p>                
+                <select name="mejorasDisenio" oninput="markAsAnswered('benchmarking')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Continuamente</option>
+                    <option value="2">Frecuentemente</option>
+                    <option value="3">Poco frecuentemente</option>
+                    <option value="4">Nunca o casi nunca</option>
+                </select> 
+                
+                <p>
+                    ¿Con qué frecuencia se implementan mejoras en distribución/comercialización?
+                </p>                
+                <select name="mejorasDistribucion" oninput="markAsAnswered('benchmarking')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Continuamente</option>
+                    <option value="2">Frecuentemente</option>
+                    <option value="3">Poco frecuentemente</option>
+                    <option value="4">Nunca o casi nunca</option>
+                </select>       
+                
+                <p>
+                    ¿Con qué frecuencia se implementan mejoras en aprovisionamiento?
+                </p>                
+                <select name="mejorasAprovisionamiento" oninput="markAsAnswered('benchmarking')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Continuamente</option>
+                    <option value="2">Frecuentemente</option>
+                    <option value="3">Poco frecuentemente</option>
+                    <option value="4">Nunca o casi nunca</option>
+                </select>     
+                
+                <p>
+                    ¿Con qué frecuencia se introducen nuevas tecnologías?
+                </p>                
+                <select name="nuevasTecnologias" oninput="markAsAnswered('benchmarking')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="2">Frecuentemente</option>
+                    <option value="3">Poco frecuentemente</option>
+                    <option value="4">Nunca o casi nunca</option>
+                </select>   
+                
+                <p>
+                    ¿Con qué frecuencia el personal sugiere mejoras e innovaciones?
+                </p>                
+                <select name="sugerenciaMejoras" oninput="markAsAnswered('benchmarking')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Muy frecuentemente</option>
+                    <option value="2">Frecuentemente</option>
+                    <option value="3">Poco frecuentemente</option>
+                    <option value="4">Nunca o casi nunca</option>
+                </select>  
+                
+                <p>
+                    ¿Se ofrecen incentivos al personal por las mejoras efectuadas?
+                </p>                
+                <select name="sugerenciaMejoras" oninput="markAsAnswered('benchmarking')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Sí, en forma suficiente</option>
+                    <option value="2">Sí, pero no suficientemente</option>
+                    <option value="3">No</option>
+                </select> 
+                
+                <p>
+                    ¿Se ofrecen incentivos al personal de ventas y marketing para que se involucren en la previsión y gestión de la demanda?
+                </p>                
+                <select name="incentivosPersonal" oninput="markAsAnswered('benchmarking')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Sí, en forma suficiente</option>
+                    <option value="2">Sí, pero no suficientemente</option>
+                    <option value="3">No</option>
+                </select> 
+                
+                <p>
+                    ¿Se ofrecen incentivos por mejoras que contribuyan a la economía circular y reducción del impacto ambiental?
+                </p>                
+                <select name="incentivosMejoras" oninput="markAsAnswered('benchmarking')">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">Sí, en forma suficiente</option>
+                    <option value="2">Sí, pero no suficientemente</option>
+                    <option value="3">No</option>
+                </select>               
+            </div>
+        </div>
+    </section>
+
+
     <section id="distribucion_items" class="section hidden">
         <p>Seleccione los indicadores que desea proporcionar:</p>
     
@@ -979,6 +1454,15 @@
 
 
         
+    </section>
+
+    <!-- Sección Propuesta de valor -->
+    <section id="numero_productos" class="section hidden">
+        <div id="numero_productosStep1">
+            <p>¿Cuántos de sus productos generaron el 80% de los beneficios en el último periodo?</p>
+            <input type="number" id="cantidadProductos" placeholder="Ingrese el número de productos" min="1">
+            <button onclick="procesarCantidadPropuesta(parseInt(document.getElementById('cantidadProductos').value), 'productosMasImportantes', 'camposProductos')">Continuar</button>
+        </div>
     </section>
 
     <section id="procesos_items" class="section hidden">
@@ -1120,19 +1604,30 @@
             <option value="Sí">Sí</option>
             <option value="No">No</option>
         </select>
+        <div id="mensajeFinanzas" class="hidden">
+            <p>Si prefiere no compartir su información financiera en línea, puedes acudir al CIDESIE o enviarnos un correo, y un miembro de nuestro equipo se pondrá en contacto con usted para brindarle asesoría personalizada.</p>
+        </div>
 
         <!-- SÍ evaluará su salud financiera -->
         <div id="selectBalanceGeneral" class="hidden">
-            <label>¿Desea proporcionar algunos datos financieros del balance general de su empresa?</label>
+            <label>¿Desea proporcionar algunos datos financieros de su empresa?</label>
             <select name="proporcionarInfoFinanciera" id="proporcionarInfoFinanciera" onchange="mostrarBalanceGeneral(this.value)">
                 <option value="" disabled selected>Seleccione</option>
                 <option value="Sí">Sí</option>
                 <option value="No">No</option>
             </select>
+            
+            <div id="mensajeFinanzas2" class="hidden">
+                <p>Recomendamos calcular sus propios indicadores de la siguiente manera:</p>
+                <li>ROE = Utilidad neta después de impuestos / Capital Propio</li>
+                <li>Razón de endeudamiento = Pasivo Total / Capital Propio</li>
+                <li>Liquidez = Activo circulante / Pasivo circulante</li>
+                <li>Razón de solvencia = Activo Total / Pasivo Total</li>
+            </div>
 
             <!-- SÍ proporcionará datos financieros del balance general -->
             <div id="divBalanceGeneral" class="hidden">
-                <label for="periodoTiempo">Seleccione la duración del último balance:</label>
+                <label for="periodoTiempo">Seleccione el período para el que se proporcionará la siguiente información:</label>
                 <select id="periodoTiempo" name="periodoTiempo" required>
                     <option value="" disabled selected>Seleccione una opción</option>
                     <option value="mes">Mes</option>
@@ -1142,25 +1637,25 @@
                     <option value="año">Año</option>
                 </select>            
                 <p>
-                    ROE = Utilidad neta / Capital Propio
+                    ROE = Utilidad neta después de impuestos / Capital Propio
                 </p>
-                <input type="number" name="utilidadNeta" placeholder="Ingrese la Utilidad Total en el último periodo">
-                <input type="number" name="capitalPropio" placeholder="Ingrese el Capital Propio en el último periodo">        
+                <input type="number" name="utilidadNeta" placeholder="Ingrese la Utilidad Neta Después de Impuestos">
+                <input type="number" name="capitalPropio" placeholder="Ingrese el Capital Propio">        
                 <p>
                     Razón de endeudamiento = Pasivo Total / Capital Propio
                 </p>
-                <input type="number" name="" placeholder="Ingrese el Pasivo Total en el último periodo ">
-                <input type="number" name="" placeholder="Ingrese el Capital Propio en el último periodo ">
+                <input type="number" name="" placeholder="Ingrese el Pasivo Total ">
+                <input type="number" name="" placeholder="Ingrese el Capital Propio ">
                 <p>
                     Liquidez = Activo circulante / Pasivo circulante
                 </p>
-                <input type="number" name="" placeholder="Ingrese el Activo circulante en el último periodo ">
-                <input type="number" name="" placeholder="Ingrese el Pasivo circulante en el último periodo ">
+                <input type="number" name="" placeholder="Ingrese el Activo circulante ">
+                <input type="number" name="" placeholder="Ingrese el Pasivo circulante ">
                 <p>
                     Razón de solvencia = Activo Total / Pasivo Total
                 </p>
-                <input type="number" name="" placeholder="Ingrese el Activo Total en el último periodo ">
-                <input type="number" name="" placeholder="Ingrese el Pasivo Total en el último periodo ">
+                <input type="number" name="" placeholder="Ingrese el Activo Total ">
+                <input type="number" name="" placeholder="Ingrese el Pasivo Total ">
             </div>
         </div>
         
@@ -1356,6 +1851,7 @@
     let nombresProveedores = [];
     let nombresDistribuidores = [];
     let nombresPropuesta = [];
+    let cantProductos = 0;
 
     function mostrarMensajeBienvenida() {
         const mensaje = document.getElementById('mensajeBienvenida');
@@ -1484,18 +1980,18 @@
 
     // Marcar ítems como contestados
     function markAsAnswered(itemId) {
+        const element = event.target; // Get the element that triggered the event
         const item = document.querySelector(`div#${itemId}`).parentElement; // Selecciona el ítem contenedor
-        const input = document.querySelector(`div#${itemId} input`); // Selecciona el campo de entrada asociado
 
-        if (input && input.value.trim() !== '') {
-            // Si hay texto en el campo, marca el ítem como contestado
-            item.classList.add('answered');
+        if ((element.tagName === "INPUT" && element.value.trim() !== '') ||
+            (element.tagName === "SELECT" && element.value !== '')) {
+            item.classList.add('answered'); // Mark the item as answered
         } else {
             // Si el campo está vacío, quita la clase 'answered'
             item.classList.remove('answered');
         }
     }
-
+Z
     // Función para cambiar de sección
     function showSection(sectionId) {
         document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
@@ -1550,16 +2046,15 @@
         document.getElementById('distribuidoresMasImportantes').classList.remove('hidden');
     }
 
-    function procesarCantidadPropuesta() {
-        const importantes = parseInt(document.getElementById('cantidadPropuesta').value);
+    function procesarCantidadPropuesta(importantes, sectionID, camposID) {
         if (!importantes || importantes <= 0) {
             alert('Por favor, ingrese una cantidad válida de productos.');
             return;
         }
-        document.getElementById('cantidadPropuestaImportantes').textContent = importantes;
+        cantProductos = importantes;
 
         // Generar campos dinámicos
-        const camposContainer = document.getElementById('camposPropuesta');
+        const camposContainer = document.getElementById(camposID);
         camposContainer.innerHTML = ''; // Limpiar contenido previo
         for (let i = 1; i <= importantes; i++) {
             const campo = document.createElement('div');
@@ -1570,8 +2065,8 @@
         }
 
         // Mostrar la siguiente sección
-        document.getElementById('propuesta').classList.add('hidden');
-        document.getElementById('propuestaMasImportantes').classList.remove('hidden');
+        document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+        document.getElementById(sectionID).classList.remove('hidden');
     }
 
 
@@ -1605,20 +2100,36 @@
         generarSeccionesDistribuidores(nombresDistribuidores);
     }
 
-function mostrarItemsPropuesta() {
-    document.getElementById('propuestaMasImportantes').classList.add('hidden');
-    const camposContainer = document.getElementById('camposPropuesta');
-    const inputs = camposContainer.querySelectorAll('input');
-    inputs.forEach(input => {
-        if (input.value.trim() === '') {
-            alert('Por favor, complete todos los campos de los productos en la propuesta de valor.');
-            return;
-        }
-        nombresPropuesta.push(input.value);
-    });
-    
-    generarSeccionesPropuesta(nombresPropuesta);
-}
+    function mostrarItemsPropuesta() {
+        document.getElementById('propuestaMasImportantes').classList.add('hidden');
+        const camposContainer = document.getElementById('camposPropuesta');
+        const inputs = camposContainer.querySelectorAll('input');
+        inputs.forEach(input => {
+            if (input.value.trim() === '') {
+                alert('Por favor, complete todos los campos de los productos en la propuesta de valor.');
+                return;
+            }
+            nombresPropuesta.push(input.value);
+        });
+        
+        generarSeccionesPropuesta();
+    }
+
+    function mostrarItemsProductos() {
+        document.getElementById('productosMasImportantes').classList.add('hidden');
+        const camposContainer = document.getElementById('camposProductos');
+        const inputs = camposContainer.querySelectorAll('input');
+        inputs.forEach(input => {
+            if (input.value.trim() === '') {
+                alert('Por favor, complete todos los campos de los productos en la propuesta de valor.');
+                return;
+            }
+            nombresPropuesta.push(input.value);
+        });
+
+        generarSeccionesPropuesta();
+        //showSection('procesos_items');
+    }
     
     function mostrarItemsDistribucion() {
         document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
@@ -1638,9 +2149,17 @@ function mostrarItemsPropuesta() {
     }
 
     function mostrarSeccionPropuesta() {
-        // Mostrar la sección distribuidores por primera vez
-        document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
-        document.getElementById('propuesta').classList.remove('hidden');
+        currentPropuestaIndex = 0;
+        cantidad = cantProductos; //document.getElementById("cantidadPropuesta").value;
+        if (cantidad === 0 || cantidad === "" || cantidad === null || isNaN(cantidad)) {
+            showSection('propuesta');
+            cantProductos = document.getElementById("cantidadProductos").value;
+        }else{
+            document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+            document.getElementById('contenedor_propuesta').classList.remove('hidden');
+            document.getElementById('propuesta_items_template').classList.remove('hidden');
+            generarSeccionesPropuesta();
+        }
     }
 
     function irAlInicio() {
@@ -2000,17 +2519,17 @@ document.addEventListener('DOMContentLoaded', () => {
             title.textContent = `Indicadores para: ${nombreProveedor}`;
             clone.prepend(title);
 
-            // Actualiza los identificadores únicos dentro del clon
-            const inputs = clone.querySelectorAll('input, select, textarea');
-            inputs.forEach((input, i) => {
-                input.id = `${input.id}_proveedor_${index}_${i}`;
-                input.name = `${input.name}_proveedor_${index}_${i}`;
-            });
+             // Update all IDs inside the clone
+            clone.querySelectorAll('.item').forEach((item, i) => {
+                const shortText = item.querySelector('.short');
+                const detailDiv = item.querySelector('.item-detail');
 
-            // Actualiza botones o ítems que necesiten toggleItem
-            const items = clone.querySelectorAll('.toggleable-item');
-            items.forEach((item, i) => {
-                item.setAttribute('data-index', `${index}_${i}`);
+                // Create unique IDs for each section
+                const newId = `proveedor_${index}_item_${i}`;
+                detailDiv.id = newId;
+                
+                // Ensure toggle works with the new ID
+                item.setAttribute("onclick", `toggleItem(event, '${newId}')`);
             });
 
             container.appendChild(clone);
@@ -2044,17 +2563,17 @@ document.addEventListener('DOMContentLoaded', () => {
             title.textContent = `Indicadores para: ${nombreDistribuidor}`;
             clone.prepend(title);
 
-            // Actualiza los identificadores únicos dentro del clon
-            const inputs = clone.querySelectorAll('input, select, textarea');
-            inputs.forEach((input, i) => {
-                input.id = `${input.id}_distribuidor_${index}_${i}`;
-                input.name = `${input.name}_distribuidor_${index}_${i}`;
-            });
+            // Update all IDs inside the clone
+            clone.querySelectorAll('.item').forEach((item, i) => {
+                const shortText = item.querySelector('.short');
+                const detailDiv = item.querySelector('.item-detail');
 
-            // Actualiza botones o ítems que necesiten toggleItem
-            const items = clone.querySelectorAll('.toggleable-item');
-            items.forEach((item, i) => {
-                item.setAttribute('data-index', `${index}_${i}`);
+                // Create unique IDs for each section
+                const newId = `distribuidor_${index}_item_${i}`;
+                detailDiv.id = newId;
+                
+                // Ensure toggle works with the new ID
+                item.setAttribute("onclick", `toggleItem(event, '${newId}')`);
             });
 
             container.appendChild(clone);
@@ -2070,51 +2589,96 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
     }
+
+
+
+
+    
     
 
-    // Generar las secciones al cargar la página
-    function generarSeccionesPropuesta(propuesta) {
+    function generarSeccionesPropuesta() {
         const container = document.getElementById('contenedor_propuesta');
         const template = document.getElementById('propuesta_items_template');
 
-        container.innerHTML = ''; // Limpiar contenido previo
+        // Preserve the template by keeping its original innerHTML
+        console.log("Before clearing:", container.innerHTML);
+        container.querySelectorAll('.propuesta-seccion').forEach(seccion => seccion.remove());
+        console.log("After clearing:", container.innerHTML);
 
-        propuesta.forEach((nombresPropuesta, index) => {
+
+        nombresPropuesta.forEach((nombreProducto, index) => {
+            // Check if the section already exists
+            console.log(`Checking for: propuesta_items_${index}`, document.getElementById(`propuesta_items_${index}`));
+            if (document.getElementById(`propuesta_items_${index}`)) {
+                console.log(`Sección para ${nombreProducto} ya existe. No se clona nuevamente.`);
+                return; // Skip if it already exists
+            }
+
+                
             const clone = template.cloneNode(true);
-            clone.id = `propuesta_items_${index}`;
+            clone.id = `propuesta_items_${index}`; 
             clone.classList.add('propuesta-seccion', 'hidden');
 
             const title = document.createElement('h3');
-            title.textContent = `Indicadores para: ${nombresPropuesta}`;
+            title.textContent = `Indicadores para: ${nombreProducto}`;
             clone.prepend(title);
 
-            // Actualiza los identificadores únicos dentro del clon
-            const inputs = clone.querySelectorAll('input, select, textarea');
-            inputs.forEach((input, i) => {
-                input.id = `${input.id}_propuesta_${index}_${i}`;
-                input.name = `${input.name}_propuesta_${index}_${i}`;
-            });
+            // Update all IDs inside the clone
+            clone.querySelectorAll('.item').forEach((item, i) => {
+                const shortText = item.querySelector('.short');
+                const detailDiv = item.querySelector('.item-detail');
 
-            // Actualiza botones o ítems que necesiten toggleItem
-            const items = clone.querySelectorAll('.toggleable-item');
-            items.forEach((item, i) => {
-                item.setAttribute('data-index', `${index}_${i}`);
+                // Create unique IDs for each section
+                const newId = `propuesta_${index}_item_${i}`;
+                detailDiv.id = newId;
+                
+                // Ensure toggle works with the new ID
+                item.setAttribute("onclick", `toggleItem(event, '${newId}')`);
             });
 
             container.appendChild(clone);
-
-            // Mostrar la primera sección por defecto
-            mostrarPropuesta(currentPropuestaIndex, propuesta);
+            mostrarPropuesta(currentPropuestaIndex, nombresPropuesta);
         });
-
-            function asignarEventosToggle() {
-                const toggleables = document.querySelectorAll('.toggleable-item');
-                toggleables.forEach((item) => {
-                    item.addEventListener('click', () => toggleItem(item));
-                });
-            }
     }
 
+
+
+
+
+
+
+    function generarSeccionesProcesos() {
+        const container = document.getElementById('contenedor_');
+        const template = document.getElementById('propuesta_items_template');
+
+        container.innerHTML = ''; // Clear previous content
+
+        nombresPropuesta.forEach((nombreProducto, index) => {
+            const clone = template.cloneNode(true);
+            clone.id = `propuesta_items_${index}`; 
+            clone.classList.add('propuesta-seccion', 'hidden');
+
+            const title = document.createElement('h3');
+            title.textContent = `Indicadores para: ${nombreProducto}`;
+            clone.prepend(title);
+
+            // Update all IDs inside the clone
+            clone.querySelectorAll('.item').forEach((item, i) => {
+                const shortText = item.querySelector('.short');
+                const detailDiv = item.querySelector('.item-detail');
+
+                // Create unique IDs for each section
+                const newId = `propuesta_${index}_item_${i}`;
+                detailDiv.id = newId;
+                
+                // Ensure toggle works with the new ID
+                item.setAttribute("onclick", `toggleItem(event, '${newId}')`);
+            });
+
+            container.appendChild(clone);
+            mostrarPropuesta(currentPropuestaIndex, nombresPropuesta);
+        });
+    }
 
     function mostrarCamposAlianzas(valor) {
         // Obtener los contenedores de los campos adicionales
@@ -2141,13 +2705,38 @@ document.addEventListener('DOMContentLoaded', () => {
         // Mostrar y ocultar los campos correspondientes
         if (valor === "Sí") {
             selectBalanceGeneral.classList.remove('hidden');
+            document.getElementById("mensajeFinanzas").classList.add("hidden");
         } else if (valor === "No") {
             selectBalanceGeneral.classList.add('hidden');
+            document.getElementById("mensajeFinanzas").classList.remove("hidden");
         } else {
             selectBalanceGeneral.classList.add('hidden');
         }
     }
 
+    function mostrarNivelRotacion(valor) {
+        // Obtener los contenedores de los campos adicionales
+        const selectNivelRotacion = document.getElementById('selectPoliticasRotacion');
+
+        // Mostrar y ocultar los campos correspondientes
+        if (valor === "1" || valor === "2" || valor === "3") {
+            selectNivelRotacion.classList.remove('hidden');
+        } else {
+            selectNivelRotacion.classList.add('hidden');
+        }
+    }
+
+    function mostrarNivelRotacionRestante(valor) {
+        // Obtener los contenedores de los campos adicionales
+        const selectNivelRotacion = document.getElementById('selectPoliticasRotacionResto');
+
+        // Mostrar y ocultar los campos correspondientes
+        if (valor === "1" || valor === "2") {
+            selectNivelRotacion.classList.remove('hidden');
+        } else {
+            selectNivelRotacion.classList.add('hidden');
+        }
+    }
 
     function mostrarBalanceGeneral(valor) {
         // Obtener los contenedores de los campos adicionales
@@ -2156,8 +2745,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Mostrar y ocultar los campos correspondientes
         if (valor === "Sí") {
             selectBalanceGeneral.classList.remove('hidden');
+            document.getElementById("mensajeFinanzas2").classList.add("hidden");
         } else if (valor === "No") {
             selectBalanceGeneral.classList.add('hidden');
+            document.getElementById("mensajeFinanzas2").classList.remove("hidden");
         } else {
             selectBalanceGeneral.classList.add('hidden');
         }
@@ -2221,8 +2812,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generarPreguntasProductos() {
-        showSection('procesos_items');
-        const cantidad = document.getElementById("cantidadPropuesta").value;
+        cantidad = cantProductos; //document.getElementById("cantidadPropuesta").value;
+        if (cantidad === 0 || cantidad === "" || cantidad === null || isNaN(cantidad)) {
+            showSection('numero_productos');
+            
+        }else{
+            //showSection('procesos_items');
+            generarSeccionesProcesos();
+        }
+
+        console.log('Cantidad = ', cantidad);
         const procesosContainer = document.getElementById("procesosContainer");
 
         procesosContainer.innerHTML = ""; // Clear previous content
@@ -2259,17 +2858,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <option value="noContest">Prefiero no contestar</option>
                 </select>
 
-                 <p>Con respecto al costo total del producto, los costos por consumo excesivo son:</p>
-                <select name="consumoExcesivo_${i}">
-                    <option value="" disabled selected>Seleccione una opción</option>
-                    <option value="nulos">Prácticamente nulos</option>
-                    <option value="menos5">Menos del 5%</option>
-                    <option value="5a10">Entre el 5 y el 10%</option>
-                    <option value="10a15">Entre el 10 y el 15%</option>
-                    <option value="mas15">Más del 15%</option>
-                    <option value="noContest">Prefiero no contestar</option>
-                </select>
-
                 <p>Con respecto al costo total del producto, los costos asociados al aseguramiento y mejora de la calidad son:</p>
                 <select name="aseguramientoCalidad_${i}">
                     <option value="" disabled selected>Seleccione una opción</option>
@@ -2279,16 +2867,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <option value="15a20">Entre el 15 y el 20%</option>
                     <option value="20a30">Entre el 20 y el 30%</option>
                     <option value="mas30">Más del 30%</option>
-                    <option value="noContest">Prefiero no contestar</option>
-                </select>
-
-                <p>Con respecto al costo total del producto, los costos generados por ociosidad son:</p>
-                <select name="aseguramientoCalidad_${i}">
-                    <option value="" disabled selected>Seleccione una opción</option>
-                    <option value="menos5">Menos del 1%</option>
-                    <option value="5a10">Entre el 1 y el 5%</option>
-                    <option value="15a20">Entre el 5 y el 10%</option>>
-                    <option value="mas30">Más del 10%</option>
                     <option value="noContest">Prefiero no contestar</option>
                 </select>
 
@@ -2344,7 +2922,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generarPreguntasRecursos() {
         showSection('recursos_items');
-        const cantidad = document.getElementById("cantidadPropuesta").value;
+        const cantidad = cantProductos; 
         const recursosContainer = document.getElementById("recursosContainer");
 
         recursosContainer.innerHTML = ""; // Clear previous content
@@ -2416,10 +2994,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 <select name="disponibilidadRecurso_${productoIndex}_${actividadIndex}_${k}">
                     <option value="" disabled selected>Seleccione una opción</option>
-                    <option value="de_acuerdo">De acuerdo</option>
-                    <option value="mas_de_acuerdo">Algo de acuerdo</option>
-                    <option value="mas_en_desacuerdo">Algo en desacuerdo</option>
-                    <option value="en_desacuerdo">En desacuerdo</option>
+                    <option value="siempre">Siempre</option>
+                    <option value="frecuentemente">Frecuentemente</option>
+                    <option value="poca_frecuencia">Con poca frecuencia</option>
+                    <option value="casi_nunca">Casi nunca</option>
                     <option value="no_opinar">Prefiero no opinar</option>
                 </select>
             `;
