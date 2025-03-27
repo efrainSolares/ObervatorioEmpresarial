@@ -21,15 +21,15 @@
         <h2>¿En cuál(es) área(s) desea autodiagnosticarse?</h2>
     </div>
     <ul class="nav-sections">
-        <li><button onclick="showSection('finanzas_items')">Salud financiera</button></li>
-        <li><button onclick="mostrarSeccionPropuesta()">Propuesta de valor</button>
-        <li><button onclick="mostrarSeccionProveedores()">Proveedores</button>
-        <li><button onclick="mostrarSeccionDistribuidores()">Canales de distribución</button>
-        <li><button onclick="showSection('clientes_items')">Clientes</button></li>
-        <li><button onclick="showSection('capitalHumano_items')">Capital humano</button></li>
-        <li><button onclick="showSection('liderazgo_items')">Liderazgo</button></li>
-        <li><button onclick="generarPreguntasProductos()">Procesos</button></li>
-        <li><button onclick="generarPreguntasRecursos()">Recursos</button></li>
+        <li><button id="propuesta_button" onclick="mostrarSeccionPropuesta()">Propuesta de valor</button>
+        <li><button id="finanzas_items_button" disabled class="boton-desactivado" onclick="showSection('finanzas_items')">Salud financiera</button></li>
+        <li><button id="proveedores_button" disabled class="boton-desactivado" onclick="mostrarSeccionProveedores()">Proveedores</button>
+        <li><button disabled class="boton-desactivado" onclick="mostrarSeccionDistribuidores()">Canales de distribución</button>
+        <li><button disabled class="boton-desactivado" onclick="showSection('clientes_items')">Clientes</button></li>
+        <li><button disabled class="boton-desactivado" onclick="showSection('capitalHumano_items')">Capital humano</button></li>
+        <li><button disabled class="boton-desactivado" disabled onclick="showSection('liderazgo_items')">Liderazgo</button></li>
+        <li><button disabled class="boton-desactivado" onclick="generarPreguntasProductos()">Procesos</button></li>
+        <li><button disabled class="boton-desactivado" onclick="generarPreguntasRecursos()">Recursos</button></li>
     </ul>
 </nav>
 
@@ -687,6 +687,7 @@
                         <option value="quiza">Quizá si tuviera más información</option>
                     </select>
                 </div>
+                <button type="button" onclick="showSection('finanzas_items')">Continuar</button>
             </div>
     </section>
 
@@ -708,7 +709,9 @@
     
 
     <section id="clientes_items" class="section hidden">
-        <p>Seleccione los indicadores y proporcione la información de la manera más honesta posible:</p>
+        <h2>Clientes</h2>
+        <h3>Seleccione los indicadores que considere más importantes</h3>
+        <p>Proporcione la información de la manera más honesta posible:</p>
         <!-- 1. OTIF para clientes -->
         <div class="item" onclick="toggleItem(event, 'clientesOTIF')">
             <p class="short">Metodología OTIF (On Time In Full)<span class="required">*</span></p>
@@ -797,7 +800,7 @@
             <p class="short">Retención de clientes<span class="required">*</span></p>
             <div id="retencionClientes" class="item-detail hidden" onclick="event.stopPropagation()">
                 <p>
-                    ¿IMPLEMENTA POLÍTICAS DE RETENCIÓN DE CLIENTES?
+                    ¿Implementa políticas de retención de clientes?
                     <i class="fas fa-info-circle info-icon" data-tooltip="Estrategias enfocadas en mantener a los clientes actuales de la empresa."></i>
                 </p>
                 <select name="retencionClientes" id="retencionSelect" oninput="mostrarPreguntaRetencion()">
@@ -809,7 +812,7 @@
         
                 <!-- Pregunta adicional sobre efectividad -->
                 <div id="preguntaEfectividadRetencion" class="hidden">
-                    <p>¿QUÉ TAN EFECTIVAS SON ESTAS POLÍTICAS?</p>
+                    <p>¿Qué tab efectuvas son estas políticas?</p>
                     <select name="efectividadPoliticasRetencion" id="efectividadPoliticasRetencion">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="5">5 - Muy efectivo</option>
@@ -856,22 +859,21 @@
                     </select>
         
                     <!-- Pregunta 3 -->
-                    <p>¿CON QUÉ PORCENTAJE DE LAS EMPRESAS DE LAS QUE USTED ES PROVEEDOR TIENE ALIANZAS ESTRATÉGICAS?</p>
+                    <p>¿Con qué porcentaje de las empresas de las que usted es proveedor tiene aliazas estratégicas?</p>
                     <input type="number" name="porcentajeAlianzas" id="porcentajeAlianzas" placeholder="Ingrese el porcentaje">
                 </div>
             </div>
         </div>
-        
-
-
-        
+        <button type="button" onclick="showSection('capitalHumano_items')">Continuar</button>
     </section>
 
 
     <section id="capitalHumano_items" class="section hidden">
-        <p>Seleccione los indicadores y proporcione la información de la manera más honesta posible:</p>
+        <h2>Capital humano</h2>
+        <h3>Seleccione los indicadores que considere más importantes</h3>
+        <p>Proporcione la información de la manera más honesta posible:</p>
         <div class="item" onclick="toggleItem(event, 'nivelConocimientoEmpleados')">
-            <p class="short">Conocimiento de los empleados</p>
+            <p class="short">Conocimiento de estrategias</p>
             <div id="nivelConocimientoEmpleados" class="item-detail hidden" onclick="event.stopPropagation()">
                 <p>
                     ¿En qué medida conocen los empleados la misión y la visión de su empresa?
@@ -973,7 +975,7 @@
 
                 <div id="selectPoliticasRotacion" class="hidden">
                     <p>
-                        Existen políticas para reducir la rotación del personal clave:
+                        ¿Existen estrategias para reducir la rotación del personal clave?
                     </p>                
                     <select id="politicasRotacion" name="politicasRotacion">
                         <option value="" disabled selected>Seleccione</option>
@@ -998,7 +1000,7 @@
 
                 <div id="selectPoliticasRotacionResto" class="hidden">
                     <p>
-                        Existen políticas para reducir la rotación del resto del personal:
+                        ¿Existen estrategias para reducir la rotación del resto del personal?
                     </p>                
                     <select id="politicasRotacionResto" name="politicasRotacionResto">
                         <option value="" disabled selected>Seleccione</option>
@@ -1041,7 +1043,7 @@
                 </select>
                 
                 <p>
-                    ¿Existen políticas de formación, capacitación y superación del resto del personal?
+                    ¿Existen estrategias de formación, capacitación y superación del resto del personal?
                 </p>   
                 <select id="capacitacionClaveResto" name="capacitacionClaveResto" oninput="markAsAnswered('puestosClave')">
                     <option value="" disabled selected>Seleccione</option>
@@ -1075,10 +1077,13 @@
                 </select>
             </div>
         </div>
+        <button type = "button" onclick="showSection('liderazgo_items')">Continuar</button>
     </section>
     
     <section id="liderazgo_items" class="section hidden">
-        <p>Seleccione los indicadores y proporcione la información de la manera más honesta posible:</p>
+        <h2>Liderazgo y cultura innovadora</h2>
+        <h3>Seleccione los indicadores que considere más importantes</h3>
+        <p>Proporcione la información de la manera más honesta posible:</p>        
         <div class="item" onclick="toggleItem(event, 'liderEmpresa')">
             <p class="short">Líder(es) de la empresa</p>
             <div id="liderEmpresa" class="item-detail hidden" onclick="event.stopPropagation()">
@@ -1094,21 +1099,9 @@
                 </select>
 
                 <p>
-                    ¿En qué medida el líder (los líderes) de la empresa posee aptitud técnica?
+                    ¿En qué medida el líder (los líderes) de la empresa posee(n) aptitud técnica?
                 </p>                
                 <select name="nivelAptitudTecnica" oninput="markAsAnswered('liderEmpresa')">
-                    <option value="" disabled selected>Seleccione</option>
-                    <option value="1">Totalmemte</option>
-                    <option value="2">En buena medida</option>
-                    <option value="3">En cierta medida</option>
-                    <option value="4">Poco o nada</option>
-                    <option value="no_seguro">No estoy seguro</option>
-                </select>
-
-                <p>
-                    ¿En qué medida el líder (los líderes) de la empresa estimula(n) la mejora continua y la innovación?
-                </p>                
-                <select name="nivelMejoraInnovacion" oninput="markAsAnswered('liderEmpresa')">
                     <option value="" disabled selected>Seleccione</option>
                     <option value="1">Totalmemte</option>
                     <option value="2">En buena medida</option>
@@ -1318,6 +1311,7 @@
                 </select>               
             </div>
         </div>
+        <button type = "button" onclick="generarPreguntasProductos()">Continuar</button>
     </section>
 
 
@@ -1467,21 +1461,25 @@
 
     <section id="procesos_items" class="section hidden">
         <div class="item" id="procesosSection" onclick="toggleItem(event, 'procesos')">
-            <p class="short">Evaluación de Procesos</p>
+            <h2>Evaluación de Procesos</h2>
+            <p class="short">Seleccione los indicadores que considere más importantes</h3>
+            
             <div id="procesos" class="item-detail hidden">
                 <div id="procesosContainer"></div> <!-- Questions will be dynamically added here -->
             </div>
         </div>
+        <button type="button" onclick="generarPreguntasRecursos()">Continuar</button>
     </section>
 
     <section id="recursos_items" class="section hidden">
         <div class="item" id="recursosSection" onclick="toggleItem(event, 'recursos')">
-            <p class="short">Evaluación de recursos clave</p>
+            <h3 class="short">Evaluación de recursos clave</h3>
             <div id="recursos" class="item-detail hidden">
                 <p>Seleccione la información sobre los recursos clave:</p>
                 <div id="recursosContainer"></div> <!-- Questions will be dynamically added here -->
             </div>
         </div>
+        <button type="button" onclick="showSection('finanzas_items')">Finalizar</button>
     </section>
 
 <!-- 
@@ -1605,7 +1603,7 @@
             <option value="No">No</option>
         </select>
         <div id="mensajeFinanzas" class="hidden">
-            <p>Si prefiere no compartir su información financiera en línea, puedes acudir al CIDESIE o enviarnos un correo, y un miembro de nuestro equipo se pondrá en contacto con usted para brindarle asesoría personalizada.</p>
+            <p>Si prefiere no compartir su información financiera en línea, puede acudir al CIDESIE o enviarnos un correo, y un miembro de nuestro equipo se pondrá en contacto con usted para brindarle asesoría personalizada.</p>
         </div>
 
         <!-- SÍ evaluará su salud financiera -->
@@ -1658,6 +1656,8 @@
                 <input type="number" name="" placeholder="Ingrese el Pasivo Total ">
             </div>
         </div>
+            
+        <button id="continueButton_finance" class="hidden" type="button" onclick="mostrarSeccionProveedores()">Continuar</button>
         
 
         <!-- Margen de beneficio - ->
@@ -1852,6 +1852,8 @@
     let nombresDistribuidores = [];
     let nombresPropuesta = [];
     let cantProductos = 0;
+    let datosProveedores = [];
+    let templateProveedores = null;
 
     function mostrarMensajeBienvenida() {
         const mensaje = document.getElementById('mensajeBienvenida');
@@ -1930,10 +1932,10 @@
         }
 
         
-        // if (!valid) {
-        //     alert('Por favor, complete todos los campos obligatorios.');
-        //     return;
-        // }
+        if (!valid) {
+            alert('Por favor, complete todos los campos obligatorios.');
+            return;
+        }
 
         // Procesar datos
         const datos = {
@@ -1951,7 +1953,7 @@
         // Muestra las secciones de navegación
         document.getElementById('mensajeAutodiagnostico').classList.remove('hidden');
         document.getElementById('nav-sections').classList.remove('hidden');
-        showSection('finanzas_items')
+        mostrarSeccionPropuesta();
     }
 
     
@@ -1991,9 +1993,31 @@
             item.classList.remove('answered');
         }
     }
-Z
+
     // Función para cambiar de sección
     function showSection(sectionId) {
+        // Ocultar botones de navegación
+        document.getElementById('siguienteBtn').classList.add('hidden');
+        document.getElementById('atrasBtn').classList.add('hidden');
+
+
+
+        // Habilitar el siguiente botón
+        const button = document.getElementById(sectionId+"_button");
+        if (button !== null) {
+            button.disabled = false;
+            button.classList.remove("boton-desactivado");
+        }
+
+        // Si la sección actual es finanzas_items, entonces se marca la sección anterior (Propuesta anterior) como realizada        
+        if(sectionId == "finanzas_items"){
+            const button_propuesta = document.getElementById("propuesta_button");
+            if (button_propuesta !== null) {
+                button_propuesta.style.backgroundColor = "green";
+                button_propuesta.style.color = "white";
+            }
+        }
+
         document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
         document.getElementById(sectionId).classList.remove('hidden');
     }
@@ -2137,9 +2161,43 @@ Z
     }
 
     function mostrarSeccionProveedores() {
-        // Mostrar la sección proveedores por primera vez
+        const button_finanzas = document.getElementById("finanzas_items_button");
+        if (button_finanzas !== null) {
+            button_finanzas.style.backgroundColor = "green";
+            button_finanzas.style.color = "white";
+        }
+        activarTodosLosBotones()
         document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
         document.getElementById('proveedores').classList.remove('hidden');
+
+        // console.log('nombresProveedores: ', nombresProveedores);
+        // if(nombresProveedores.length > 0 ){
+        //     console.log('dentro');
+        //     currentProveedorIndex = 0;
+        //     document.getElementById('proveedores').classList.remove('hidden');
+        //     mostrarProveedor(currentProveedorIndex, proveedores); // Restaurar el índice actual
+        //     return;
+        //     //generarSeccionesProveedores(nombresProveedores);
+        // }else{
+        //     // Mostrar la sección proveedores por primera vez
+        //     console.log('fuera');
+        //     const button_finanzas = document.getElementById("finanzas_items_button");
+        //     if (button_finanzas !== null) {
+        //         button_finanzas.style.backgroundColor = "green";
+        //         button_finanzas.style.color = "white";
+        //     }
+        //     activarTodosLosBotones()
+        //     document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+        //     document.getElementById('proveedores').classList.remove('hidden');
+        // }
+    }
+
+    function activarTodosLosBotones() {
+        const botones = document.querySelectorAll('.boton-desactivado');
+        botones.forEach(boton => {
+            boton.classList.remove('boton-desactivado');
+            boton.disabled = false;
+        });
     }
 
     function mostrarSeccionDistribuidores() {
@@ -2344,8 +2402,10 @@ function mostrarSubcategorias() {
 function mostrarProveedor(index, proveedores) {
     const secciones = document.querySelectorAll('.proveedor-seccion');
     const navegacion = document.getElementById('navegacion-proveedores');
-    const pantallaEvaluacion = document.getElementById('pantallaEvaluacion');
     const informacionProveedores = document.getElementById('contenedor_proveedores');
+    // Mostrar botones de navegación
+    document.getElementById('siguienteBtn').classList.remove('hidden');
+    document.getElementById('atrasBtn').classList.remove('hidden');
 
     // Validar el índice para que esté dentro del rango
     if (index >= 0 && index < proveedores.length) {
@@ -2364,7 +2424,7 @@ function mostrarProveedor(index, proveedores) {
         if (index >= proveedores.length) {
             // Aquí se realiza la transición a la pantalla de evaluación
             informacionProveedores.classList.add('hidden'); // Oculta la pantalla actual
-            pantallaEvaluacion.classList.remove('hidden'); // Muestra la pantalla de evaluación
+            mostrarSeccionDistribuidores();
         }
     }
 
@@ -2379,7 +2439,6 @@ function mostrarProveedor(index, proveedores) {
 function mostrarDistribuidor(index, distribuidores) {
     const secciones = document.querySelectorAll('.distribuidor-seccion');
     const navegacion = document.getElementById('navegacion-distribuidores');
-    const pantallaEvaluacion = document.getElementById('pantallaEvaluacion');
     const informacionDistribuidores = document.getElementById('contenedor_distribuidores');
 
     // Validar el índice para que esté dentro del rango
@@ -2397,9 +2456,7 @@ function mostrarDistribuidor(index, distribuidores) {
     } else {
         navegacion.classList.add('hidden');
         if (index >= distribuidores.length) {
-            // Aquí se realiza la transición a la pantalla de evaluación
-            informacionDistribuidores.classList.add('hidden'); // Oculta la pantalla actual
-            pantallaEvaluacion.classList.remove('hidden'); // Muestra la pantalla de evaluación
+            showSection('clientes_items');
         }
     }
 
@@ -2500,24 +2557,34 @@ function atrasPropuesta() {
 
 // Inicialización al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
+    templateProveedores = document.getElementById("proveedores_items_template");
 });
 
 
     // Generar las secciones al cargar la página
     function generarSeccionesProveedores(proveedores) {
         const container = document.getElementById('contenedor_proveedores');
-        const template = document.getElementById('proveedores_items_template');
+        //const template = document.getElementById('proveedores_items_template');
 
         container.innerHTML = ''; // Limpiar contenido previo
+        container.classList.remove('hidden');
+
+        datosProveedores = []; // Reiniciar arreglo
 
         proveedores.forEach((nombreProveedor, index) => {
-            const clone = template.cloneNode(true);
+            const clone = templateProveedores.cloneNode(true); //const clone = template.cloneNode(true);
             clone.id = `proveedores_items_${index}`;
             clone.classList.add('proveedor-seccion', 'hidden');
 
             const title = document.createElement('h3');
             title.textContent = `Indicadores para: ${nombreProveedor}`;
             clone.prepend(title);
+            
+            // Crear entrada vacía para este proveedor
+            datosProveedores.push({
+                nombre: nombreProveedor,
+                respuestas: {}
+            });
 
              // Update all IDs inside the clone
             clone.querySelectorAll('.item').forEach((item, i) => {
@@ -2530,6 +2597,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Ensure toggle works with the new ID
                 item.setAttribute("onclick", `toggleItem(event, '${newId}')`);
+
+                // Asignar nombre e ID únicos al input/select dentro de detailDiv
+                const input = detailDiv.querySelector('input, select, textarea');
+                if (input) {
+                    input.name = newId;
+
+                    // Insertar datos almacenados previamente (si existen)
+                    if (datosProveedores && datosProveedores[index] && datosProveedores[index][newId]) {
+                        input.value = datosProveedores[index][newId];
+                    }
+                }
             });
 
             container.appendChild(clone);
@@ -2601,14 +2679,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const template = document.getElementById('propuesta_items_template');
 
         // Preserve the template by keeping its original innerHTML
-        console.log("Before clearing:", container.innerHTML);
         container.querySelectorAll('.propuesta-seccion').forEach(seccion => seccion.remove());
-        console.log("After clearing:", container.innerHTML);
 
 
         nombresPropuesta.forEach((nombreProducto, index) => {
             // Check if the section already exists
-            console.log(`Checking for: propuesta_items_${index}`, document.getElementById(`propuesta_items_${index}`));
             if (document.getElementById(`propuesta_items_${index}`)) {
                 console.log(`Sección para ${nombreProducto} ya existe. No se clona nuevamente.`);
                 return; // Skip if it already exists
@@ -2648,10 +2723,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function generarSeccionesProcesos() {
-        const container = document.getElementById('contenedor_');
+        const container = document.getElementById('contenedor_procesos');
         const template = document.getElementById('propuesta_items_template');
 
         container.innerHTML = ''; // Clear previous content
+
+        console.log('nombreProducto, index',nombreProducto, index);
 
         nombresPropuesta.forEach((nombreProducto, index) => {
             const clone = template.cloneNode(true);
@@ -2707,6 +2784,10 @@ document.addEventListener('DOMContentLoaded', () => {
             selectBalanceGeneral.classList.remove('hidden');
             document.getElementById("mensajeFinanzas").classList.add("hidden");
         } else if (valor === "No") {
+            const button = document.getElementById("continueButton_finance");
+            if (button !== null) {
+                button.classList.remove("hidden");
+            }
             selectBalanceGeneral.classList.add('hidden');
             document.getElementById("mensajeFinanzas").classList.remove("hidden");
         } else {
@@ -2741,6 +2822,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function mostrarBalanceGeneral(valor) {
         // Obtener los contenedores de los campos adicionales
         const selectBalanceGeneral = document.getElementById('divBalanceGeneral');
+        const button = document.getElementById("continueButton_finance");
+        if (button !== null) {
+            button.classList.remove("hidden");
+        }      
 
         // Mostrar y ocultar los campos correspondientes
         if (valor === "Sí") {
@@ -2803,10 +2888,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Mostrar el bloque de razones solo si se selecciona "Fuertemente" o "Algo"
         if (value === "fuertemente" || value === "algo") {
-            console.log('Dentro');
             razonesCompetencia.classList.remove('hidden');
         } else {
-            console.log('Fuera');
             razonesCompetencia.classList.add('hidden');
         }
     }
@@ -2815,13 +2898,12 @@ document.addEventListener('DOMContentLoaded', () => {
         cantidad = cantProductos; //document.getElementById("cantidadPropuesta").value;
         if (cantidad === 0 || cantidad === "" || cantidad === null || isNaN(cantidad)) {
             showSection('numero_productos');
-            
         }else{
-            //showSection('procesos_items');
-            generarSeccionesProcesos();
+            showSection('procesos_items');
+            //generarSeccionesProcesos();
         }
-
-        console.log('Cantidad = ', cantidad);
+        
+        
         const procesosContainer = document.getElementById("procesosContainer");
 
         procesosContainer.innerHTML = ""; // Clear previous content
